@@ -11,7 +11,11 @@
     - [线索二叉树](/cs/algorithm/线索二叉树)
     - [最小生成树](/cs/algorithm/最小生成树)
 - **编程开发**
-  - [![](https://railgun.imfast.io/Notes/svg/cpp-blue.svg) C/C++](/develop/c_cpp)
+  - ![](https://railgun.imfast.io/Notes/svg/cpp-blue.svg) C/C++
+    - [输入输出处理](/develop/c_cpp/输入输出处理)
+    - [数学相关](/develop/c_cpp/数学相关)
+    - [指针](/develop/c_cpp/指针)
+    - [STL](/develop/c_cpp/stl)
   - [![](https://railgun.imfast.io/Notes/svg/python.svg) Python](/develop/python)
   - [![](https://railgun.imfast.io/Notes/svg/golang.svg) Golang](/develop/golang)
 - **读书记录**
