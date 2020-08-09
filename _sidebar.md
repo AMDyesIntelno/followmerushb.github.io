@@ -1,6 +1,15 @@
 - **README**
   - [![](https://railgun.imfast.io/Notes/svg/important.svg) README](/README)
+- **CS基础**
+  - ![](https://railgun.imfast.io/Notes/svg/datastruct.svg)**数据结构**
+    - [数据结构](/cs/data_struct/data_struct)
+  - ![](https://railgun.imfast.io/Notes/svg/algorithm.svg)**算法**
+    - [串的模式匹配](/cs/algorithm/kmp)
 - **编程开发**
-  - [![](https://railgun.imfast.io/Notes/svg/cpp-blue.svg) C/C++ 笔记](/develop/c_cpp)
-  - [![](https://railgun.imfast.io/Notes/svg/python.svg) Python 笔记](/develop/python)
-  - [![](https://railgun.imfast.io/Notes/svg/golang.svg) Golang 笔记](/develop/golang)
+  - [![](https://railgun.imfast.io/Notes/svg/cpp-blue.svg) C/C++](/develop/c_cpp)
+  - [![](https://railgun.imfast.io/Notes/svg/python.svg) Python](/develop/python)
+  - [![](https://railgun.imfast.io/Notes/svg/golang.svg) Golang](/develop/golang)
+- **读书记录**
+  - [![](https://railgun.imfast.io/Notes/svg/internet.svg) 计算机网络](/books/internet)
+- **CTF**
+  - [🚩 攻防世界](/ctf/adworld)
