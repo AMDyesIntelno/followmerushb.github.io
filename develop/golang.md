@@ -1,3 +1,13 @@
 ?> Golang 笔记
 
-# b
+# highlight test
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
+}
+```

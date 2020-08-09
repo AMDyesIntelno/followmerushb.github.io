@@ -21,13 +21,20 @@
   <script>
     window.$docsify = {
       name: 'Notes',
-      repo: 'https://github.com/AMDyesIntelno/Notes',
+      repo: 'https://github.com/followmerushb/followmerushb.github.io',
       coverpage: true,
       basePath: '/',
       loadSidebar: true,
       subMaxLevel: 3,
       themeable: {
         responsiveTables: true // default
+      },
+      search: {
+        maxAge: 86400000, // 过期时间，单位毫秒，默认一天
+        paths: 'auto',
+        placeholder: 'Search',
+        noData: 'No Results!',
+        depth: 4 // 搜索标题的最大程级, 1 - 6
       }
     }
   </script>
