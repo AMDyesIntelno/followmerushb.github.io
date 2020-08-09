@@ -1,5 +1,3 @@
-?> 攻防世界
-
 ## Misc
 
 ![](https://railgun.imfast.io/CTF/Misc%E8%B7%AF%E7%BA%BF%E5%9B%BE/mindmap.png)

@@ -4,4 +4,4 @@
 
 >Notes about 💻Computer Science & 🚩CTF
 
-[GitHub](https://github.com/AMDyesIntelno/Notes)
+[GitHub](https://github.com/followmerushb/followmerushb.github.io)

@@ -5,6 +5,11 @@
     - [数据结构](/cs/data_struct/data_struct)
   - ![](https://railgun.imfast.io/Notes/svg/algorithm.svg)**算法**
     - [串的模式匹配](/cs/algorithm/kmp)
+    - [排序](/cs/algorithm/sort)
+    - [关键路径与拓扑排序](/cs/algorithm/关键路径与拓扑排序)
+    - [图的最短路径](/cs/algorithm/图的最短路径)
+    - [线索二叉树](/cs/algorithm/线索二叉树)
+    - [最小生成树](/cs/algorithm/最小生成树)
 - **编程开发**
   - [![](https://railgun.imfast.io/Notes/svg/cpp-blue.svg) C/C++](/develop/c_cpp)
   - [![](https://railgun.imfast.io/Notes/svg/python.svg) Python](/develop/python)
