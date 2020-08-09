@@ -26,7 +26,7 @@
 
 #### 方法二
 
-通过 `strings stego100` 或者 `pngcheck -7 -f stego100` 可以得到 [hint: http://i.imgur.com/22kUrzm.png](http://i.imgur.com/22kUrzm.png) 
+通过 `strings stego100` 或者 `pngcheck -7 -f stego100` 可以得到 [hint: http://i.imgur.com/22kUrzm.png](https://i.imgur.com/22kUrzm.png) 
 
 打开链接得到一张看起来相同的图片,通过 `compare 22kUrzm.png stego100 -compose src out.png`
 
