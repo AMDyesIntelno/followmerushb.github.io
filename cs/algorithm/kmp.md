@@ -29,7 +29,7 @@ int main(){
 }
 ```
 
-时间复杂度极高,为![](http://latex.codecogs.com/gif.latex?O(n*m))
+时间复杂度极高,为![](https://latex.codecogs.com/gif.latex?O(n*m))
 
 ### KMP 
 
