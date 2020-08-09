@@ -1,0 +1,6 @@
+- **README**
+  - [![](https://railgun.imfast.io/Notes/svg/important.svg) README](/README)
+- **编程开发**
+  - [![](https://railgun.imfast.io/Notes/svg/cpp-blue.svg) C/C++ 笔记](/develop/c_cpp)
+  - [![](https://railgun.imfast.io/Notes/svg/python.svg) Python 笔记](/develop/python)
+  - [![](https://railgun.imfast.io/Notes/svg/golang.svg) Golang 笔记](/develop/golang)
