@@ -4,4 +4,5 @@
 
 >Notes about 💻Computer Science & 🚩CTF
 
-[GitHub](https://github.com/followmerushb/followmerushb.github.io)
+[Blog](https://misaka.gq)
+[GitHub](https://github.com/AMDyesIntelno)
