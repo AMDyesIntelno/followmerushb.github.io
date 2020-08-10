@@ -14,6 +14,7 @@
   - ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/cpp-blue.svg) C/C++
     - [输入输出处理](/develop/c_cpp/输入输出处理)
     - [数学相关](/develop/c_cpp/数学相关)
+    - [数值表示](/develop/c_cpp/数值表示)
     - [指针](/develop/c_cpp/指针)
     - [STL](/develop/c_cpp/stl)
   - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/python.svg) Python](/develop/python)
