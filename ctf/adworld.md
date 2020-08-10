@@ -1,6 +1,6 @@
 ## Misc
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/CTF/Misc%E8%B7%AF%E7%BA%BF%E5%9B%BE/mindmap.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/CTF/Misc%E8%B7%AF%E7%BA%BF%E5%9B%BE/mindmap.png)
 
 ---
 
@@ -18,11 +18,11 @@
 
 同时得到的图像不一定能够正确解码(我用PS调出来的就无法解码,要命.....
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/CTF/Erik-Baleog-and-Olaf/1.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/CTF/Erik-Baleog-and-Olaf/1.png)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/CTF/Erik-Baleog-and-Olaf/2.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/CTF/Erik-Baleog-and-Olaf/2.png)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/CTF/Erik-Baleog-and-Olaf/3.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/CTF/Erik-Baleog-and-Olaf/3.png)
 
 #### 方法二
 
@@ -36,7 +36,7 @@
 flag{#justdiffit}
 ```
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/CTF/Erik-Baleog-and-Olaf/out.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/CTF/Erik-Baleog-and-Olaf/out.png)
 
 ---
 
@@ -52,7 +52,7 @@ version1的二维码是21x21,version2的二维码是25x25
 
 通过 `binwalk` 分析可知一共有两个图片,用 `foremost` 将其分离,在第二张图片中得到一个 `key:ctfer2333` 
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/CTF/%E5%8F%8C%E8%89%B2%E5%9D%97/1.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/CTF/%E5%8F%8C%E8%89%B2%E5%9D%97/1.png)
 
 将gif文件中的绿色看作0,将紫色看作1,可以得到
 
@@ -114,4 +114,4 @@ o8DlxK+H8wsiXe/ERFpAMaBPiIcj1sHyGOMmQDkK+uXsVZgre5DSXw==hhhhhhhhhhhhhhh
 
 > DES数据块长度为64位，所以IV长度需要为8个字符（ECB模式不用IV），密钥长度也为8个字符，IV与密钥超过长度则截取，不足则在末尾填充'\0'补足
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/CTF/%E5%8F%8C%E8%89%B2%E5%9D%97/2.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/CTF/%E5%8F%8C%E8%89%B2%E5%9D%97/2.png)
