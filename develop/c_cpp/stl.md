@@ -6,7 +6,7 @@
 
 ***Sample***
 
-![](https://railgun.imfast.io/CodeWiki/String/1.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/CodeWiki/String/1.png)
 
 1. `str.erase(num)`
 
@@ -30,7 +30,7 @@
 
 ***Sample***
 
-![](https://railgun.imfast.io/CodeWiki/String/2.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/CodeWiki/String/2.png)
 
 1. `str.insert(num,str2)`
 

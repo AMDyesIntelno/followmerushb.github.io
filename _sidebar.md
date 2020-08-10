@@ -1,9 +1,9 @@
 - **README**
-  - [![](https://railgun.imfast.io/Notes/svg/important.svg) README](/README)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/important.svg) README](/README)
 - **CS基础**
-  - ![](https://railgun.imfast.io/Notes/svg/datastruct.svg)**数据结构**
+  - ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/datastruct.svg)**数据结构**
     - [数据结构](/cs/data_struct/data_struct)
-  - ![](https://railgun.imfast.io/Notes/svg/algorithm.svg)**算法**
+  - ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/algorithm.svg)**算法**
     - [串的模式匹配](/cs/algorithm/kmp)
     - [排序](/cs/algorithm/sort)
     - [关键路径与拓扑排序](/cs/algorithm/关键路径与拓扑排序)
@@ -11,14 +11,14 @@
     - [线索二叉树](/cs/algorithm/线索二叉树)
     - [最小生成树](/cs/algorithm/最小生成树)
 - **编程开发**
-  - ![](https://railgun.imfast.io/Notes/svg/cpp-blue.svg) C/C++
+  - ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/cpp-blue.svg) C/C++
     - [输入输出处理](/develop/c_cpp/输入输出处理)
     - [数学相关](/develop/c_cpp/数学相关)
     - [指针](/develop/c_cpp/指针)
     - [STL](/develop/c_cpp/stl)
-  - [![](https://railgun.imfast.io/Notes/svg/python.svg) Python](/develop/python)
-  - [![](https://railgun.imfast.io/Notes/svg/golang.svg) Golang](/develop/golang)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/python.svg) Python](/develop/python)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/golang.svg) Golang](/develop/golang)
 - **读书记录**
-  - [![](https://railgun.imfast.io/Notes/svg/internet.svg) 计算机网络](/books/internet)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/internet.svg) 计算机网络](/books/internet)
 - **CTF**
   - [🚩 攻防世界](/ctf/adworld)

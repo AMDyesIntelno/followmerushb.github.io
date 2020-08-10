@@ -1,4 +1,4 @@
-![logo](https://railgun.imfast.io/avatar.png ':size=100')
+![logo](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/avatar.png ':size=100')
 
 # Misaka's Notes
 
