@@ -301,3 +301,78 @@ print(a)
 ('a', 'b', ['X', 'Y'])
 ```
 
+## 字符串
+
+>字符串类型的对象不支持更改
+
+```python
+print("PI:%.2f"%3.14159)#精度
+print("PI:%10f"%3.14159)#字符宽度,两个空格
+print("PI:%10.2f"%3.14159)#6个空格
+print("PI:%-10.2f"%3.14159)#左对齐
+print("PI:%010.2f"%3.14159)#补零
+print("str:%.3s"%"abcdefg")#字符串截取
+print("PI:%s"%3.14159)
+print("str:%*.*s"%(10,3,"abcdefg"))#*作为字段宽度或精度,数值会从元组中读出
+print("PI:%.2f E:%.2f"%(3.14159,2.71))#在有多个占位符的字符串中,使用元组传入多个格式化值
+print("percent: %d"%85+"%")#输出%
+print("percent: %d%%"%85)#如果要输出%,需要格式化字符%,需要使用%%
+print(('%+5d'%10)+'\n'+('%+5d'%-10))#显示正负号并对齐
+```
+
+```
+PI:3.14
+PI:  3.141590
+PI:      3.14
+PI:3.14      
+PI:0000003.14
+str:abc
+PI:3.14159
+str:       abc
+PI:3.14 E:2.71
+percent: 85%
+percent: 85%
+  +10
+  -10
+```
+
+### 常用方法
+
+1. `find()`用于检测字符串中是否包含子字符串str
+>如果指定beg(开始)和end(结束)范围,就检查是否包含在指定范围内
+>
+>如果包含子字符串,就返回开始的索引值,否则返回-1
+
+`str.find(str, beg=0, end=len(string))`
+
+2. `join()`用于将序列中的元素以指定字符连接成一个新字符串
+
+`str.join(sequence)`
+
+3. `lower()`用于将字符串中所有大写字符转换为小写
+
+`str.lower()`
+
+4. `upper()`用于将字符串中所有小写字符转换为大写
+
+`str.upper()`
+
+5. `swapcase()`用于对字符串的大小写字母进行转换,将字符串中大写转换为小写,小写转换为大写
+
+`str.swapcase()`
+
+6. `replace()`把字符串中的old(旧字符串)替换成new(新字符串),如果指定第3个参数max,替换次数就不超过max次
+
+`str.replace(old, new[, max])`
+
+7. `split()`通过指定分隔符对字符串进行切片,如果参数num有指定值,就只分隔num个子字符串
+
+`str.split(st="", num=string.count(str))`
+ 
+8. `strip()`用于移除字符串头尾指定的字符(默认为空格)
+
+`str.strip([char])`
+
+9. `translate()`根据参数table给出的表(包含256个字符)转换字符串的字符,将要过滤掉的字符放到del参数中
+
+`str.translate(table[, deletechars])`
