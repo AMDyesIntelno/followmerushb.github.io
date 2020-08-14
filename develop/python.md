@@ -421,3 +421,137 @@ I h_ve _n apple
 a-b-c
 ----1-2-3----
 ```
+
+## 字典
+
+字典的创建格式
+
+`d={key1:value1,key2:value2}`
+
+>键(key)必须是唯一的,但值(value)不必
+>
+>不允许同一个键出现两次,创建时如果同一个键被赋值两次,后面的值会被记住
+>
+>值可以取任何数据类型,键必须是不可变的,如字符串,数字或元组,但不能用列表
+>
+>字典内部存放的顺序和键放入的顺序没有关系
+
+```python
+dic={"a":1001,"b":1002,"c":1003,"d":1004}
+print(dic)
+dic["a"]=1002
+print(dic)
+dic["a"]=1001
+dic["e"]=1005
+dic["fgh"]="qwer"
+print(dic)
+print("len: %d"%len(dic))
+dic=dict([("name","abc"),("num","123")])
+print(dic)
+print(dic["name"])
+print(dic["num"])
+print("name:%(name)s"%dic)#字典的格式化方式是在每个转换说明符中的%字符后加上用圆括号括起来的键,再跟上其他说明元素
+print("num:%s"%dic["num"])
+```
+
+```
+{'a': 1001, 'b': 1002, 'c': 1003, 'd': 1004}
+{'a': 1002, 'b': 1002, 'c': 1003, 'd': 1004}
+{'a': 1001, 'b': 1002, 'c': 1003, 'd': 1004, 'e': 1005, 'fgh': 'qwer'}
+len: 6
+{'name': 'abc', 'num': '123'}
+abc
+123
+name:abc
+num:123
+```
+
+### 常用方法
+
+1. `clear()`用于删除字典内的所有项
+
+`dict.clear()`
+
+```python
+a={}
+b=a
+print(id(a)==id(b))
+a['key']='value'
+print(b)
+a={}
+print(id(a)==id(b))
+print(b)
+'''
+'''
+c={}
+d=c
+print(id(c)==id(d))
+c['key']='value'
+print(d)
+c.clear()
+print(id(c)==id(d))
+print(d)
+```
+
+```
+True
+{'key': 'value'}
+False
+{'key': 'value'}
+True
+{'key': 'value'}
+True
+{}
+```
+
+2. `copy()`返回一个具有相同键/值对的新字典(浅复制)
+
+`dict.copy()`
+
+浅复制时,仅对键进行复制,相当于两个键指向同一个值(id相同)
+
+当对一个键的值进行替换时(`a["name"]="asdf"`),相当于这个键重新指向另一个值(id改变),因此不会对拷贝造成影响
+
+当对一个键的值进行修改时(`a["date"][1]=10`)(`b["date"][0]=9`),这个键的指向并没有发生变化(id没有改变),只有值发生了改变,因此拷贝和源均会发生变化
+
+```python
+a={"name":"abc","num":"123","date":[12,13]}
+b=a.copy()
+print(id(a)==id(b))
+print(id(a["name"])==id(b["name"]))
+print(id(a["num"])==id(b["num"]))
+print(id(a["date"])==id(b["date"]))
+a["name"]="asdf"
+print(id(a["name"])==id(b["name"]))
+print(a)
+print(b)
+a["date"][1]=10
+print(id(a["date"])==id(b["date"]))
+print(a)
+print(b)
+b["date"][0]=9
+print(id(a["date"])==id(b["date"]))
+print(a)
+print(b)
+del a["date"]
+print(a)
+print(b)
+```
+
+```
+False
+True
+True
+True
+False
+{'name': 'asdf', 'num': '123', 'date': [12, 13]}
+{'name': 'abc', 'num': '123', 'date': [12, 13]}
+True
+{'name': 'asdf', 'num': '123', 'date': [12, 10]}
+{'name': 'abc', 'num': '123', 'date': [12, 10]}
+True
+{'name': 'asdf', 'num': '123', 'date': [9, 10]}
+{'name': 'abc', 'num': '123', 'date': [9, 10]}
+{'name': 'asdf', 'num': '123'}
+{'name': 'abc', 'num': '123', 'date': [9, 10]}
+```
