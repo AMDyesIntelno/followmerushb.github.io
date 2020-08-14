@@ -349,6 +349,8 @@ percent: 85%
 
 `str.join(sequence)`
 
+>进行join操作调用和被调用的对象必须都是字符串,任意一个不是字符串都会报错
+
 3. `lower()`用于将字符串中所有大写字符转换为小写
 
 `str.lower()`
@@ -376,3 +378,46 @@ percent: 85%
 9. `translate()`根据参数table给出的表(包含256个字符)转换字符串的字符,将要过滤掉的字符放到del参数中
 
 `str.translate(table[, deletechars])`
+
+```python
+str="I have an apple"
+print(str.find("q"))
+print(str.find("apple"))
+mark="+"
+str=tuple("12345")
+print(mark.join(str))
+str=("","usr","bin","python3")
+print("/".join(str))
+str="I have an apple"
+print(str.lower())
+print(str.upper())
+print(str.swapcase())
+print(str.replace("an apple","a pen",1))
+print(str.replace("a","_",2))
+print(str.split())
+print(str.split("a",2))
+print(str.split("a"))
+str="----a-b-c----"
+print(str.strip("-"))
+tab1="abcde"
+tab2="12345"
+trantab=str.maketrans(tab1,tab2)
+print(str.translate(trantab))
+```
+
+```
+-1
+10
+1+2+3+4+5
+/usr/bin/python3
+i have an apple
+I HAVE AN APPLE
+i HAVE AN APPLE
+I have a pen
+I h_ve _n apple
+['I', 'have', 'an', 'apple']
+['I h', 've ', 'n apple']
+['I h', 've ', 'n ', 'pple']
+a-b-c
+----1-2-3----
+```
