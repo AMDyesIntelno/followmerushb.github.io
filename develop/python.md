@@ -259,7 +259,7 @@ asdf
 
 如果参数是元组,参数就会被原样返回
 
-元组中的元素值不允许修改，但可以对元组进行连接组合
+元组中的元素值不允许修改,但可以对元组进行连接组合
 
 元组中的元素值不允许删除,但可以使用`del`删除整个元组
 
@@ -555,3 +555,39 @@ True
 {'name': 'asdf', 'num': '123'}
 {'name': 'abc', 'num': '123', 'date': [9, 10]}
 ```
+
+3. `fromkeys()`用于创建一个新字典,以序列seq中的元素做字典的键,value为字典**所有键**对应的初始值
+
+`dict.fromkeys(seq[, value]))`
+
+4. `get()`返回指定键的值,如果值不在字典中.就返回默认值(`None`)
+
+`dict.get(key, default=None)`
+
+5. `key in dict`方判断键是否存在于字典中,如果键在字典dict中就返回true,否则返回false。
+
+`key in dict`
+
+6. `items()`以列表返回可遍历的(键,值)**元组数组**
+
+`dict.items()`
+
+7. `keys()`以列表返回一个字典所有键
+
+`dict.keys()`
+
+8. `setdefault()`方用于获得与给定键相关联的值,如果键不存在于字典中,就会添加键并将值设为默认值
+
+`dict.setdefault(key, default=None)`
+
+>当键不存在时,setdefault方法返回默认值并更新字典；如果键存在,就返回与其对应的值,不改变字典
+
+9. `update()`用于把字典dict2的键/值对更新到dict中
+
+`dict.update(dict2)`
+
+>提供的字典中的项被添加到旧字典中,如果有相同的键就会覆盖
+
+10. `values()`以列表形式返回字典中所有值
+
+`dict.values()`
