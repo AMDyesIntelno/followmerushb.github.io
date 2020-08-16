@@ -1,5 +1,30 @@
 ?> Python 笔记
 
+## 输出
+
+快速多行输出
+
+```python
+print("""asdf
+qwe""")
+```
+
+```
+asdf
+qwe
+```
+
+去掉`print`添加逗号后的自动空格(`sep=""`)和`print`的自动换行(`end=""`)
+
+```python
+print("abc","edf",end="")
+print("ghi","jkl",sep="")
+```
+
+```
+abc edfghijkl
+```
+
 ## 列表
 
 ### 分片
@@ -591,3 +616,46 @@ True
 10. `values()`以列表形式返回字典中所有值
 
 `dict.values()`
+
+```python
+seq=("a","b","c")
+dic=dict.fromkeys(seq)
+print(dic)
+dic=dict.fromkeys(seq,10)
+print(dic)
+print(dic.get("a"))
+print(dic.get("d"))
+print(dic.get("e","无"))
+print("a" in dic)
+print("e" in dic)
+print(dic.items())
+print(dic.keys())
+print(dic.values())
+print(dic.setdefault("d"))
+print(dic)
+print(dic.setdefault("e",10086))
+print(dic)
+print(dic.setdefault("e"))
+dic2={"f":123,"e":100}
+dic.update(dic2)
+print(dic)
+```
+
+```
+{'a': None, 'b': None, 'c': None}
+{'a': 10, 'b': 10, 'c': 10}
+10
+None
+无
+True
+False
+dict_items([('a', 10), ('b', 10), ('c', 10)])
+dict_keys(['a', 'b', 'c'])
+dict_values([10, 10, 10])
+None
+{'a': 10, 'b': 10, 'c': 10, 'd': None}
+10086
+{'a': 10, 'b': 10, 'c': 10, 'd': None, 'e': 10086}
+10086
+{'a': 10, 'b': 10, 'c': 10, 'd': None, 'e': 100, 'f': 123}
+```
