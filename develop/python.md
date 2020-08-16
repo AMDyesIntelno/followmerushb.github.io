@@ -25,6 +25,156 @@ print("ghi","jkl",sep="")
 abc edfghijkl
 ```
 
+## 变量
+
+有关变量的规则
+
+>1. 变量名只能包含字母、数字和下划线变量名可以字母或下划线打头,但不能以数字打头,例如,可将变量命名为message_1,但不能将其命名为1_message
+>
+>2. 变量名不能包含空格,但可使用下划线来分隔其中的单词例如,变量名greeting_message可行,但变量名greeting message会引发错误
+>
+>3. 不要将Python关键字和函数名用作变量名,即不要使用Python保留用于特殊用途的单词,如print
+>
+>4. 变量名应既简短又具有描述性例如,name比n好,student_name比s_n好,name_length比length_of_persons_name好
+>
+>5. 慎用小写字母l和大写字母O,因为它们可能被人错看成数字1和0
+
+## 字符串&数字
+
+>字符串类型的对象不支持更改
+>
+>TypeError: 'str' object does not support item assignment
+
+```python
+print("PI:%.2f"%3.14159)#浮点数精度控制
+print("PI:%10f"%3.14159)#字符宽度,前面保留两个空格
+print("PI:%10.2f"%3.14159)#前面保留6个空格
+print("PI:%-10.2f"%3.14159)#左对齐(默认为右对齐)
+print("PI:%010.2f"%3.14159)#补零
+print("str:%.3s"%"abcdefg")#字符串截取
+print("PI:%s"%3.14159)
+print("str:%*.*s"%(10,3,"abcdefg"))#星号(*)作为字段宽度或精度,数值会从元组中读出
+print("PI:%.2f E:%.2f"%(3.14159,2.71))#在有多个占位符的字符串中,使用元组传入多个格式化值
+print("percent: %d"%85+"%")#输出%
+print("percent: %d%%"%85)#如果要输出%,需要格式化字符%,需要使用%%
+print(('%+5d'%10)+'\n'+('%+5d'%-10))#显示正负号并对齐
+```
+
+```
+PI:3.14
+PI:  3.141590
+PI:      3.14
+PI:3.14      
+PI:0000003.14
+str:abc
+PI:3.14159
+str:       abc
+PI:3.14 E:2.71
+percent: 85%
+percent: 85%
+  +10
+  -10
+```
+
+### 常用方法
+
+1. `find()`用于检测字符串中是否包含子字符串str
+>如果指定beg(开始)和end(结束)范围,就检查是否包含在指定范围内
+>
+>如果包含子字符串,就返回开始的索引值,否则返回-1
+
+`str.find(str, beg=0, end=len(string))`
+
+2. `join()`用于将序列中的元素以指定字符连接成一个新字符串
+
+`str.join(sequence)`
+
+>进行join操作调用和被调用的对象必须都是字符串,任意一个不是字符串都会报错
+
+3. `lower()`用于将字符串中所有大写字符转换为小写
+
+`str.lower()`
+
+4. `upper()`用于将字符串中所有小写字符转换为大写
+
+`str.upper()`
+
+5. `swapcase()`用于对字符串的大小写字母进行转换,将字符串中大写转换为小写,小写转换为大写
+
+`str.swapcase()`
+
+6. `replace()`把字符串中的old(旧字符串)替换成new(新字符串),如果指定第3个参数max,替换次数就不超过max次
+
+`str.replace(old, new[, max])`
+
+7. `split()`通过指定分隔符对字符串进行切片,如果参数num有指定值,就只分隔num个子字符串
+
+`str.split(st="", num=string.count(str))`
+ 
+8. `strip()`用于移除字符串头尾指定的字符(默认为空格)
+
+`str.strip([char])`
+
+9. `translate()`根据参数table给出的表(包含256个字符)转换字符串的字符,将要过滤掉的字符放到del参数中
+
+`str.translate(table[, deletechars])`
+
+```python
+str="I have an apple"
+print(str.find("q"))
+print(str.find("apple"))
+mark="+"
+str=tuple("12345")
+print(mark.join(str))
+str=("","usr","bin","python3")
+print("/".join(str))
+str="I have an apple"
+print(str.lower())
+print(str.upper())
+print(str.swapcase())
+print(str.replace("an apple","a pen",1))
+print(str.replace("a","_",2))
+print(str.split())
+print(str.split("a",2))
+print(str.split("a"))
+str="----a-b-c----"
+print(str.strip("-"))
+tab1="abcde"
+tab2="12345"
+trantab=str.maketrans(tab1,tab2)
+print(str.translate(trantab))
+```
+
+```
+-1
+10
+1+2+3+4+5
+/usr/bin/python3
+i have an apple
+I HAVE AN APPLE
+i HAVE AN APPLE
+I have a pen
+I h_ve _n apple
+['I', 'have', 'an', 'apple']
+['I h', 've ', 'n apple']
+['I h', 've ', 'n ', 'pple']
+a-b-c
+----1-2-3----
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 列表
 
 ### 分片
@@ -326,126 +476,28 @@ print(a)
 ('a', 'b', ['X', 'Y'])
 ```
 
-## 字符串
-
->字符串类型的对象不支持更改
+## 序列解包
 
 ```python
-print("PI:%.2f"%3.14159)#精度
-print("PI:%10f"%3.14159)#字符宽度,两个空格
-print("PI:%10.2f"%3.14159)#6个空格
-print("PI:%-10.2f"%3.14159)#左对齐
-print("PI:%010.2f"%3.14159)#补零
-print("str:%.3s"%"abcdefg")#字符串截取
-print("PI:%s"%3.14159)
-print("str:%*.*s"%(10,3,"abcdefg"))#*作为字段宽度或精度,数值会从元组中读出
-print("PI:%.2f E:%.2f"%(3.14159,2.71))#在有多个占位符的字符串中,使用元组传入多个格式化值
-print("percent: %d"%85+"%")#输出%
-print("percent: %d%%"%85)#如果要输出%,需要格式化字符%,需要使用%%
-print(('%+5d'%10)+'\n'+('%+5d'%-10))#显示正负号并对齐
+nums=1,2,3
+print(nums)
+x,y,z=nums
+print(x)
+print(x,y,z)
 ```
 
 ```
-PI:3.14
-PI:  3.141590
-PI:      3.14
-PI:3.14      
-PI:0000003.14
-str:abc
-PI:3.14159
-str:       abc
-PI:3.14 E:2.71
-percent: 85%
-percent: 85%
-  +10
-  -10
+(1, 2, 3)
+1
+1 2 3
 ```
 
-### 常用方法
+## bool
 
-1. `find()`用于检测字符串中是否包含子字符串str
->如果指定beg(开始)和end(结束)范围,就检查是否包含在指定范围内
+>标准值False和None,所有类型的数字0(包括浮点型、长整型和其他类型),空序列(如空字符串、空元组和空列表)以及空字典都为假
 >
->如果包含子字符串,就返回开始的索引值,否则返回-1
+>其他值都为真
 
-`str.find(str, beg=0, end=len(string))`
-
-2. `join()`用于将序列中的元素以指定字符连接成一个新字符串
-
-`str.join(sequence)`
-
->进行join操作调用和被调用的对象必须都是字符串,任意一个不是字符串都会报错
-
-3. `lower()`用于将字符串中所有大写字符转换为小写
-
-`str.lower()`
-
-4. `upper()`用于将字符串中所有小写字符转换为大写
-
-`str.upper()`
-
-5. `swapcase()`用于对字符串的大小写字母进行转换,将字符串中大写转换为小写,小写转换为大写
-
-`str.swapcase()`
-
-6. `replace()`把字符串中的old(旧字符串)替换成new(新字符串),如果指定第3个参数max,替换次数就不超过max次
-
-`str.replace(old, new[, max])`
-
-7. `split()`通过指定分隔符对字符串进行切片,如果参数num有指定值,就只分隔num个子字符串
-
-`str.split(st="", num=string.count(str))`
- 
-8. `strip()`用于移除字符串头尾指定的字符(默认为空格)
-
-`str.strip([char])`
-
-9. `translate()`根据参数table给出的表(包含256个字符)转换字符串的字符,将要过滤掉的字符放到del参数中
-
-`str.translate(table[, deletechars])`
-
-```python
-str="I have an apple"
-print(str.find("q"))
-print(str.find("apple"))
-mark="+"
-str=tuple("12345")
-print(mark.join(str))
-str=("","usr","bin","python3")
-print("/".join(str))
-str="I have an apple"
-print(str.lower())
-print(str.upper())
-print(str.swapcase())
-print(str.replace("an apple","a pen",1))
-print(str.replace("a","_",2))
-print(str.split())
-print(str.split("a",2))
-print(str.split("a"))
-str="----a-b-c----"
-print(str.strip("-"))
-tab1="abcde"
-tab2="12345"
-trantab=str.maketrans(tab1,tab2)
-print(str.translate(trantab))
-```
-
-```
--1
-10
-1+2+3+4+5
-/usr/bin/python3
-i have an apple
-I HAVE AN APPLE
-i HAVE AN APPLE
-I have a pen
-I h_ve _n apple
-['I', 'have', 'an', 'apple']
-['I h', 've ', 'n apple']
-['I h', 've ', 'n ', 'pple']
-a-b-c
-----1-2-3----
-```
 
 ## 字典
 
@@ -460,6 +512,8 @@ a-b-c
 >值可以取任何数据类型,键必须是不可变的,如字符串,数字或元组,但不能用列表
 >
 >字典内部存放的顺序和键放入的顺序没有关系
+>
+>字典中的元素是没有顺序的
 
 ```python
 dic={"a":1001,"b":1002,"c":1003,"d":1004}
@@ -589,7 +643,7 @@ True
 
 `dict.get(key, default=None)`
 
-5. `key in dict`方判断键是否存在于字典中,如果键在字典dict中就返回true,否则返回false。
+5. `key in dict`方判断键是否存在于字典中,如果键在字典dict中就返回true,否则返回false
 
 `key in dict`
 
@@ -659,3 +713,78 @@ None
 10086
 {'a': 10, 'b': 10, 'c': 10, 'd': None, 'e': 100, 'f': 123}
 ```
+
+## import
+
+引入模块
+
+`import module1[, module2[,... moduleN]]`
+
+`import sys,math`
+
+从模块中导入指定部分到当前命名空间
+
+`from modname import name1[, name2[, ... nameN]]`
+
+`from math import pi,sin`
+
+为模块/函数取别名
+
+`import math as m`
+
+`from math import pi as p`
+
+## 断言
+
+```python
+a=-1
+assert a>0,"a<=0"
+assert a%2==0,"a%2==1"
+```
+
+```
+Traceback (most recent call last):
+  File "/home/misaka/python/test3.py", line 2, in <module>
+    assert a>0,"a<=0"
+AssertionError: a<=0
+```
+
+```python
+a=5
+assert a>0,"a<=0"
+assert a%2==0,"a%2==1"
+```
+
+```
+Traceback (most recent call last):
+  File "/home/misaka/python/test3.py", line 3, in <module>
+    assert a%2==0,"a%2==1"
+AssertionError: a%2==1
+```
+
+>使用assert断言时,要注意以下几点:
+>
+>1. assert断言用来声明某个条件是真的
+>
+>2. 如果你非常确信你使用的列表中至少有一个元素,想要检验这一点,并在它非真时引发一个错误,那么assert语句是应用在这种情形下的理想语句
+>
+>3. assert语句失败时,会抛出一个AssertionError
+
+## 流程控制语句
+
+在`for`循环中使用序列解包
+
+```python
+tup={"a":1,"b":2,"c":3}
+for key,value in tup.items():
+   print("%s:%s"%(key,value))
+```
+
+```
+a:1
+b:2
+c:3
+```
+
+
+
