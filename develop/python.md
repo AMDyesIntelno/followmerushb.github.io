@@ -162,19 +162,6 @@ a-b-c
 ----1-2-3----
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## 列表
 
 ### 分片
@@ -309,6 +296,26 @@ print(a)
 [1, 3, 5, 'qwer']
 ```
 
+`range()`用于创建数字列表(左闭右开区间)
+
+```python
+for value in range(1,5):
+    print(value)
+list1=list(range(1,5))
+list2=list(range(1,5,2))#步长
+print(list1)
+print(list2)
+```
+
+```
+1
+2
+3
+4
+[1, 2, 3, 4]
+[1, 3]
+```
+
 ### 分片赋值
 
 `list()`可将字符串转换为列表
@@ -331,53 +338,71 @@ print(b)
 [1, 2, '3', '4', 'a', 'b', 'c']
 ```
 
+### 列表解析
+
+```python
+a=[value**2 for value in range(1,11)]
+print(a)
+a=[value**3 for value in range(1,11)]
+print(a)
+```
+
+```
+[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+[1, 8, 27, 64, 125, 216, 343, 512, 729, 1000]
+```
+
 ### 常用方法
 
 1. `count()`用于统计某个元素在列表中出现的次数
 
 `list.count(obj)`
 
-2. `extend()`用于在列表末尾一次性追加另一个序列中的多个值
+2. `sum()`用于计算列表中的和
+
+`sum(list)`
+
+3. `extend()`用于在列表末尾一次性追加另一个序列中的多个值
 
 `list.extend(seq)`
 
 >`extend()`和序列相加的主要区别是:`extend()`方法修改了被扩展的序列,序列相加会返回一个全新的列表
 
-3. `index()`用于从列表中找出某个值第一个匹配项的索引位置
+4. `index()`用于从列表中找出某个值第一个匹配项的索引位置
 
 `list.index(obj)`
 
 >对于不在列表中的元素,用index()会报错
 
-4. `insert()`用于在列表中的某个位置插入对象
+5. `insert()`用于在列表中的某个位置插入对象
 
 `list.insert(index,obj)`
 
 >list代表列表,index代表对象obj需要插入的索引位置,obj代表要插入列表中的对象
 
-5. `pop()`用于移除列表中的一个元素(默认最后一个元素)并且返回该元素的值
+6. `pop()`用于移除列表中的一个元素(默认最后一个元素)并且返回该元素的值
 
 `list.pop(obj=list[-1])`
 
-6. `remove()`用于移除列表中某个值的第一个匹配项
+7. `remove()`用于移除列表中某个值的第一个匹配项
 
 `list.remove(obj)`
 
-7. `reverse()`用于反向列表中的元素
+8. `reverse()`用于反向列表中的元素
 
 `list.reverse()`
 
-8. `sort()`用于对原列表进行排序,如果指定参数,就使用参数指定的比较方法进行排序
+9. `sort()`用于对原列表进行永久排序(`sorted()`对列表进行临时排序),如果指定参数,就使用参数指定的比较方法进行排序
 
 `list.sort(func)`
 
 >list代表列表,func为可选参数,如果指定该参数,就会使用该参数的方法进行排序
 
-9. `clear()`用于清空列表,类似于`del a[:]`
+10. `clear()`用于清空列表,类似于`del a[:]`
 
 `list.clear()`
 
-10.  `copy()`用于复制列表,类似于`a[:]`
+11.  `copy()`用于复制列表,类似于`a[:]`
 
 `list.copy()`
 
@@ -388,6 +413,7 @@ c=[[1,3],5,6,[1,3],2,"asdf"]
 print(a.count(3))
 print(b.count("a"))
 print(c.count([1,3]))
+print(sum(a))
 d=list("bca")
 b.extend(d)
 print(b)
@@ -412,6 +438,7 @@ print(a)
 2
 3
 2
+48
 ['a', 's', 'd', 'f', 'g', 'a', 'a', 'b', 'c', 'a']
 1
 5
@@ -786,5 +813,158 @@ b:2
 c:3
 ```
 
+### 并行迭代
 
+`zip`函数用来进行并行迭代,可以作用于任意数量的序列,返回一个元组的列表
+
+`zip函数`以短序列为准,当短序列遍历结束时,for循环就会遍历结束
+
+```python
+a=[1,2,3,4,5,6]
+b=["a","b","c","d"]
+c=["abc","edf","gh"]
+for num,ch,string in zip(a,b,c):
+    print(num,ch,string)
+```
+
+```
+1 a abc
+2 b edf
+3 c gh
+```
+
+### 翻转/排序迭代
+
+`reversed`进行翻转迭代
+
+`sorted`进行排序迭代
+
+两者可作用于任何序列或可迭代对象,但不对源对象进行修改,而是返回翻转或排序后的版本
+
+```python
+a=[1,2,3,6,5,4]
+print(sorted(a))
+print(a)
+b=["a","b","c","d"]
+print(list(reversed(b)))
+print(b)
+```
+
+```
+[1, 2, 3, 4, 5, 6]
+[1, 2, 3, 6, 5, 4]
+['d', 'c', 'b', 'a']
+['a', 'b', 'c', 'd']
+```
+
+### 在while循环中使用else语句
+
+```python
+n=0
+while n<3:
+  print(n)
+  n+=1
+else:
+  print (n,">=3",sep="")
+print("...")
+```
+
+```
+0
+1
+2
+3>=3
+...
+```
+
+```python
+n=0
+while n<3:
+  print(n)
+  n+=1
+  if n==2:
+      break
+else:
+  print (n,">=3",sep="")
+print("...")
+```
+
+```
+0
+1
+...
+```
+
+### 在for循环中使用else语句
+
+`pass`是空语句,作用是保持程序结构的完整性
+
+```python
+n=0
+for n in range(0,4):
+  print(n)
+else:
+  print (n,">=3",sep="")
+print("...")
+```
+
+```
+0
+1
+2
+3
+3>=3
+...
+```
+
+```python
+n=0
+for n in range(0,4):
+  print(n)
+  if n==2:
+      break
+else:
+  print (n,">=3",sep="")
+print("...")
+```
+
+```
+0
+1
+2
+...
+```
+
+### pass语句
+
+```python
+str="asdf"
+if str=="asdf":
+   print('hello')
+elif str=="qwer":
+    #None
+else:
+   print("...")
+```
+
+```
+  File "/home/misaka/python/test3.py", line 6
+    else:
+       ^
+IndentationError: expected an indented block
+```
+
+```python
+str="asdf"
+if str=="asdf":
+   print('hello')
+elif str=="qwer":
+    pass
+else:
+   print("...")
+```
+
+```
+hello
+```
 
