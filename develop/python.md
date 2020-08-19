@@ -968,3 +968,247 @@ else:
 hello
 ```
 
+## 函数
+
+### 函数定义
+
+>函数代码块以`def`关键词开头,后接函数标识符名称和圆括号`()`
+>
+>所有传入的参数和自变量都必须放在圆括号中,可以在圆括号中定义参数
+>
+>函数的第一行语句可以选择性使用文档字符串,用于存放函数说明
+>
+>函数内容以冒号开始,并且要缩进
+>
+>`return [表达式]`结束函数,选择性返回一个值给调用方
+>
+>不带表达式的`return`相当于返回`None`
+>
+>没有`return`语句时,函数执行完毕也会返回结果,不过结果为`None`
+>
+>`return None`可以简写为`return`
+
+### 函数参数
+
+#### 必须参数
+
+>必须参数必须以正确的顺序传入函数,调用时数量必须和声明时一样
+
+```python
+def fun(string):
+    print("string: ",string,sep="")
+s="asdf"
+fun(s)
+#fun() #TypeError: fun() missing 1 required positional argument: 'string'
+#fun(s,s) #TypeError: fun() takes 1 positional argument but 2 were given
+```
+
+```
+string: asdf
+```
+
+#### 关键字参数
+
+>使用关键字参数允许调用函数时参数的顺序与声明时不一致,因为Python解释器能够用参数名匹配参数值
+
+```python
+def fun(string1,string2):
+    print("string1: ",string1,sep="")
+    print("string2: ",string2,sep="")
+s1="asdf"
+s2="qwer"
+fun(s1,s2)
+print("---")
+fun(string1=s1,string2=s2)
+```
+
+```
+string1: asdf
+string2: qwer
+---
+string1: asdf
+string2: qwer
+```
+
+#### 默认参数
+
+>使用默认参数,就是在定义函数时,给参数一个默认值,如果没有给调用的函数的参数赋值,调用的函数就会使用这个默认值
+>
+>无论有多少默认参数,默认参数都不能在必须参数之前
+>
+>无论有多少默认参数,若不传入默认参数值,则使用默认值
+>
+>若要更改某一个默认参数值,又不想传入其他默认参数,且该默认参数的位置不是第一个,则可以通过参数名更改想要更改的默认参数值
+>
+>若有一个默认参数通过传入参数名更改参数值,则其他想要更改的默认参数都需要传入参数名更改参数值,否则报错
+>
+>更改默认参数值时,传入默认参数的顺序不需要根据定义的函数中的默认参数的顺序传入,不过最好同时传入参数名,否则容易出现执行结果与预期不一致的情况
+
+```python
+def fun(string1,string2="qwer",string3="zxcv"):
+    print("string1: ",string1,sep="")
+    print("string2: ",string2,sep="")
+    print("string3: ",string3,sep="")
+s1="asdf"
+s2="1234"
+s3="5678"
+print('-------传入必须参数-------')
+fun(s1)
+print('-------传入必须参数,更改第一个默认参数值-------')
+fun(s1,s2)
+print('-------传入必须参数,默认参数值都更改-------')
+fun(s1,s2,s3)
+print('-------传入必须参数,指定默认参数名并更改参数值-------')
+fun(s1,string2=s2)
+print('-------传入必须参数,指定参数名并更改值-------')
+fun(s1,string3=s3,string2=s2)
+print('-------第一个默认参数不带参数名,第二个带-------')
+fun(s1,s2,string3=s3)
+print('-------两个默认参数都带参数名-------')
+fun(s1,string2=s2,string3=s3)
+'''
+print('-------第一个默认参数带参数名,第二个不带,报错-------')
+fun(s1,string2=s2,s3)
+#SyntaxError: positional argument follows keyword argument
+'''
+```
+
+```
+-------传入必须参数-------
+string1: asdf
+string2: qwer
+string3: zxcv
+-------传入必须参数,更改第一个默认参数值-------
+string1: asdf
+string2: 1234
+string3: zxcv
+-------传入必须参数,默认参数值都更改-------
+string1: asdf
+string2: 1234
+string3: 5678
+-------传入必须参数,指定默认参数名并更改参数值-------
+string1: asdf
+string2: 1234
+string3: zxcv
+-------传入必须参数,指定参数名并更改值-------
+string1: asdf
+string2: 1234
+string3: 5678
+-------第一个默认参数不带参数名,第二个带-------
+string1: asdf
+string2: 1234
+string3: 5678
+-------两个默认参数都带参数名-------
+string1: asdf
+string2: 1234
+string3: 5678
+```
+
+#### 可变参数
+
+`def functionname([formal_args,] *var_args_tuple):`
+
+>加了星号(*)的变量名会存放所有未命名的变量参数
+>
+>如果变量参数在函数调用时没有指定参数,就是一个空元组
+
+```python
+def fun(string,*strings):
+    print(string)
+    print(strings)
+fun("asdf")
+fun("asdf","qwer")
+fun("asdf","qwer","zxcv")
+fun("asdf","qwer",123,"zxcv")
+def fun2(*strings,string):
+    print(string)
+    print(strings)
+#fun2("asdf","qwer","zxcv",123)
+#TypeError: fun2() missing 1 required keyword-only argument: 'string'
+#fun2("asdf","qwer",string="zxcv",123)
+#SyntaxError: positional argument follows keyword argument
+fun2("asdf","qwer",string="zxcv")
+```
+
+```
+asdf
+()
+asdf
+('qwer',)
+asdf
+('qwer', 'zxcv')
+asdf
+('qwer', 123, 'zxcv')
+zxcv
+('asdf', 'qwer')
+```
+
+`def functionname([formal_args,] **var_argvs_dict):`
+
+>使用任意数量的关键字实参
+
+```python
+def fun(string,**strings):
+    print(string)
+    print(strings)
+fun("asdf")
+fun("asdf",fir="qwer")
+fun("asdf",fir="qwer",sec=123)
+#fun("asdf",fir="qwer",sec=123,string=456)
+#TypeError: fun() got multiple values for argument 'string'
+#fun("asdf","fir"="qwer")
+#SyntaxError: keyword can't be an expression
+#fun("asdf",1="qwer")
+#SyntaxError: keyword can't be an expression
+'''
+def fun2(**strings,string):
+    print(string)
+    print(strings)
+
+def fun2(**strings,string):
+                        ^
+SyntaxError: invalid syntax
+'''
+```
+
+```
+asdf
+{}
+asdf
+{'fir': 'qwer'}
+asdf
+{'fir': 'qwer', 'sec': 123}
+```
+
+#### 组合参数
+
+```python
+def fun(a,b,c=0,*d,**e):
+   print(a,b,c,d,e)
+fun(1,2)
+fun(1,2,c=3)
+fun(1,2,c=3,d=3)
+fun(1,2,3,"a","b","c")
+fun(1,2,3,"abc","def",x=9,y=10,z=11)
+```
+
+```
+1 2 0 () {}
+1 2 3 () {}
+1 2 3 () {'d': 3}
+1 2 3 ('a', 'b', 'c') {}
+1 2 3 ('abc', 'def') {'x': 9, 'y': 10, 'z': 11}
+```
+
+#### 形参与实参
+
+>在函数体内都是对形参进行操作,不能操作实参,即无法对实参做出更改
+>
+>作为实参传入函数的变量名称和函数定义里形参的名字没有关系
+>
+>函数只关心形参的值,而不关心它在调用前叫什么名字
+
+### 变量作用域
+
+#### 局部变量
+
