@@ -1212,3 +1212,144 @@ fun(1,2,3,"abc","def",x=9,y=10,z=11)
 
 #### 局部变量
 
+```python
+def fun1():
+    a=1
+    print(a)
+fun1()
+#print(a)
+#NameError: name 'a' is not defined
+
+b=2
+def fun2():
+    #在函数体中可以直接使用函数体外的变量
+    print(b)
+fun2()
+
+c=3
+'''
+def fun3():
+    #UnboundLocalError: local variable 'c' referenced before assignment
+    print(c)
+    c=4
+    print(c)
+'''
+def fun3(c):
+    #在函数体中更改变量的值并不会更改函数体外变量的值
+    print(c)
+    c=4
+    print(c)
+fun3(c)
+print(c)
+```
+
+```
+1
+2
+3
+4
+3
+```
+
+#### 全局变量
+
+>在函数体中更改全局变量的值不会影响全局变量在其他函数或语句中的使用
+>
+>函数中使用某个变量时,如果该变量名既有全局变量又有局部变量,就默认使用局部变量
+>
+>要在函数中将某个变量定义为全局变量,在需要被定义的变量前加一个关键字global即可
+>
+>在函数体中定义global变量后,在函数体中对变量做的其他操作也是全局性的
+
+```python
+total=0#全局变量
+def fun1(a,b):
+    total=a+b#局部变量
+    print(total)
+    return total
+print(fun1(1,2))
+print(total)
+print("---")
+a=5
+def fun2():
+    a=10
+    print(a)
+fun2()
+print(a)
+print("---")
+def fun3():
+    #global a=10
+    #SyntaxError: invalid syntax
+    global a
+    a=10
+    print(a)
+fun3()
+print(a)
+```
+
+```
+3
+3
+0
+---
+10
+5
+---
+10
+10
+```
+
+### 闭包
+
+#### 嵌套函数
+
+```python
+def fun1():
+    msg="asdf"
+    def fun2():
+        print(msg)
+    fun2()
+fun1()
+```
+
+```
+asdf
+```
+
+#### 函数作为返回值
+
+>一个函数返回了一个内部函数,该内部函数引用了外部函数(不是在全局作用域)的相关参数和变量,将该返回的内部函数称为**闭包**
+
+```python
+def sum(*num):
+    def core():
+        s=0
+        for n in num:
+            s+=n
+        return s
+    return core
+_sum=sum(1,2,3)
+print(_sum)
+print(_sum())
+```
+
+```
+<function sum.<locals>.core at 0x7f90cba1bd08>
+6
+```
+
+```python
+def sum(a):
+    def fun(b):
+        return a+b
+    return fun
+_sum=sum(1)
+print(_sum)
+print(_sum(2))
+```
+
+```
+<function sum.<locals>.fun at 0x7febff01ed08>
+3
+```
+
