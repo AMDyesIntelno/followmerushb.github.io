@@ -1318,8 +1318,6 @@ asdf
 
 #### 函数作为返回值
 
->一个函数返回了一个内部函数,该内部函数引用了外部函数(不是在全局作用域)的相关参数和变量,将该返回的内部函数称为**闭包**
-
 ```python
 def sum(*num):
     def core():
@@ -1353,3 +1351,84 @@ print(_sum(2))
 3
 ```
 
+#### 闭包
+
+>一个函数返回了一个内部函数,该内部函数引用了外部函数(不是在全局作用域)的相关参数和变量,将该返回的内部函数称为**闭包**
+
+```python
+def fun():
+    s=[]
+    for i in range(1,4):
+        def f():
+             return i*i
+        s.append(f)
+        #当循环结束以后,循环体中的临时变量i不会销毁,而是继续存在于执行环境中
+        #python的函数只有在执行时,才会去找函数体中变量的值
+        #f没有被立即执行,因此i的值并没有传入,因此传入的i值由最终的i值确定,所以i=3
+    return s
+f1,f2,f3=fun()#序列解包
+print(f1,f1.__closure__[0].cell_contents)#__closure__属性返回的是一个元组对象,包含了闭包引用的外部变量,cell_contents对元组进行读取
+print(f2,f2.__closure__[0].cell_contents)
+print(f3,f3.__closure__[0].cell_contents)
+print(f1())
+print(f2())
+print(f3())
+```
+
+```
+<function fun.<locals>.f at 0x7fd44911bd08> 3
+<function fun.<locals>.f at 0x7fd44911bd90> 3
+<function fun.<locals>.f at 0x7fd44911be18> 3
+9
+9
+9
+```
+
+```python
+def fun():
+    def g(i):
+        def h():
+            return i*i
+        return h
+    s=[]
+    for i in range(1, 4):
+        s.append(g(i))#g(i)被立刻执行,在列表中的元素为h,同时因为i的当前值被传入函数g(),而函数g()的返回值为h,所以h可以使用当前的i
+    return s
+f1,f2,f3=fun()#序列解包
+print(f1,f1.__closure__[0].cell_contents)#__closure__属性返回的是一个元组对象,包含了闭包引用的外部变量,cell_contents对元组进行读取
+print(f2,f2.__closure__[0].cell_contents)
+print(f3,f3.__closure__[0].cell_contents)
+print(f1())
+print(f2())
+print(f3())
+```
+
+```
+<function fun.<locals>.g.<locals>.h at 0x7f8c5be86d90> 1
+<function fun.<locals>.g.<locals>.h at 0x7f8c5be86e18> 2
+<function fun.<locals>.g.<locals>.h at 0x7f8c5be86ea0> 3
+1
+4
+9
+```
+
+>闭包可以访问但无法修改外部函数的局部变量
+
+```python
+def fun():
+    x=5
+    def fun2():
+        #x*=x
+        #UnboundLocalError: local variable 'x' referenced before assignment
+        print("fun2:",x,id(x))
+    print("fun:",x,id(x))
+    fun2()
+    print("fun:",x,id(x))
+fun()
+```
+
+```
+fun: 5 9062752
+fun2: 5 9062752
+fun: 5 9062752
+```
