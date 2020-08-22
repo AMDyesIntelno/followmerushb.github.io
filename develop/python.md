@@ -1305,15 +1305,16 @@ print(a)
 
 ```python
 def fun1():
-    msg="asdf"
+    print("asdf")
     def fun2():
-        print(msg)
+        print("qwer")
     fun2()
 fun1()
 ```
 
 ```
 asdf
+qwer
 ```
 
 #### 函数作为返回值
@@ -1412,7 +1413,7 @@ print(f3())
 9
 ```
 
->闭包可以访问但无法修改外部函数的局部变量
+>闭包可以访问但无法直接修改外部函数的局部变量(通过`nonlocal`或者容器类型来间接修改)
 
 ```python
 def fun():
@@ -1431,4 +1432,41 @@ fun()
 fun: 5 9062752
 fun2: 5 9062752
 fun: 5 9062752
+```
+
+```python
+def fun():
+    x=5
+    def fun2():
+        nonlocal x
+        x*=x
+        print("fun2:",x,id(x))
+    print("fun:",x,id(x))
+    fun2()
+    print("fun:",x,id(x))
+fun()
+```
+
+```
+fun: 5 9062752
+fun2: 25 9063392
+fun: 25 9063392
+```
+
+```python
+def fun():
+    x=[5]
+    def fun2():
+        x[0]*=x[0]
+        print("fun2:",x,id(x))
+    print("fun:",x,id(x))
+    fun2()
+    print("fun:",x,id(x))
+fun()
+```
+
+```
+fun: [5] 140178018971848
+fun2: [25] 140178018971848
+fun: [25] 140178018971848
 ```
