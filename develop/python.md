@@ -1470,3 +1470,134 @@ fun: [5] 140178018971848
 fun2: [25] 140178018971848
 fun: [25] 140178018971848
 ```
+
+### 匿名函数
+
+`lambda [arg1 [,arg2,.....argn]]:expression`
+
+>假定要对一个列表中的奇数进行筛选
+
+1. 常规函数
+
+```python
+def fun(num):
+    return num%2
+l1=[1,2,3,4,5,6,7]
+l2=[]
+for i in l1:
+    if(fun(i)):
+        l2.append(i)
+print(l2)
+```
+
+```
+[1, 3, 5, 7]
+```
+
+2. `filter()`+常规函数
+
+>filter()函数用于过滤序列,过滤掉不符合条件的元素
+>
+>Pyhton2返回列表,Python3返回迭代器对象
+
+```python
+def fun(num):
+    return num%2
+l1=[1,2,3,4,5,6,7]
+l2=filter(fun,l1)
+print(l2)
+l3=list(l2)
+print(l3)
+```
+
+```
+<filter object at 0x7f1ce0a91c50>
+[1, 3, 5, 7]
+```
+
+3. `filter()`+匿名函数
+
+```python
+l1=[1,2,3,4,5,6,7]
+l2=filter(lambda x:x%2,l1)
+print(l2)
+l3=list(l2)
+print(l3)
+```
+
+```
+<filter object at 0x7fe37ed26ba8>
+[1, 3, 5, 7]
+```
+
+>x为lambda函数的一个参数
+>
+>:为分割符
+>
+>x%2则是返回值,在lambda 函数中不能有return
+>
+>而冒号(:)后面的就是返回值
+
+---
+
+>无参匿名函数
+
+```python
+a=lambda :True
+print(a())
+```
+
+```
+True
+```
+
+>含参匿名函数
+
+```python
+a=lambda x:x>0
+b=lambda x,y:x+y
+c=lambda x,y,z=3:x*y*z#带有默认参数
+print(a(1))
+print(a(-1))
+print(b(1,2))
+print(c(2,3))
+print(c(2,3,4))
+```
+
+```
+True
+False
+3
+18
+24
+```
+
+### 偏函数
+
+>偏函数通过`functools`模块被用户调用
+>
+>偏函数是将所要承载的函数作为`partial()`函数的第一个参数,原函数的各个参数依次作为`partial()`函数的后续参数,除非使用关键字参数
+
+```python
+from functools import partial
+def fun1(x,y):
+    return x%y
+def fun2(x,y,z):
+    return x*y*z
+a=partial(fun1,100)
+print(fun1(100,3))
+print(a(3))
+b=partial(fun2,2)
+c=partial(fun2,2,3)
+print(fun2(2,3,4))
+print(b(3,4))
+print(c(4))
+```
+
+```
+1
+1
+24
+24
+24
+```
