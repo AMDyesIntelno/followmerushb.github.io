@@ -1848,6 +1848,8 @@ class DerivedClassName(BaseClassName):
 >在Python中,首先查找对应类型的方法,如果在子类中找不到对应的方法,才到基类中逐个查找
 >
 >继承最大的好处是子类获得了父类全部非私有的功能
+>
+>在继承关系中,如果一个实例的数据类型是某个子类,那它的数据类型也可以看作是父类
 
 ```python
 class animal:
@@ -1861,17 +1863,24 @@ class cat(animal):
 class dog(animal):
     def __init__(self):
         pass
-    def action(self):
-        print("sleeping")
 miao=cat()
 miao.action()
 wang=dog()
 wang.action()
+#isinstance()判断一个变量是否是某个类型
+print(isinstance(miao,cat))
+print(isinstance(miao,animal))
+print(isinstance(wang,dog))
+print(isinstance(wang,animal))
 ```
 
 ```
 running
-sleeping
+running
+True
+True
+True
+True
 ```
 
 >子类不能继承父类中的私有方法,也不能调用父类的私有方法
@@ -1899,3 +1908,120 @@ asdf
 qwer
 ```
 
+### 多重继承
+
+>定义
+
+```python
+class DerivedClassName(Base1,Base2,Base3...):
+    <statement-1>
+    ...
+    <statement-N>
+```
+
+>多重继承就是有多个基类
+>
+>需要注意圆括号中父类的顺序,若是父类中有相同的方法名,而在子类使用时未指定,python从左至右搜索 即方法在子类中未找到时,从左到右查找父类中是否包含方法
+
+```python
+class base1:
+    def __init__(self):
+        pass
+    def out(self):
+        print("asdf")
+class base2:
+    def __init__(self):
+        pass
+    def out(self):
+        print("qwer")
+class base3:
+    def __init__(self):
+        pass
+    def out(self):
+        print("zxcv")
+class test1(base1,base2,base3):
+    def __init__(self):
+        pass
+class test2(base2,base1,base3):
+    def __init__(self):
+        pass
+a=test1()
+a.out()
+b=test2()
+b.out()
+```
+
+```
+asdf
+qwer
+```
+
+### 多态
+
+>当子类和父类存在相同的方法时,子类的方法会覆盖父类的方法
+>
+>在代码运行时总是会调用子类的方法,称之为多态
+
+```python
+class animal:
+    def __init__(self):
+        pass
+    def action(self):
+        print("running")
+class cat(animal):
+    def __init__(self):
+        pass
+class dog(animal):
+    def __init__(self):
+        pass
+    def action(self):
+        print("sleeping")
+class snake(animal):
+    def __init__(self):
+        pass
+    def action(self):
+        print("crawling")
+def get_action(name):
+    name.action()
+miao=cat()
+wang=dog()
+python=snake()
+get_action(miao)
+get_action(wang)
+get_action(python)
+```
+
+```
+running
+sleeping
+crawling
+```
+
+### 封装
+
+>封装是全局作用域中其他区域隐藏多余信息的原则,主要体现的是对数据的保护
+>
+>封装还可以在无须知道内部实现细节的前提下,直接调用类的内部函数实现对应的功能
+
+```python
+class student:
+    def __init__(self,name,chinese,maths,english):
+        self.__name=name
+        self.__chinese=chinese
+        self.__maths=maths
+        self.__english=english
+    def __get_sum(self):
+        self.__sum=self.__chinese+self.__maths+self.__english
+    def __get_avg(self):
+        self.__avg=(self.__chinese+self.__maths+self.__english)//3
+    def info(self):
+        self.__get_avg()
+        self.__get_sum()
+        print(self.__name,self.__chinese,self.__maths,self.__english,self.__sum,self.__avg)
+student0=student("zhangsan",87,92,86)
+student0.info()
+```
+
+```
+zhangsan 87 92 86 265 88
+```
