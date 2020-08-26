@@ -1601,3 +1601,301 @@ print(c(4))
 24
 24
 ```
+
+## 面向对象
+
+>类:用来描述具有相同属性和方法的对象的集合,类定义了集合中每个对象共有的属性和方法,对象是类的实例
+>
+>类变量(属性):类变量在整个实例化的对象中是公用的,类变量定义在类中,且在方法之外,类变量通常不作为实例变量使用,类变量也称作属性
+>
+>数据成员:类变量或实例变量用于处理类及其实例对象的相关数据
+>
+>方法重写:如果从父类继承的方法不能满足子类的需求,就可以对其进行改写,这个过程称为方法的覆盖(Override),也称为方法的重写
+>
+>实例变量:定义在方法中的变量只作用于当前实例的类
+>
+>多态(Polymorphism):对不同类的对象使用同样的操作
+>
+>封装(Encapsulation):对外部世界隐藏对象的工作细节
+>
+>继承(Inheritance):即一个派生类(derived class)继承基类(base class)的字段和方法,继承允许把一个派生类的对象作为一个基类对象对待,以普通类为基础建立专门的类对象
+>
+>实例化(Instance):创建一个类的实例、类的具体对象
+>
+>方法:类中定义的函数
+>
+>对象:通过类定义的数据结构实例,对象包括两个数据成员(类变量和实例变量)和方法
+
+### 类定义
+
+```python
+class ClassName:
+    <statement-1>
+    ...
+    <statement-n>
+```
+
+在类中定义方法的要求:在类中定义方法时,第一个参数必须是self
+
+除第一个参数外,类的方法和普通函数没什么区别,如可以用默认参数,可变参数,关键字参数和命名关键字参数等
+
+### 类对象
+
+类对象支持两种操作:属性引用和实例化
+
+属性引用使用和所有的属性引用一样的标准语法:`obj.name`
+
+```python
+class test:
+    num=123
+    def fun1(self):
+        print("asdf")
+    def fun2(self):
+        return "qwer"
+a=test()#类的实例化,a为类的具体对象
+print(a.num)#访问类的属性
+a.fun1()#访问类的方法
+print(a.fun2())#访问类的方法
+```
+
+```
+123
+asdf
+qwer
+```
+
+### 类的构造
+
+>类有一个名为`__init__()`的特殊方法(构造方法),该方法在类实例化时会自动调用
+>
+>在定义类时,若不显式地定义一个`__init__()`方法,则程序默认调用一个无参的`__init__()`方法
+>
+>一个类中可定义多个构造方法,但实例化类时只实例化最后的构造方法,即**后面的构造方法会覆盖前面的构造方法,并且需要根据最后一个构造方法的形式进行实例化**
+>
+>建议一个类中只定义一个构造函数
+
+```python
+class test:
+    def __init__(self,str):
+        self.name=str
+    def out(self):
+        print(self.name)
+a=test("asdf")
+a.out()
+```
+
+```
+asdf
+```
+
+```python
+class test:
+    def __init__(self,str):
+        print(str)
+    def __init__(self):
+        print("none")
+test()
+#test("asdf")
+#TypeError: __init__() takes 1 positional argument but 2 were given
+```
+
+```
+none
+```
+
+### 类的访问权限
+
+#### 私有变量
+
+>要让内部属性不被外部访问,可以在属性名称前加两个下划线`__`
+>
+>在Python中,实例的变量名如果以`__`开头,就会变成私有变量(private),只有内部可以访问,外部不能访问
+>
+>不能直接访问私有变量是因为Python解释器把私有变量变成了`_classname__xxx`,所以仍然可以通过`_classname__xxx`来访问/修改私有变量
+
+```python
+class student:
+    def __init__(self,name,mark):
+        self.__name=name
+        self.__mark=mark
+    def info(self):
+        print(self.__name,self.__mark)
+stu = student("zhangsan",90)
+stu.info()
+#print(stu.__mark)
+#AttributeError: 'student' object has no attribute '__mark'
+stu.__mark=100
+print(stu.__mark)
+stu.info()
+```
+
+```
+zhangsan 90
+100
+zhangsan 90
+```
+
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/develop/python/python_private.png)
+
+```python
+class student:
+    def __init__(self,name,mark):
+        self.__name=name
+        self.__mark=mark
+    def info(self):
+        print(self.__name,self.__mark)
+stu = student("zhangsan",90)
+stu.info()
+stu._student__mark=100
+stu.info()
+```
+
+```
+zhangsan 90
+zhangsan 100
+```
+
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/develop/python/python_change_private.png)
+
+>如果需要从外部获取类中的私有变量的值,可以在类中添加读取方法
+
+```python
+class student:
+    def __init__(self,name,mark):
+        self.__name=name
+        self.__mark=mark
+    def info(self):
+        print(self.__name,self.__mark)
+    def get_name(self):
+        return self.__name
+    def get_mark(self):
+        return self.__mark
+stu = student("zhangsan",90)
+stu.info()
+print(stu.get_name())
+print(stu.get_mark())
+```
+
+```
+zhangsan 90
+zhangsan
+90
+```
+
+>如果需要从外部修改类中的私有变量的值,可以在类中添加修改方法
+
+```python
+class student:
+    def __init__(self,name,mark):
+        self.__name=name
+        self.__mark=mark
+    def info(self):
+        print(self.__name,self.__mark)
+    def change_name(self,name):
+        self.__name=name
+    def change_mark(self,mark):
+        self.__mark=mark
+stu = student("zhangsan",90)
+stu.info()
+stu.change_name("lisi")
+stu.change_mark(85)
+stu.info()
+```
+
+```
+zhangsan 90
+lisi 85
+```
+
+#### 私有方法
+
+```python
+class test:
+    def __init__(self):
+        pass
+    def __private(self):
+        print("private")
+    def out(self):
+        print("__private: ",end="")
+        self.__private()
+a=test()
+a.out()
+#a.__private()
+#AttributeError: 'test' object has no attribute '__private'
+a._test__private()
+```
+
+```
+__private: private
+private
+```
+
+### 继承
+
+>定义
+
+```python
+class DerivedClassName(BaseClassName):
+    <statement-1>
+    ...
+    <statement-N>
+```
+
+>在继承中,基类的构造方法`__init__()`不会被自动调用,需要在子类的构造方法中专门调用
+>
+>在调用基类的方法时需要加上基类的类名前缀,并带上`self`参数,区别于在类中调用普通函数时不需要带`self`参数
+>
+>在Python中,首先查找对应类型的方法,如果在子类中找不到对应的方法,才到基类中逐个查找
+>
+>继承最大的好处是子类获得了父类全部非私有的功能
+
+```python
+class animal:
+    def __init__(self):
+        pass
+    def action(self):
+        print("running")
+class cat(animal):
+    def __init__(self):
+        pass
+class dog(animal):
+    def __init__(self):
+        pass
+    def action(self):
+        print("sleeping")
+miao=cat()
+miao.action()
+wang=dog()
+wang.action()
+```
+
+```
+running
+sleeping
+```
+
+>子类不能继承父类中的私有方法,也不能调用父类的私有方法
+
+```python
+class father:
+    def __init__(self):
+        pass
+    def fun1(self):
+        print("asdf")
+    def __fun2(self):
+        print("qwer")
+class son(father):
+    def __init__(self):
+        pass
+a=son()
+a.fun1()
+#a.__fun2()
+#AttributeError: 'son' object has no attribute '__fun2'
+a._father__fun2()
+```
+
+```
+asdf
+qwer
+```
+
