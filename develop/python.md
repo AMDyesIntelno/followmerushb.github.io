@@ -2025,3 +2025,166 @@ student0.info()
 ```
 zhangsan 87 92 86 265 88
 ```
+
+## 异常
+
+>单个异常
+
+```python
+try:
+    <语句>#运行别的代码
+except <名字>:
+    #如果在try部分引发了异常
+    <语句>
+```
+
+```python
+def fun(x,y):
+    try:
+        a=x/y
+    except ZeroDivisionError:
+        print("You can't divide by 0")
+fun(2,0)
+```
+
+```
+You can't divide by 0
+```
+
+>多个异常
+
+```python
+try:
+    <语句>#运行别的代码
+except <name1>:
+    <语句>#引发name1异常
+except <name2>:
+    <语句>#引发name2异常
+```
+
+```python
+def fun(x,y):
+    try:
+        b=name
+        a=x/y
+    except ZeroDivisionError:
+        print("You can't divide by 0")
+    except NameError:
+        print("NameError")
+fun(2,0)
+```
+
+```
+NameError
+```
+
+```python
+def fun(x,y):
+    try:
+        #b=name
+        a=x/y
+    except ZeroDivisionError:
+        print("You can't divide by 0")
+    except NameError:
+        print("NameError")
+fun(2,0)
+```
+
+```
+You can't divide by 0
+```
+
+>异常中的else
+
+```python
+try:
+    <语句>
+except <名字>:
+    <语句>
+except <名字>:
+    <语句>
+else:
+    <语句>#没有发生异常
+```
+
+```python
+def fun(x,y):
+    try:
+        a=x/y
+    except TypeError:
+        print("TypeError")
+    except ZeroDivisionError:
+        print("You can't divide by 0")
+    else:
+        print(a)
+fun(2,0)
+fun(2,"0")
+fun(2,1)
+```
+
+```
+You can't divide by 0
+TypeError
+2.0
+```
+
+>finally子句
+
+```python
+def fun(x,y):
+    try:
+        a=x/y
+    finally:
+        print("asfd")
+fun(2,0)
+```
+
+```
+asfd
+Traceback (most recent call last):
+  File "/home/misaka/python/test3.py", line 6, in <module>
+    fun(2,0)
+  File "/home/misaka/python/test3.py", line 3, in fun
+    a=x/y
+ZeroDivisionError: division by zero
+```
+
+>无论try子句中是否发生异常,finally都会被执行
+
+## 日期与时间
+
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/develop/python/python_format.jpeg)
+
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/develop/python/python_struct_time.jpeg)
+
+```python
+import time
+print(time.time())
+print(time.localtime())#将时间戳转化为本地时间
+print(time.localtime(1))
+print(time.gmtime())#将时间戳转化为UTC时间
+print(time.mktime((2020,8,30,4,53,8,6,243,0)))#将时间转化为时间戳
+print(time.asctime())#返回一个形式为Sun Aug 30 13:01:39 2020的字符串
+time.sleep(1)#推迟1秒执行
+print(time.asctime())
+print(time.asctime(time.gmtime()))
+print(time.ctime())#把一个时间戳转化为time.asctime()的形式
+print(time.ctime(1))
+print(time.strftime("%B %d %Y %H:%M:%S %Z",time.localtime()))#接收时间元组,并返回以可读字符串表示的时间,格式由参数format决定
+print(time.strptime("30 Aug 20","%d %b %y"))#用于根据指定的格式把一个时间字符串解析为时间元组
+```
+
+```
+1598765902.2248757
+time.struct_time(tm_year=2020, tm_mon=8, tm_mday=30, tm_hour=13, tm_min=38, tm_sec=22, tm_wday=6, tm_yday=243, tm_isdst=0)
+time.struct_time(tm_year=1970, tm_mon=1, tm_mday=1, tm_hour=8, tm_min=0, tm_sec=1, tm_wday=3, tm_yday=1, tm_isdst=0)
+time.struct_time(tm_year=2020, tm_mon=8, tm_mday=30, tm_hour=5, tm_min=38, tm_sec=22, tm_wday=6, tm_yday=243, tm_isdst=0)
+1598734388.0
+Sun Aug 30 13:38:22 2020
+Sun Aug 30 13:38:23 2020
+Sun Aug 30 05:38:23 2020
+Sun Aug 30 13:38:23 2020
+Thu Jan  1 08:00:01 1970
+August 30 2020 13:38:23 CST
+time.struct_time(tm_year=2020, tm_mon=8, tm_mday=30, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=6, tm_yday=243, tm_isdst=-1)
+```
