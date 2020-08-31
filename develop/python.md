@@ -2188,3 +2188,27 @@ Thu Jan  1 08:00:01 1970
 August 30 2020 13:38:23 CST
 time.struct_time(tm_year=2020, tm_mon=8, tm_mday=30, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=6, tm_yday=243, tm_isdst=-1)
 ```
+
+```python
+import datetime,time
+print(datetime.datetime.today())#返回一个表示当前本地时间的datetime对象
+print(datetime.datetime.now())#返回某个时区的时间
+print(datetime.datetime.now(datetime.timezone.utc))
+print(datetime.datetime.utcnow())#返回UTC时间
+print(datetime.datetime.utcfromtimestamp(time.time()))#根据时间戳创建datetime对象
+print(datetime.datetime.strptime(str(datetime.datetime.today()),"%Y-%m-%d %H:%M:%S.%f"))#将格式字符串转换为datetime对象
+print(datetime.datetime.now().strftime("%Y %B %d %H:%M:%S"))#将格式字符串转换为datetime对象
+```
+
+```
+2020-08-31 09:48:23.362030
+2020-08-31 09:48:23.362083
+2020-08-31 01:48:23.362093+00:00
+2020-08-31 01:48:23.362101
+2020-08-31 01:48:23.362105
+2020-08-31 09:48:23.362111
+2020 August 31 09:48:23
+```
+
+## 文件操作
+
