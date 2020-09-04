@@ -1841,7 +1841,7 @@ class DerivedClassName(BaseClassName):
     <statement-N>
 ```
 
->在继承中,基类的构造方法`__init__()`不会被自动调用,需要在子类的构造方法中专门调用
+>在继承中,基类的构造方法`__init__()`不会被自动调用,需要在子类的构造方法中专门调用`基类名.__init__(self,参数列表)`
 >
 >在调用基类的方法时需要加上基类的类名前缀,并带上`self`参数,区别于在类中调用普通函数时不需要带`self`参数
 >
@@ -1882,6 +1882,35 @@ True
 True
 True
 ```
+
+```python
+class Person:
+    def __init__(self,name,age):
+        self.__name=name
+        self.__age=age
+    def info(self):
+        print(self.__name,self.__age)
+class Student(Person):
+    def __init__(self,name,age,stu_id):
+        Person.__init__(self,name,age)
+        self.__stu_id=stu_id
+    def info(self):
+        Person.info(self)
+        print(self.__stu_id)
+p1=Person("zhangsan",18)
+p2=Student("lisi",20,123456)
+p1.info()
+print("---")
+p2.info()
+```
+
+```
+zhangsan 18
+---
+lisi 20
+123456
+```
+
 
 >子类不能继承父类中的私有方法,也不能调用父类的私有方法
 
