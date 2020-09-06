@@ -38,6 +38,32 @@ abc edfghijkl
 >4. 变量名应既简短又具有描述性例如,name比n好,student_name比s_n好,name_length比length_of_persons_name好
 >
 >5. 慎用小写字母l和大写字母O,因为它们可能被人错看成数字1和0
+>
+>6. Python中每个对象由标识(identity),类型(type)和值(value)来进行标识,函数和类等也是对象,均具有相应的id和类型
+>
+>7. Python对象位于计算机内存中的一个内存数据块,通过赋值语句将对象赋值给变量来进行引用对象,指向对象的引用即为变量
+>
+>8. Python在内存中创建各种对象(堆内存),通过赋值语句将对象绑定到变量(栈内存),通过变量引用对象进行操作
+>
+>9. 通过`==`来判断两个变量指向的对象的值是否相同,通过`is`来判断两个变量是否指向同一对象
+
+
+```python
+a=123
+print(id(a))#获取对象的唯一id标识
+print(type(a))#判断一个对象的类型
+print(a)
+print(id(abs))
+print(type(abs))
+```
+
+```
+9066528
+<class 'int'>
+123
+140559755401760
+<class 'builtin_function_or_method'>
+```
 
 ## 字符串&数字
 
