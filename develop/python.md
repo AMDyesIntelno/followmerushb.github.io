@@ -27,7 +27,7 @@ abc edfghijkl
 
 ## 变量
 
-有关变量的规则
+### 有关变量的规则
 
 >1. 变量名只能包含字母、数字和下划线变量名可以字母或下划线打头,但不能以数字打头,例如,可将变量命名为message_1,但不能将其命名为1_message
 >
@@ -64,6 +64,108 @@ print(type(abs))
 140559755401760
 <class 'builtin_function_or_method'>
 ```
+
+### 可变数据类型与不可变数据类型
+
+- 可变数据类型:列表list和字典dict
+
+- 不可变数据类型:整型int,浮点型float,字符串型string和元组tuple
+
+>可变与不可变,是指内存中的值(value)是否可以被改变
+>
+>不可变类型,在对象进行操作时,需要申请一个新的内存区域,因为原内存区域的值不可改变
+>
+>不可变类型不允许变量的值发生变化,如果改变了变量的值,相当于是新建了一个对象
+>
+>**而对于相同的值的对象,在内存中则只有一个对象,内部会有一个引用计数来记录有多少个变量引用这个对象**
+>
+>可变类型,在对象进行操作时,不需要再在其他地方申请内存,只需要在此对象后面连续申请
+>
+>可变类型,允许变量的值发生变化,对变量进行操作后,只是改变了变量的值,而不会新建一个对象,变量引用的对象的地址也不会变化
+>
+>而对于相同的值的不同对象,在内存中则会存在不同的对象,即每个对象都有自己的地址,相当于内存中对于同值的对象保存了多份.这里不存在引用计数
+
+```python
+x=123
+y=x
+z=123
+print(x==y)
+print(x is y)
+print(x==z)
+print(x is z)
+print(y==z)
+print(y is z)
+print(id(x),id(y),id(z))
+x+=1
+print(x==y)
+print(x is y)
+print(x==z)
+print(x is z)
+print(y==z)
+print(y is z)
+print(id(x),id(y),id(z))
+y+=1
+print(x==y)
+print(x is y)
+print(x==z)
+print(x is z)
+print(y==z)
+print(y is z)
+print(id(x),id(y),id(z))
+```
+
+```
+True
+True
+True
+True
+True
+True
+9066528 9066528 9066528
+False
+False
+False
+False
+True
+True
+9066560 9066528 9066528
+True
+True
+False
+False
+False
+False
+9066560 9066560 9066528
+```
+
+```python
+a=[1,2,3]
+b=[1,2,3]
+print(id(a),id(b))
+a=[1,2,3]
+print(id(a),id(b))
+a[0]=0
+print((id(a)))
+a.append(4)
+print((id(a)))
+print(a)
+```
+
+```
+140513012486344 140513012486408
+140513010799176 140513012486408
+140513010799176
+140513010799176
+[0, 2, 3, 4]
+```
+
+
+
+
+
+
+
+
 
 ## 字符串&数字
 
@@ -1234,6 +1336,46 @@ fun(1,2,3,"abc","def",x=9,y=10,z=11)
 >
 >函数只关心形参的值,而不关心它在调用前叫什么名字
 
+### 函数传参
+
+https://docs.python.org/zh-cn/3/faq/programming.html#how-do-i-write-a-function-with-output-parameters-call-by-reference
+
+>Python中参数是通过赋值来传递的,由于赋值只是创建了对象的引用,因此在调用者和被调用者的参数名称之间没有别名,所以本身是没有按引用调用的
+
+```python
+def fun(a,b):#不可变数据类型
+    a="asdf"
+    b+=1
+    return a,b
+x,y="qwer",1
+print(fun(x,y))
+print(x,y)
+```
+
+```
+('asdf', 2)
+qwer 1
+```
+
+```python
+def fun1(a):#可变数据类型
+    a.append(3)
+l=[1,2]
+fun1(l)
+print(l)
+def fun2(b):#局部变量b引用的对象发生了改变
+    b=[1,2,3,4]
+    print(b)
+fun2(l)
+print(l)
+```
+
+```
+[1, 2, 3]
+[1, 2, 3, 4]
+[1, 2, 3]
+```
+
 ### 变量作用域
 
 #### 局部变量
@@ -1597,6 +1739,50 @@ False
 18
 24
 ```
+
+>为什么在具有不同值的循环中定义的lambdas都返回相同的结果?
+
+```python
+a=[]
+for x in range(5):
+    a.append(lambda :x**2)#包含5个lambdas的列表
+print(x)
+print(a[2]())
+print(a[0]())
+x=10
+print(a[0]())
+
+b=[]
+for x in range(5):
+    b.append(lambda n=x:n**2)#包含5个lambdas的列表
+print(b[2]())
+print(b[0]())
+print(b[0](5))
+```
+
+```
+4
+16
+16
+100
+4
+0
+25
+```
+
+>因为x不是lambda的内部变量,而是在外部作用域中定义,并且**在调用lambda时访问它,而不是在定义它时**
+>
+>在循环结束时,x的值是4,所以所有的函数现在返回4**2,即16
+>
+>通过更改x的值,可以修改lamba的结果
+>
+>将值保存在lambdas的局部变量中,这样就不依赖于全局变量x的值
+>
+>`n=x`在lambda本地创建一个新的变量n,并在定义lambda时计算,使它具有与x在循环中该点相同的值
+>
+>这意味着n的值在第一个lambda中为0,在第二个lambda中为1,依此类推
+>
+>因此每个lambda现在将返回正确的结果
 
 ### 偏函数
 
