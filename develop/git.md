@@ -58,3 +58,10 @@ __pycache__/
 
 ## 执行提交
 
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/develop/git/git_commit&push.png)
+
+>`git commit -m "update"`以拍摄项目的快照,标志`-m`让`Git`将接下来的消息`update`记录到项目的历史记录中,输出表明我们在master分支上,且有一个文件被修改了
+>
+>`git status`检查状态时,显示位于master分支,且工作目录是干净的
+>
+>`git push`推送至服务器
