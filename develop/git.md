@@ -55,3 +55,6 @@ __pycache__/
 >只要在`Changes to be committed`这行下面的，就说明是已暂存状态
 >
 >如果有标签`new file`意味着这些文件是新添加到仓库中的
+
+## 执行提交
+
