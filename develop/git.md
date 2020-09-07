@@ -47,3 +47,11 @@ __pycache__/
 >`Changes not staged for commit`指出已跟踪文件的内容发生了变化,但还没有放到暂存区
 >
 >`Untracked files`指出存在哪些未跟踪的文件,即意味着Git在之前的提交中没有这些文件,Git不会自动将其纳入跟踪范围
+
+## 将文件加入到仓库中
+
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/develop/git/git_add.png)
+
+>只要在`Changes to be committed`这行下面的，就说明是已暂存状态
+>
+>如果有标签`new file`意味着这些文件是新添加到仓库中的
