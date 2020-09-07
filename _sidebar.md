@@ -19,6 +19,7 @@
     - [STL](/develop/c_cpp/stl)
   - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/python.svg) Python](/develop/python)
   - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/golang.svg) Golang](/develop/golang)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/git.svg) Git](/develop/git)
 - **读书记录**
   - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/assembly.svg) 汇编语言](/books/assembly)
   - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/internet.svg) 计算机网络](/books/internet)
