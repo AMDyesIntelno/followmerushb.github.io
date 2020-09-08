@@ -10,6 +10,8 @@
     - [图的最短路径](/cs/algorithm/图的最短路径)
     - [线索二叉树](/cs/algorithm/线索二叉树)
     - [最小生成树](/cs/algorithm/最小生成树)
+- **上课笔记**
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/key.svg) 现代密码学](/subject/现代密码学)
 - **编程开发**
   - ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/cpp-blue.svg) **C/C++**
     - [输入输出处理](/develop/c_cpp/输入输出处理)
