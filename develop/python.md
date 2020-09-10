@@ -158,11 +158,26 @@ print(a)
 [0, 2, 3, 4]
 ```
 
-## 字符串&数字
+## 数字&字符串
 
->字符串类型的对象不支持更改
->
->TypeError: 'str' object does not support item assignment
+Python有4种数值类型
+
+- 整型(int):123,456
+
+- 布尔型(bool):True,False
+
+- 浮点型(float):3.14
+
+- 复数(complex):3+4j
+
+```python
+x=complex(1,2)
+print(x)
+```
+
+```
+(1+2j)
+```
 
 ```python
 print("PI:%.2f"%3.14159)#浮点数精度控制
@@ -976,7 +991,9 @@ print(b)
 ['a', 'b', 'c', 'd']
 ```
 
-### 在while循环中使用else语句
+### else子句
+
+#### 在while循环中使用
 
 ```python
 n=0
@@ -1014,9 +1031,7 @@ print("...")
 ...
 ```
 
-### 在for循环中使用else语句
-
-`pass`是空语句,作用是保持程序结构的完整性
+#### 在for循环中使用
 
 ```python
 n=0
@@ -1055,6 +1070,8 @@ print("...")
 ```
 
 ### pass语句
+
+`pass`是空语句,作用是保持程序结构的完整性
 
 ```python
 str="asdf"
