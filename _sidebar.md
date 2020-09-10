@@ -1,15 +1,8 @@
 - **README**
   - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/important.svg) README](/README)
 - **CS基础**
-  - ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/datastruct.svg)**数据结构**
-    - [数据结构](/cs/data_struct/data_struct)
-  - ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/algorithm.svg)**算法**
-    - [串的模式匹配](/cs/algorithm/kmp)
-    - [排序](/cs/algorithm/sort)
-    - [关键路径与拓扑排序](/cs/algorithm/关键路径与拓扑排序)
-    - [图的最短路径](/cs/algorithm/图的最短路径)
-    - [线索二叉树](/cs/algorithm/线索二叉树)
-    - [最小生成树](/cs/algorithm/最小生成树)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/datastruct.svg) 数据结构](/cs/data_struct)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/algorithm.svg) 算法](/cs/algorithm)
 - **课程笔记**
   - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/key.svg) 现代密码学](/subject/现代密码学)
 - **编程开发**
