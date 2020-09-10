@@ -29,7 +29,7 @@ abc edfghijkl
 
 ### 有关变量的规则
 
->1. 变量名只能包含字母、数字和下划线变量名可以字母或下划线打头,但不能以数字打头,例如,可将变量命名为message_1,但不能将其命名为1_message
+>1. 变量名只能包含字母,数字和下划线,变量名可以字母或下划线打头,但不能以数字打头,例如,可将变量命名为message_1,但不能将其命名为1_message
 >
 >2. 变量名不能包含空格,但可使用下划线来分隔其中的单词例如,变量名greeting_message可行,但变量名greeting message会引发错误
 >
@@ -158,7 +158,9 @@ print(a)
 [0, 2, 3, 4]
 ```
 
-## 数字&字符串
+## 数值&字符串
+
+### 数值
 
 Python有4种数值类型
 
@@ -183,34 +185,9 @@ print(x)
 (1+2j)
 ```
 
->集合数据类型
+### 字符串
 
-集合数据类型表示若干数据的集合,数据项目**没有顺序**,且**不重复**
-
-- 可变集合(set)
-
-- 不可变集合(frozenset)
-
-```python
-x=set((1,2,3,4,5,1,2))
-print(x)
-y=frozenset((1,2,3,4,5,1,2))
-print(y)
-x.add(6)
-#y.add(7)
-#AttributeError: 'frozenset' object has no attribute 'add'
-print(x)
-print(y)
-```
-
-```
-{1, 2, 3, 4, 5}
-frozenset({1, 2, 3, 4, 5})
-{1, 2, 3, 4, 5, 6}
-frozenset({1, 2, 3, 4, 5})
-```
-
----
+>使用`%`运算符进行字符串格式化
 
 ```python
 print("PI:%.2f"%3.14159)#浮点数精度控制
@@ -241,6 +218,111 @@ percent: 85%
 percent: 85%
   +10
   -10
+```
+
+>使用`format`进行字符串格式化
+
+>format函数可以接受不限个参数,位置可以不按顺序
+
+- 传入位置
+
+```python
+print("{} {}".format("abc","qwe"))#不设置指定位置,按默认顺序
+print("{0} {1}".format("abc","qwe"))#设置指定位置
+print("{1} {0} {1}".format("abc","qwe"))#设置指定位置
+```
+
+```
+abc qwe
+abc qwe
+qwe abc qwe
+```
+
+- 传入参数
+
+```python
+print("name:{name},num:{num}".format(name="asdf",num=123))
+dic={"name":"asdf","num":123}
+print("name:{name},num:{num}".format(**dic))#通过字典设置参数
+l=["asdf",123]
+print("name:{0[0]},num:{0[1]}".format(l))#通过列表索引设置参数
+```
+
+```
+name:asdf,num:123
+name:asdf,num:123
+name:asdf,num:123
+```
+
+- 传入对象
+
+```python
+class a():
+    def __init__(self,value):
+        self.value=value
+test=a(1)
+print("value={0.value}".format(test))
+```
+
+```
+value=1
+```
+
+- 数字格式化
+
+`^`,`<`,`>`分别是居中,左对齐,右对齐,后面带宽度
+
+`:`冒号后面带填充的字符,只能是一个字符,不指定则默认是用空格填充
+
+`+`加号表示在正数前显示`+`,负数前显示`-`
+
+` `(空格)表示在正数前加空格
+
+`b`,`d`,`o`,`x`分别是二进制,十进制,八进制,十六进制
+
+可以使用大括号`{}`来转义大括号
+
+```python
+a=3.1415
+print("{:.2f}".format(a))#保留小数点后两位 
+print("{:+.2f}".format(a))#带符号保留小数点后两位
+print("{:.0f}".format(a))#不带小数
+print("{:.2%}".format(a))#百分比格式
+b=5
+print("{:0>3}".format(b))#数字补零((填充左边,宽度为3)
+print("{:x<3}".format(b))#数字补x((填充右边,宽度为3)
+print("{:>10}".format(b))#右对齐(默认)(宽度为10)
+print("{:^10}".format(b))#中间对齐(宽度为10)
+print("{:<10}".format(b))#左对齐(宽度为10)
+print("{:b}".format(b))
+print("{:d}".format(b))
+print("{:o}".format(b))
+print("{:x}".format(b))
+print("{:#x}".format(b))
+print("{:#X}".format(b))
+c=10000000
+print("{:,}".format(c))#以逗号分隔的数字格式
+print("{}:{{}}".format(c))#转义大括号
+```
+
+```
+3.14
++3.14
+3
+314.15%
+005
+5xx
+         5
+    5     
+5         
+101
+5
+5
+5
+0x5
+0X5
+10,000,000
+10000000:{}
 ```
 
 ### 常用方法
@@ -332,6 +414,35 @@ I h_ve _n apple
 a-b-c
 ----1-2-3----
 \n\t\\
+```
+
+## 集合
+
+>集合数据类型
+
+集合数据类型表示若干数据的集合,数据项目**没有顺序**,且**不重复**
+
+- 可变集合(set)
+
+- 不可变集合(frozenset)
+
+```python
+x=set((1,2,3,4,5,1,2))
+print(x)
+y=frozenset((1,2,3,4,5,1,2))
+print(y)
+x.add(6)
+#y.add(7)
+#AttributeError: 'frozenset' object has no attribute 'add'
+print(x)
+print(y)
+```
+
+```
+{1, 2, 3, 4, 5}
+frozenset({1, 2, 3, 4, 5})
+{1, 2, 3, 4, 5, 6}
+frozenset({1, 2, 3, 4, 5})
 ```
 
 ## 列表
@@ -552,9 +663,11 @@ print(a)
 
 >list代表列表,index代表对象obj需要插入的索引位置,obj代表要插入列表中的对象
 
-6. `pop()`用于移除列表中的一个元素(默认最后一个元素)并且返回该元素的值
+6. `pop()`用于删除列表中给定位置的元素并返回它,如果没有给定位置,`pop()`将会删除并返回列表中的最后一个元素
 
-`list.pop(obj=list[-1])`
+` list.pop([i])`
+
+>i两边的方括号表示这个参数是可选的,而不是要输入方括号
 
 7. `remove()`用于移除列表中某个值的第一个匹配项
 
@@ -594,6 +707,7 @@ print(c.index("asdf"))
 c.insert(2,"插入位置c[2]之前")
 print(c)
 print(c.pop())
+print(c.pop(0))
 print(c)
 c.remove([1,3])
 print(c)
@@ -616,8 +730,9 @@ print(a)
 5
 [[1, 3], 5, '插入位置c[2]之前', 6, [1, 3], 2, 'asdf']
 asdf
-[[1, 3], 5, '插入位置c[2]之前', 6, [1, 3], 2]
+[1, 3]
 [5, '插入位置c[2]之前', 6, [1, 3], 2]
+[5, '插入位置c[2]之前', 6, 2]
 [9, 7, 3, 2, 5, 4, 8, 6, 3, 1]
 [1, 2, 3, 3, 4, 5, 6, 7, 8, 9]
 ['a', 's', 'd', 'f', 'g', 'a', 'a', 'b', 'c', 'a']
@@ -693,7 +808,7 @@ print(x,y,z)
 
 ## bool
 
->标准值False和None,所有类型的数字0(包括浮点型、长整型和其他类型),空序列(如空字符串、空元组和空列表)以及空字典都为假
+>标准值False和None,所有类型的数字0(包括浮点型,长整型和其他类型),空序列(如空字符串,空元组和空列表)以及空字典都为假
 >
 >其他值都为真
 
@@ -1878,7 +1993,7 @@ print(c(4))
 >
 >继承(Inheritance):即一个派生类(derived class)继承基类(base class)的字段和方法,继承允许把一个派生类的对象作为一个基类对象对待,以普通类为基础建立专门的类对象
 >
->实例化(Instance):创建一个类的实例、类的具体对象
+>实例化(Instance):创建一个类的实例,类的具体对象
 >
 >方法:类中定义的函数
 >
