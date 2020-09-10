@@ -164,11 +164,15 @@ Python有4种数值类型
 
 - 整型(int):123,456
 
+>Python的整数位数可以为任意长度位数(只受限于计算机的内存)
+
 - 布尔型(bool):True,False
 
 - 浮点型(float):3.14
 
 - 复数(complex):3+4j
+
+>虚部可选`complex(real[,imag])`
 
 ```python
 x=complex(1,2)
@@ -178,6 +182,35 @@ print(x)
 ```
 (1+2j)
 ```
+
+>集合数据类型
+
+集合数据类型表示若干数据的集合,数据项目**没有顺序**,且**不重复**
+
+- 可变集合(set)
+
+- 不可变集合(frozenset)
+
+```python
+x=set((1,2,3,4,5,1,2))
+print(x)
+y=frozenset((1,2,3,4,5,1,2))
+print(y)
+x.add(6)
+#y.add(7)
+#AttributeError: 'frozenset' object has no attribute 'add'
+print(x)
+print(y)
+```
+
+```
+{1, 2, 3, 4, 5}
+frozenset({1, 2, 3, 4, 5})
+{1, 2, 3, 4, 5, 6}
+frozenset({1, 2, 3, 4, 5})
+```
+
+---
 
 ```python
 print("PI:%.2f"%3.14159)#浮点数精度控制
@@ -253,6 +286,8 @@ percent: 85%
 
 `str.translate(table[, deletechars])`
 
+10. 使用`r""或R""`的字符串称为原始(raw)字符串,其中包含的任何字符都不进行转义
+
 ```python
 str="I have an apple"
 print(str.find("q"))
@@ -277,6 +312,8 @@ tab1="abcde"
 tab2="12345"
 trantab=str.maketrans(tab1,tab2)
 print(str.translate(trantab))
+s=r"\n\t\\"
+print(s)
 ```
 
 ```
@@ -294,6 +331,7 @@ I h_ve _n apple
 ['I h', 've ', 'n ', 'pple']
 a-b-c
 ----1-2-3----
+\n\t\\
 ```
 
 ## 列表
