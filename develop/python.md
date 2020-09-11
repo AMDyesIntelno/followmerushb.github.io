@@ -568,6 +568,60 @@ a-b-c
 \n\t\\
 ```
 
+## 二进制序列类型
+
+操作二进制数据的核心内置类型是`bytes`和`bytearray`
+
+`bytes`对象是由单个字节构成的**不可变序列**
+
+`bytes`字面值中只允许`ASCII`字符
+
+`bytes`字面值比字符串字面值多了一个`b`前缀
+
+- 单引号: `b'123'`
+
+- 双引号: `b"123"`
+
+- 三重引号: `b"""123"""` `b'''123'''`
+
+可以使用`list(bytes)`将`bytes`对象转换为一个由整数构成的列表
+
+除了字面值,`bytes`对象还可以通过其他方式创建:
+
+- 指定长度的以零值填充的`bytes`对象: bytes(10)
+
+- 通过由整数组成的可迭代对象: bytes(range(20))
+
+### 常用方法
+
+`bytes.fromhex(string)`
+
+>返回一个解码给定字符串的bytes对象,字符串必须由表示每个字节的两个十六进制数码构成,其中的ASCII空白符会被忽略
+
+`hex()`
+
+>返回一个字符串对象,该对象包含实例中每个字节的两个十六进制数字
+
+```python
+print(bytes(10))
+print(bytes(range(20)))
+print(bytes.fromhex("12345678"))
+print(b'\n\t')
+print(rb'\n\t\xaa')
+print(b"abc\xaa\xbb\xcc".hex())
+print(list(b"abc\xaa\xbb\xcc"))
+```
+
+```
+b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+b'\x00\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r\x0e\x0f\x10\x11\x12\x13'
+b'\x124Vx'
+b'\n\t'
+b'\\n\\t\\xaa'
+616263aabbcc
+[97, 98, 99, 170, 187, 204]
+```
+
 ## 集合
 
 >集合数据类型
@@ -713,6 +767,10 @@ print(type(a[1]))
 
 `del list[posi]`
 
+`del list[a:b]`
+
+`list[a:b]=x` x为可迭代对象
+
 ```python
 a=[1,2,3]
 print(a)
@@ -722,6 +780,10 @@ a.append("qwer")
 print(a)
 del a[1]
 print(a)
+#a[1:3]=0
+#TypeError: can only assign an iterable
+a[1:3]=[0]
+print(a)
 ```
 
 ```
@@ -729,6 +791,7 @@ print(a)
 [1, 2, 3, 5]
 [1, 2, 3, 5, 'qwer']
 [1, 3, 5, 'qwer']
+[1, 0, 'qwer']
 ```
 
 `range()`用于创建数字列表(左闭右开区间)
