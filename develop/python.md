@@ -276,11 +276,66 @@ n位二进制数的取值范围是![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/
 |运算符|用法|含义|优先级|备注|
 |:---:|:---:|:---:|:---:|:---:|
 |`~`|`~op`|按位取反|1|`~op=-(op+1)`|
-|`<<`|`op1<<op2`|将op1左移op2位|2||
-|`>>`|`op1>>op2`|将op1右移op2位|2||
+|`<<`|`op1<<op2`|将op1左移op2位|2|`op1<<op2=op1*(2**op2)`|
+|`>>`|`op1>>op2`|将op1右移op2位|2|`op1>>op2=op1//(2**op2)`|
 |`&`|`op1&op2`|按位与|3||
 |`^`|`op1^op2`|按位异或|4||
 |`\|`|`op1\|op2`|按位或|5||
+
+- 按位与
+
+>全1为1,其余为0
+
+|p|q|p&q|
+|:---:|:---:|:---:|
+|True|True|True|
+|True|False|False|
+|False|True|False|
+|False|False|False|
+
+- 按位异或
+
+>相同为0,不同为1
+
+|p|q|p^q|
+|:---:|:---:|:---:|
+|True|True|False|
+|True|False|True|
+|False|True|True|
+|False|False|False|
+
+- 按位或
+
+>全0为0,其余为1
+
+|p|q|p\|q|
+|:---:|:---:|:---:|
+|True|True|True|
+|True|False|True|
+|False|True|True|
+|False|False|False|
+
+```python
+a=5
+print(~a)
+print(a<<2)
+print(a>>2)
+print(5&2)
+#0101&0010=0000
+print(5^2)
+#0101^0010=0111
+print(5|2)
+#0101|0010=0111
+```
+
+```
+-6
+20
+1
+0
+7
+7
+```
 
 ### 字符串
 
