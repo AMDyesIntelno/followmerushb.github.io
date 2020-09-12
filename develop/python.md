@@ -572,9 +572,11 @@ a-b-c
 
 操作二进制数据的核心内置类型是`bytes`和`bytearray`
 
+### bytes对象
+
 `bytes`对象是由单个字节构成的**不可变序列**
 
-`bytes`字面值中只允许`ASCII`字符
+`bytes`字面值中只允许`ASCII`字符`[0,255]`
 
 `bytes`字面值比字符串字面值多了一个`b`前缀
 
@@ -592,7 +594,9 @@ a-b-c
 
 - 通过由整数组成的可迭代对象: bytes(range(20))
 
-### 常用方法
+!>`bytes`和`bytearray`不接受字符串参数,只接受`bytes`和`bytearray`参数,否则会导致`TypeError`
+
+#### 常用方法
 
 `bytes.fromhex(string)`
 
@@ -606,10 +610,22 @@ a-b-c
 print(bytes(10))
 print(bytes(range(20)))
 print(bytes.fromhex("12345678"))
-print(b'\n\t')
-print(rb'\n\t\xaa')
+print(b"\n\t")
+print(bytes((123,125)))
+#print(bytes((123,256)))
+#ValueError: bytes must be in range(0, 256)
+print(rb"\n\t\xaa")
+print(b'abc\xaa\xbb\xcc'.hex())
 print(b"abc\xaa\xbb\xcc".hex())
 print(list(b"abc\xaa\xbb\xcc"))
+b=bytes.fromhex("12345678")
+print(b,b[0])
+#b[0]=100
+#TypeError: 'bytes' object does not support item assignment
+print(b,b[0])
+print(b.replace(b"V",b"A"))
+#print(b.replace("x","z"))
+#TypeError: a bytes-like object is required, not 'str'
 ```
 
 ```
@@ -617,10 +633,50 @@ b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
 b'\x00\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r\x0e\x0f\x10\x11\x12\x13'
 b'\x124Vx'
 b'\n\t'
+b'{}'
 b'\\n\\t\\xaa'
 616263aabbcc
+616263aabbcc
 [97, 98, 99, 170, 187, 204]
+b'\x124Vx' 18
+b'\x124Vx' 18
+b'\x124Ax'
 ```
+
+### bytearray对象
+
+`bytearray`为**可变对象**
+
+```python
+print(bytearray(10))
+print(bytearray(range(20)))
+print(bytearray.fromhex("12345678"))
+print(bytearray((123,125)))
+#print(bytearray((123,256)))
+#ValueError: byte must be in range(0, 256)
+b=bytearray.fromhex("12345678")
+print(b,b[1])
+b[1]=100
+print(b,b[1])
+print(b.replace(b"V",b"A"))
+#print(b.replace("x","z"))
+#TypeError: a bytes-like object is required, not 'str'
+```
+
+```
+bytearray(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
+bytearray(b'\x00\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r\x0e\x0f\x10\x11\x12\x13')
+bytearray(b'\x124Vx')
+bytearray(b'{}')
+bytearray(b'\x124Vx') 52
+bytearray(b'\x12dVx') 100
+bytearray(b'\x12dAx')
+```
+
+
+
+
+
 
 ## 集合
 
