@@ -1,6 +1,205 @@
 ?> Python 笔记
 
-## 输出
+!>[遇事不决看文档](https://docs.python.org/zh-cn/3.7/)
+
+## 输入与输出
+
+### 输入
+
+#### 通过命令行参数
+
+**`sys.argv`**
+
+`argv[0]`代表当前程序的路径名(不一定为全路径),`argv[1]`为传入的第一个参数,`argv[2]`为传入的第二个参数
+
+```python
+#!/usr/bin/python3
+import sys
+for i in sys.argv:
+    print(i)
+```
+
+```
+➜  python_homework git:(master) ./test.py asdf qwe zxc 
+./test.py
+asdf
+qwe
+zxc
+```
+
+`#!/usr/bin/python3`用于确定python解释器的路径
+
+在编写完成python脚本后,`chmod +x test.py`为脚本添加可执行权限
+
+---
+
+**`argparse`**
+
+`parser=argparse.ArgumentParser()`创建`ArgumentParser`对象
+
+`parser.add_argument()`给一个`ArgumentParser`添加程序参数信息是通过调用`add_argument()`方法完成的
+
+!>注意
+
+1. 每一个参数都要单独设置
+
+2. 参数分为两种:`positional arguments`(位置参数)和`optional arguments`(选项参数)
+
+- `positional arguments`按照参数设置的先后顺序对应读取,实际中不用设置参数名,必须有序设计
+
+    `parser.add_argument("-f","--foo")`
+
+- `optional arguments`参数在使用时必须使用参数名,然后是参数具体数值,设置可以是无序的
+
+    `parser.add_argument("bar")`
+
+```python
+import argparse
+parser=argparse.ArgumentParser(prog="PROG")
+parser.add_argument("-f","--foo")
+parser.add_argument("bar")
+print(parser.parse_args(["BAR"]))
+print(parser.parse_args(["BAR","--foo","FOO"]))
+print(parser.parse_args(["--foo","FOO"]))
+```
+
+```
+Namespace(bar='BAR', foo=None)
+Namespace(bar='BAR', foo='FOO')
+usage: PROG [-h] [-f FOO] bar
+PROG: error: the following arguments are required: bar
+```
+
+3. `action`参数指定了这个命令行参数应当如何处理
+
+- `store`:存储参数的值(默认动作)
+
+```python
+import argparse
+parser=argparse.ArgumentParser()
+parser.add_argument("--foo")
+print(parser.parse_args(["--foo","1"]))
+```
+
+```
+Namespace(foo='1')
+```
+
+- `store_const`:存储被`const`参数指定的值
+
+```python
+import argparse
+parser=argparse.ArgumentParser()
+parser.add_argument("--foo",action="store_const",const=42)
+print(parser.parse_args(["--foo"]))
+```
+
+```
+Namespace(foo=42)
+```
+
+- `count`:统计参数出现的次数
+
+```python
+import argparse
+parser=argparse.ArgumentParser()
+parser.add_argument("-v",action="count",default=0)
+print(parser.parse_args(["-v"]))
+print(parser.parse_args(["-vvvv"]))
+```
+
+```
+Namespace(v=1)
+Namespace(v=4)
+```
+
+4. `nargs`参数关联不同数目的命令行参数到单一动作
+
+- `N`(一个整数):命令行中的`N`个参数会被聚集到一个列表中
+
+    `nargs=1`会产生一个单元素列表,这和默认的元素本身是不同的
+
+```python
+import argparse
+parser=argparse.ArgumentParser()
+parser.add_argument("--foo",nargs=2)
+parser.add_argument("bar",nargs=1)
+print(parser.parse_args(("c","--foo","a","b")))
+```
+
+```
+Namespace(bar=['c'], foo=['a', 'b'])
+```
+
+- `?`:如果可能的话,会从命令行中消耗一个参数,并产生一个单一项,如果当前没有命令行参数,则会产生`default`值
+
+    注意,对于选项,有另外的用例`-`选项字符串出现但没有跟随命令行参数,则会产生`const`值
+
+```python
+import argparse
+parser=argparse.ArgumentParser()
+parser=argparse.ArgumentParser()
+parser.add_argument("--foo",nargs="?",const="c",default="d")
+parser.add_argument("bar",nargs="?",default="d")
+print(parser.parse_args(["XX","--foo","YY"]))
+print(parser.parse_args(["XX","--foo"]))
+print(parser.parse_args([]))
+```
+
+```
+Namespace(bar='XX', foo='YY')
+Namespace(bar='XX', foo='c')
+Namespace(bar='d', foo='d')
+```
+
+- `*`:所有当前命令行参数被聚集到一个列表,注意通过`nargs="*"`来实现多个位置参数通常没有意义,但是多个选项是可能的
+
+```python
+import argparse
+parser=argparse.ArgumentParser()
+parser.add_argument("--foo",nargs="*")
+parser.add_argument("--bar",nargs="*")
+parser.add_argument("baz",nargs="*")
+print(parser.parse_args(["a","b","--foo","x","y","--bar","1","2"]))
+```
+
+```
+Namespace(bar=['1', '2'], baz=['a', 'b'], foo=['x', 'y'])
+```
+
+- `+`和`*`类似,所有当前命令行参数被聚集到一个列表中,另外,当前没有至少一个命令行参数时会产生一个错误信息
+
+```python
+import argparse
+parser=argparse.ArgumentParser()
+parser.add_argument("foo", nargs="+")
+print(parser.parse_args(["a","b"]))
+print(parser.parse_args([]))
+```
+
+```
+Namespace(foo=['a', 'b'])
+usage: test.py [-h] foo [foo ...]
+test.py: error: the following arguments are required: foo
+```
+
+5. `type`参数允许任何的类型检查和类型转换
+
+```python
+import argparse
+parser=argparse.ArgumentParser()
+parser.add_argument("foo",type=int)
+parser.add_argument("bar",type=float)
+print(parser.parse_args(["123","123.45"]))
+print(parser.parse_args([123,123.45]))
+```
+
+```
+Namespace(bar=123.45, foo=123)
+TypeError: 'int' object is not subscriptable
+```
+
+### 输出
 
 快速多行输出
 
@@ -673,10 +872,18 @@ bytearray(b'\x12dVx') 100
 bytearray(b'\x12dAx')
 ```
 
+### 字节编码与解码
 
+```python
+s="一二三123"
+print(s.encode())
+print(s.encode().decode())
+```
 
-
-
+```
+b'\xe4\xb8\x80\xe4\xba\x8c\xe4\xb8\x89123'
+一二三123
+```
 
 ## 集合
 
