@@ -1,6 +1,6 @@
 ?> Python 笔记
 
-!>[遇事不决看文档](https://docs.python.org/zh-cn/3.7/)
+!>[遇事不决看文档 https://docs.python.org/zh-cn/3.7/](https://docs.python.org/zh-cn/3.7/)
 
 ## 输入与输出
 
