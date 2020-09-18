@@ -41,4 +41,5 @@
 <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-json.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-powershell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
 ```

@@ -224,6 +224,314 @@ print("ghi","jkl",sep="")
 abc edfghijkl
 ```
 
+### 标准输入,输出,错误流
+
+```python
+>>> import sys
+>>> sys.stdin
+<_io.TextIOWrapper name='<stdin>' mode='r' encoding='UTF-8'>
+>>> sys.stdout
+<_io.TextIOWrapper name='<stdout>' mode='w' encoding='UTF-8'>
+>>> sys.stderr
+<_io.TextIOWrapper name='<stderr>' mode='w' encoding='UTF-8'>
+```
+
+>`print()`函数调用的是`sys.stdout.write()`方法
+
+```python
+import sys
+print("asdf")
+print("---")
+sys.stdout.write("asdf")
+print("\n---")
+print(sys.stdout.write("asdf"))
+print("---")
+a=sys.stdin.read()#ctrl+D or ctrl+Z to stop read()
+print(a,end="")
+print("---")
+a=sys.stdin.readlines()#ctrl+D or ctrl+Z to stop read()
+print(a)
+print("---")
+a=sys.stdin.readline()
+print(a,end="")
+print("---")
+a=sys.stdin.readline(5)
+print(a)
+print("---")
+print(sys.stderr.write("asdf"))
+```
+
+```
+asdf
+---
+asdf
+---
+asdf4
+---
+asdf
+qwer
+asdf
+qwer
+---
+asdf
+qwer
+['asdf\n', 'qwer\n']
+---
+asdfqwer
+asdfqwer
+---
+asdfqwer
+asdfq
+---
+4
+asdf
+```
+
+?>将输出流重定向
+
+```test.txt
+asdf
+qwer
+zxcv
+```
+
+```python
+import sys
+f=open("test.txt","r")
+sys.stdin=f
+a=input()
+print(a)
+a=input()
+print(a)
+sys.stdin=sys.__stdin__#将输入流恢复默认状态
+a=input()
+print(a)
+```
+
+```
+asdf
+qwer
+1234
+1234
+```
+
+```python
+import sys
+f=open("test.txt","a")
+sys.stdout=f
+a=["123","456","789"]
+print(a[0])
+print(a[1])
+sys.stdout=sys.__stdout__
+print(a[2])
+```
+
+```
+789
+```
+
+```test.txt
+asdf
+qwer
+zxcv123
+456
+```
+
+### 重定向
+
+1. 将输出重定向到文件
+
+```python
+for i in range(10):
+    print(i)
+```
+
+```bash
+/usr/bin/python3 /home/misaka/python_homework/test.py > test.txt
+```
+
+```test.txt
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
+
+2. 将文件重定向到输入
+
+```python
+for i in range(10):
+    a=input()
+    print(a)
+```
+
+```bash
+/usr/bin/python3 /home/misaka/python_homework/test.py < test.txt
+```
+
+```
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
+
+### 管道
+
+`程序1 | 程序2 | 程序3 | ...`
+
+```python
+l=["123","456","789","147","258","369"]
+for i in l:
+    print(i)
+```
+
+```
+➜  python_homework git:(master) /usr/bin/python3 /home/misaka/python_homework/test.py | grep 1 
+123
+147
+```
+
+>使用`more`来逐屏显示数据
+
+```python
+for i in range(100,0,-1):
+    print(i)
+```
+
+```
+➜  python_homework git:(master) /usr/bin/python3 /home/misaka/python_homework/test.py | more
+100
+99
+98
+97
+96
+95
+94
+93
+92
+91
+90
+--More--
+```
+
+>使用`sort`来进行排序
+
+```
+➜  python_homework git:(master) /usr/bin/python3 /home/misaka/python_homework/test.py | sort -n
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+```
 ## 变量
 
 ### 有关变量的规则
