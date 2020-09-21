@@ -2182,6 +2182,20 @@ string2: 1234
 string3: 5678
 ```
 
+>带星号的参数后面声明的参数强制为命名参数,必须使用命名参数赋值
+
+```python
+def fun(a=2,*,b):
+    print(a*b)
+#fun(3,4)
+#Missing mandatory keyword argument 'b' in function call
+fun(3,b=4)
+```
+
+```
+12
+```
+
 #### 可变参数
 
 `def functionname([formal_args,] *var_args_tuple):`
