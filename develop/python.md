@@ -2383,6 +2383,29 @@ print(c)
 3
 ```
 
+#### 非局部变量
+
+>使用`nonlocal`声明非局部变量,用于调用**上级函数体**中定义的局部变量,注意与全局变量区分
+
+```python
+def fun1():
+    a=1
+    print("fun1_a =",a)
+    def fun2():
+        nonlocal a
+        a=2
+        print("fun2_a =",a)
+    fun2()
+    print("fun1_a =",a)
+fun1()
+```
+
+```
+fun1_a = 1
+fun2_a = 2
+fun1_a = 2
+```
+
 #### 全局变量
 
 >在函数体中更改全局变量的值不会影响全局变量在其他函数或语句中的使用
@@ -2777,6 +2800,210 @@ print(c(4))
 24
 24
 ```
+
+### 常用内置函数
+
+1. `abs()`
+
+返回一个数的绝对值,实参可以是整数或浮点数,如果实参是一个复数,返回它的模
+
+```python
+print(abs(-3))
+print(abs(-3.1))
+print(abs(3+4j))
+```
+
+```
+3
+3.1
+5.0
+```
+
+2. `all(iterable)`
+
+如果`iterable`的**所有**元素为真(或迭代器为空)返回`True`
+
+```python
+a=[1,2,3]
+b=[]
+c=[False]
+d=[False,True]
+print(all(a))
+print(all(b))
+print(all(c))
+print(all(d))
+```
+
+```
+True
+True
+False
+False
+```
+
+3. `any(iterable)`
+
+如果`iterable`的任一元素为真则返回`True`,如果迭代器为空,返回`False`
+
+```python
+a=[1,2,3]
+b=[]
+c=[False]
+d=[False,True]
+print(any(a))
+print(any(b))
+print(any(c))
+print(any(d))
+```
+
+```
+True
+False
+False
+True
+```
+
+4. `bin(x)`&`oct(x)`&`hex(x)`
+
+`bin(x)`:将一个整数转变为一个前缀为`0b`的二进制字符串
+
+`oct(x)`:将一个整数转变为一个前缀为`0o`的八进制字符串
+
+`hex(x)`:将整数转换为以`0x`为前缀的小写十六进制字符串
+
+```python
+print(bin(17))
+print(bin(-17))
+print(oct(17))
+print(oct(-17))
+print(hex(17))
+print(hex(-17))
+```
+
+```
+0b10001
+-0b10001
+0o21
+-0o21
+0x11
+-0x11
+```
+
+5. `ord(c)`&`chr(i)`
+
+`ord(c)`:对表示单个`Unicode`字符的字符串,返回代表它`Unicode`码点的整数
+
+`chr(i)`:返回`Unicode`码位为整数`i`的字符的字符串格式
+
+```python
+print(ord("a"))
+print(ord("€"))#欧元符号
+print(chr(97))
+print(chr(8364))
+```
+
+```
+97
+8364
+a
+€
+```
+
+6. `complex([real[, imag]])`
+
+返回值为`real+imag*1j`的复数,或将字符串或数字转换为复数,如果第一个形参是字符串,则它被解释为一个复数,并且函数调用时必须没有第二个形参,第二个形参不能是字符串
+
+!>当从字符串转换时,字符串在`+`或`-`的周围必须不能有空格,例如`complex("1+2j")`是合法的,但`complex("1 + 2j")`会触发`ValueError`异常
+
+```python
+print(complex(1,2))
+print(complex("1+j"))
+#print(complex("1 + j"))
+#ValueError: complex() arg is a malformed string
+```
+
+```
+(1+2j)
+(1+1j)
+```
+
+7. `divmod(a, b)`
+
+将两个(非复数)数字作为实参,并在执行整数除法时返回一对商和余数
+
+```python
+print(divmod(2,1))
+print(divmod(3,2))
+print(divmod(3,-2))
+print(divmod(3.1,2))
+print(divmod(3.1,2.05))
+```
+
+```
+(2, 0)
+(1, 1)
+(-2, -1)
+(1.0, 1.1)
+(1.0, 1.0500000000000003)
+```
+
+8. `eval(expression[, globals[, locals]])`
+
+用于动态表达式的求值,实参是一个字符串,以及可选的`globals`和`locals`,`globals`实参必须是一个字典,`locals`可以是任何映射对象
+
+```python
+x=2
+print(eval("x*x"))
+```
+
+```
+4
+```
+
+9. `exec(object[, globals[, locals]])`
+
+这个函数支持动态执行Python代码,`object`必须是字符串或者代码对象
+
+`eval`用于动态表达式求值,`exec`用于动态语句执行
+
+```python
+str="for i in range(5):print(i)"
+exec(str)
+```
+
+```
+0
+1
+2
+3
+4
+```
+
+10. `compile(source, filename, mode, flags=0, dont_inherit=False, optimize=-1)`
+
+将`source`编译成代码对象,代码对象可以被`exec()`或`eval()`执行
+
+`source`为代码语句的字符串,如果是多行语句则每一行的结尾都要有换行符`\n`
+
+`mode`实参指定了编译代码必须用的模式,如果`source`是语句序列,可以是`"exec"`,如果是单一表达式,可以是`"eval"`
+
+```python
+str="for i in range(5):print(i)"
+co=compile(str,"","exec")
+exec(co)
+```
+
+```
+0
+1
+2
+3
+4
+```
+
+11. `filter(function, iterable)`
+
+用`iterable`中函数`function`返回真的那些元素,构建一个新的迭代器,`iterable`可以是一个序列,一个支持迭代的容器,或一个迭代器
 
 ## 面向对象
 
