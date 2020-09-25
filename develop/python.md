@@ -3048,6 +3048,8 @@ class ClassName:
 
 属性引用使用和所有的属性引用一样的标准语法:`obj.name`
 
+!>类属性既能通过`obj.属性名`进行访问,也能通过`类名.类变量名`进行访问
+
 ```python
 class test:
     num=123
@@ -3059,12 +3061,24 @@ a=test()#类的实例化,a为类的具体对象
 print(a.num)#访问类的属性
 a.fun1()#访问类的方法
 print(a.fun2())#访问类的方法
+b=test()
+test.num+=1
+print(a.num,b.num)
+a.num+=1
+print(a.num,b.num)
+a.b=123
+print(a.b)
+print(a.__dict__)#自定义属性(类定义中不存在的属性)
 ```
 
 ```
 123
 asdf
 qwer
+124 124
+125 124
+123
+{'num': 125, 'b': 123}
 ```
 
 ### 类的构造
@@ -3231,6 +3245,39 @@ a._test__private()
 ```
 __private: private
 private
+```
+
+### 装饰器
+
+#### @property
+
+使用`@property`装饰函数,使函数可以被当作属性进行访问
+
+```python
+class test:
+    def __init__(self,n):
+        self.__num=n
+    @property
+    def num(self):
+        return self.__num
+    @num.setter
+    def num(self,n):
+        self.__num=n
+    @num.deleter
+    def num(self):
+        del self.__num
+a=test(123)
+print(a.num)
+a.num=10086#@num.setter
+print(a.num)
+del a.num#@num.deleter
+#print(a.num)
+#AttributeError: 'test' object has no attribute '_test__num'
+```
+
+```
+123
+10086
 ```
 
 ### 继承
