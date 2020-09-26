@@ -555,6 +555,8 @@ for i in range(100,0,-1):
 >
 >9. 通过`==`来判断两个变量指向的对象的值是否相同,通过`is`来判断两个变量是否指向同一对象
 
+!>两个生命期不重叠的对象可能具有相同的`id()`值
+
 ```python
 a=123
 print(id(a))#获取对象的唯一id标识
@@ -562,14 +564,23 @@ print(type(a))#判断一个对象的类型
 print(a)
 print(id(abs))
 print(type(abs))
+a=[1,2,3,4,5,6]
+x=a[1:];y=a[2:];z=a[3:]
+print(id(x),id(y),id(z))
+print(id(a[1:]),id(a[2:]),id(a[3:]))
+#两个生命期不重叠的对象可能具有相同的id()值
+print(a[1:] is a[2:])
 ```
 
 ```
 9066528
 <class 'int'>
 123
-140559755401760
+140573199895072
 <class 'builtin_function_or_method'>
+140573199655176 140573199616584 140573199122696
+140573199345672 140573199345672 140573199345672
+False
 ```
 
 ### 可变数据类型与不可变数据类型
@@ -3278,6 +3289,89 @@ del a.num#@num.deleter
 ```
 123
 10086
+```
+
+#### @staticmethod
+
+!>静态方法无需传入`self参数`或者是`cls参数`
+
+声明格式
+
+```python
+@staticmethod
+def 静态方法名([形参列表]):
+    函数体
+```
+
+调用格式
+
+```python
+类名.静态方法名([实参列表])
+```
+
+```python
+class hex_dec:
+    @staticmethod
+    def hex_to_dec(h):
+        return int(h)
+    @staticmethod
+    def dec_to_hex(d):
+        return hex(d)
+test=hex_dec()
+print(hex_dec.hex_to_dec(0x11))
+print(test.hex_to_dec(0x11))
+print(hex_dec.dec_to_hex(17))
+print(test.dec_to_hex(17))
+```
+
+#### @classmethod
+
+声明格式
+
+```python
+@classmethod
+def 类方法名(cls,[形参列表]):
+    函数体
+```
+
+调用格式
+
+```python
+类名.类方法名([实参列表])
+```
+
+```python
+class test:
+    def method(self):
+        print(self)
+    @classmethod
+    def class_method(cls):
+        print(cls)
+    @staticmethod
+    def static_method():
+        print("static")
+a=test()
+a.method()#self参数指向的是刚刚实例化出的a实例对象
+print(a)
+a.class_method()#当调用类方法时,cls参数指向的是一开始定义的test类对象(注意不是实例对象)
+print(test)
+a.static_method()
+#test.method()
+#TypeError: method() missing 1 required positional argument: 'self'
+test.class_method()#结果与实例对象调用结果一致
+#类方法可以通过类对象或者实例对象调用,如果是通过实例对象调用的,那么实例对象会被忽略,而是转而通过其类对象进行调用
+test.static_method()
+#当通过类对象调用静态方法时,结果与通过实例对象调用是完全一样的,通过实例对象调用静态方法时,实例对象也会被忽略
+```
+
+```
+<__main__.test object at 0x7f26ef7d1cf8>
+<__main__.test object at 0x7f26ef7d1cf8>
+<class '__main__.test'>
+<class '__main__.test'>
+static
+<class '__main__.test'>
+static
 ```
 
 ### 继承
