@@ -1334,6 +1334,18 @@ MAC地址共分为3种,分别为**单播MAC地址**,**组播MAC地址**,**广播
 
     与IP分片有关
 
+    **标识**:一个计数器,用来产生IP数据报的标识
+
+    **标志**:占3位,目前只有前两位有意义,标志字段的最低位是MF(More Fragment),`MF=1`表示后面还有分片,`MF=0`表示最后一个分片,标志字段中间的一位是DF(Don't Fragment),只有当`DF=0`时才允许分片
+
+    **片偏移**:占13位,标识较长的分组在分片后某片在原分组中的相对位置,片偏移以**8个字节**为偏移单位
+
+    ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/IP_data_divide1.png)
+
+    ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/IP_data_divide2.png)
+
+    ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/IP_data_divide3.png)
+
 - 存活时间(TTL)
 
     TTL字段用来确保数据报不会永远在网络中循环,每当一台路由器处理数据报时,该字段的值减少1,若TTL为0,则丢弃该数据报
@@ -1360,3 +1372,40 @@ MAC地址共分为3种,分别为**单播MAC地址**,**组播MAC地址**,**广播
 
 #### IPv4编址
 
+IPv4地址就是给互联网上的每一台主机(或路由器)的每一个**接口**分配一个在全世界范围内是唯一的32位的标识符
+
+每个IPv4地址的长度为**32比特**,因此共有**2^32**个IPv4地址
+
+IPv4地址的书写常采用**点分十进制记法**
+
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/dotted_decimal_notation.jpg)
+
+IP地址的编址方法共经过了三个历史阶段
+
+- 分类IP地址
+
+- 划分子网
+
+- 构成超网
+
+##### 分类IP地址
+
+>将IP地址划分为若干个固定类,每一类地址都由两个固定长度的字段组成,其中第一个字段是网络号(net-id),它标志主机(或路由器)所连接到的网络,一个网络号在整个互联网范围内必须是唯一的
+>
+>第二个字段是主机号(host-id),它标志该主机(或路由器),一台主机号在它前面的网络号所指明的网络范围内必须是唯一的,因此,一个IP地址在整个互联网范围内是唯一的
+
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/net&host_ip.jpg)
+
+>A类地址的网络号字段占1个字节,只有7位可供使用(该字段的第一位已固定为0),可指派的网络号是126个,减2的原因是:第一,IP地址中的全0代表当前设备的IP,可以代表本机的所有IP地址;第二,网络号为127(即01111111)保留作为本地软件环回测试,用于本机中各个应用之间的网络交互
+>
+>A类地址的主机号占3个字节,因此每一个A类网络中的最大主机数是2^24–2,即16777214,减2的原因是:全0的主机号字段表示该IP地址是本机所连接到的单个网络地址(一主机的IP地址为5.6.7.8,则该主机所在的网络地址就是5.0.0.0),而全1的主机号字段表示该网络上的所有主机(A类地址1.1.255.255表示在网络1.1.0.0上的所有主机,而地址0.0.0.35则表示在这个网络上主机号为35的主机),整个A类地址空间共有2^31个地址
+>
+>B类地址的网络号字段占2个字节,但前面两位(10)已经固定了,只剩下14位可以进行分配,但B类地址128.0.0.0不进行指派,可以指派的B类最小网络地址是128.1.0.0,因此B类地址可指派的网络数为2^14−1,即16383,B类地址的每一个网络上的最大主机数是2^16–2,即65534
+>
+>C类地址有3个字节的网络号字段,最前面的3位是(110),还有21位可以进行分配,但C类网络地址192.0.0.0不进行指派,可以指派的C类最小网络地址是192.0.1.0,因此C类地址可指派的网络总数是2^21−1,即2097151,每一个C类地址的最大主机数是2^8–2,即254
+
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/range_ip.jpg)
+
+
+
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/special_ip.png)
