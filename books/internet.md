@@ -1066,7 +1066,7 @@ MAC地址共分为3种,分别为**单播MAC地址**,**组播MAC地址**,**广播
 
 #### 地址解析协议ARP
 
-**地址解析协议(Address Resolution Protocol)**是一个通过**解析IP地址**来**寻找MAC地址**的网络传输协议
+地址解析协议(Address Resolution Protocol)是一个通过**解析IP地址**来**寻找MAC地址**的网络传输协议
 
 每台主机或路由器中都包含一个ARP表,这张表包含IP地址到MAC地址的映射关系,同时包含该映射的有效期(TTL)
 
@@ -1406,6 +1406,17 @@ IP地址的编址方法共经过了三个历史阶段
 
 ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/range_ip.jpg)
 
-
+!>一般不使用的特殊的IP地址
 
 ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/special_ip.png)
+
+!>IP地址与MAC地址
+
+1. IP地址与MAC地址是不同的地址
+
+2. MAC地址是数据链路层和物理层使用的地址
+
+3. IP地址是网络层和以上各层使用的地址,是一种逻辑地址(IP地址通过软件实现)
+
+##### 划分子网
+
