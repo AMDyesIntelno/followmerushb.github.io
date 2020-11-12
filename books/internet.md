@@ -1747,3 +1747,39 @@ IPv6地址可分为三种:
 
 #### 距离向量路由选择算法
 
+每个路由器只知道和自己相邻的路由器的存在,以及和相邻路由器间的链路的成本信息
+
+Bellman-Ford等式(动态规划的思想)
+
+用`d_𝑥 (𝑦)`表示"从x到y的最佳路径的成本",则有`d_𝑥 (𝑦)=min┬𝑣⁡{𝑐(𝑥,𝑣)+d_𝑣 (𝑦)}`("x到v的成本"+"从v到y的最佳路径的成本")
+
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/Bellman_Ford_Sample.png)
+
+`d_v(z)=5`,`d_x(z)=3`,`d_w(z)=3`
+
+`c(u,v)=2`,`c(u,x)=1`,`c(u,w)=5`
+
+根据BF方程得到`d_u(z)={2+5,3+1,3+5}=4`,与Dijkstra算法得出的结果相同
+
+使用DV算法时,每个节点`x`维护下列路由选择信息
+
+- 对于每个邻居`v`,从`x`到直接相连邻居`v`的开销为`c(x,v)`
+
+- 节点`x`的路由向量,包含`x`到所有目的地的开销估计值
+
+- 每个邻居的距离向量
+
+每个节点不时地向每个邻居发送其距离向量副本,当节点`x`从它的任意一个邻居`w`接收到一个新的距离向量时,将该向量保存,并利用BF方程对距离向量进行更新
+
+如果距离向量发生了变化,则节点`x`向它的每个邻居发送新的距离向量,继而让邻居更新它们自己的距离向量
+
+只要所有节点继续交换距离向量,每个开销估计`Dx(y)`收敛到`dx(y)`(`x`到`y`的实际最低开销路径的开销)
+
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/Bellman_Ford_Table.png)
+
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/good_news_travels_fast.png)
+
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/bad_news_travels_slow.png)
+
+利用`毒性逆转`来避免路由环路:如果`z→y→x`，则z向y通告`𝐷_𝑧 (𝑥)=∞`(即使z知道𝐷_𝑧 (𝑥)是某个数值),这样可以防止y重新经过z到达x
+
