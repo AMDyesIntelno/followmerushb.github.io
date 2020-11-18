@@ -2,7 +2,7 @@
 
 # Misaka's Notes
 
->Notes about 💻Computer Science & 🚩CTF
+>Notes about 💻Computer Science
 
 [Blog](https://misaka.gq)
 [GitHub](https://github.com/AMDyesIntelno)
