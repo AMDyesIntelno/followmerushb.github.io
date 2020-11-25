@@ -1,16 +1,15 @@
 - **README**
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/important.svg) README](/README)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/important.svg) README](/README)
 - **CS基础**
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/datastruct.svg) 数据结构](/cs/data_struct)
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/algorithm.svg) 算法](/cs/algorithm)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/datastruct.svg) 数据结构](/cs/data_struct)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/algorithm.svg) 算法](/cs/algorithm)
 - **课程笔记**
   - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/key.svg) 现代密码学](/subject/现代密码学)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/assembly.svg) 汇编语言](/subject/assembly)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/internet.svg) 计算机网络](/subject/internet)
 - **编程开发**
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/cpp-blue.svg) C/C++](/develop/c_cpp)
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/python.svg) Python](/develop/python)
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/golang.svg) Golang](/develop/golang)
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/git.svg) Git](/develop/git)
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/docker.svg) Docker](/develop/docker)
-- **读书笔记**
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/assembly.svg) 汇编语言](/books/assembly)
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/svg/internet.svg) 计算机网络](/books/internet)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/cpp-blue.svg) C/C++](/develop/c_cpp)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/python.svg) Python](/develop/python)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/golang.svg) Golang](/develop/golang)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/git.svg) Git](/develop/git)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/docker.svg) Docker](/develop/docker)
