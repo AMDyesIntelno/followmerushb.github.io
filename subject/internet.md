@@ -1,6 +1,6 @@
 ?>《计算机网络 自顶向下方法》&《计算机网络》
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TCP_IP.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TCP_IP.png)
 
 ## 第一部分 计算机网络和因特网
 
@@ -341,7 +341,7 @@ D=D0/(1-U)
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/prac1-4.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/prac1-4.png)
 
 ## 第二部分 物理层
 
@@ -407,7 +407,7 @@ D=D0/(1-U)
 
 - 基带调制方式
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/modulation1.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/modulation1.jpg)
 
 1. 不归零制:正电平代表1,负电平代表0
 
@@ -421,7 +421,7 @@ D=D0/(1-U)
 
 - 带通调制方式
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/modulation2.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/modulation2.jpg)
 
 1. 调幅(AM)即载波的振幅随基带数字信号而变化,例如,0或1分别对应于无载波或有载波输出
 
@@ -648,7 +648,7 @@ Wi-Fi,又称"无线热点"或"无线网络",是Wi-Fi联盟的商标,一个基于
 
 时分复用则更有利于数字信号的传输
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TDM&FDM.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TDM&FDM.jpg)
 
 在进行通信时,复用器(multiplexer)总是和分用器(demultiplexer)成对地使用,在复用器和分用器之间是用户共享的高速信道,分用器的作用正好和复用器相反,它把高速信道传送过来的数据进行分用,分别送交到相应的用户
 
@@ -658,9 +658,9 @@ Wi-Fi,又称"无线热点"或"无线网络",是Wi-Fi联盟的商标,一个基于
 
 集中器(concentrator)常使用统计时分复用,一个使用统计时分复用的集中器连接4个低速用户,然后将它们的数据集中起来通过高速线路发送到一个远程计算机
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TDM_lose.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TDM_lose.jpg)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/STDM.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/STDM.jpg)
 
 ---
 
@@ -686,7 +686,7 @@ Wi-Fi,又称"无线热点"或"无线网络",是Wi-Fi联盟的商标,一个基于
 
 为了提高传输的可靠性和电视信号的质量,HFC网把原有线电视网中的同轴电缆主干部分改换为光纤,光纤从头端连接到光纤结点,在光纤结点光信号被转换为电信号,通过同轴电缆传送到每个用户
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HFC.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HFC.jpg)
 
 #### FTTx技术
 
@@ -696,7 +696,7 @@ Wi-Fi,又称"无线热点"或"无线网络",是Wi-Fi联盟的商标,一个基于
 
 光线路终端OLT(Optical Line Terminal)是连接到光纤干线的终端设备,OLT把收到的下行数据发往无源的1:N光分路器(splitter),然后用广播方式向所有用户端的光网络单元ONU(Optical Network Unit)发送
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/PON.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/PON.jpg)
 
 - 光纤到户 FTTH (Fiber To The Home):光纤一直铺设到用户家庭
 
@@ -770,7 +770,7 @@ Wi-Fi,又称"无线热点"或"无线网络",是Wi-Fi联盟的商标,一个基于
 
 ?>点对点信道的链路层简化,每个结点只有下三层--网络层,数据链路层和物理层
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/step_of_link.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/step_of_link.jpg)
 
 点对点信道的数据链路层在进行通信时的主要步骤如下:
 
@@ -786,7 +786,7 @@ Wi-Fi,又称"无线热点"或"无线网络",是Wi-Fi联盟的商标,一个基于
 
 ### 封装成帧
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/framing.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/framing.jpg)
 
 >**封装成帧**就是在一段数据的前后分别添加**首部**和**尾部**,接收端在收到物理层传输的比特流后,根据首部和尾部的标记,从收到的比特流中识别帧的开始和结束
 >
@@ -802,7 +802,7 @@ Wi-Fi,又称"无线热点"或"无线网络",是Wi-Fi联盟的商标,一个基于
 
 当数据是由**可打印**的`ASCII`码组成的文本文件时,可以使用帧定界符
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/SOH&EOT.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/SOH&EOT.jpg)
 
 >帧定界可以使用特殊的帧定界符,控制字符`SOH(Start Of Header)`放在一帧的最前面,表示帧的首部开始,另一个控制字符`EOT(End Of Transmission)`表示帧的结束
 
@@ -824,7 +824,7 @@ Wi-Fi,又称"无线热点"或"无线网络",是Wi-Fi联盟的商标,一个基于
 
 发送端的数据链路层在数据中出现控制字符`SOH`或`EOT`的前面插入一个转义字符`ESC`(其十六进制编码是`1B`),接收端的数据链路层在将数据送往网络层之前删除插入的转义字符,如果转义字符也出现数据当中,那么应在转义字符前面插入一个转义字符,当接收端收到连续的两个转义字符时,就删除其中前面的一个
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/byte_stuffing.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/byte_stuffing.jpg)
 
 ### 差错检测
 
@@ -986,13 +986,13 @@ CDMA可以使不同的节点可以进行同时传输,且具有抗干扰特性
 
 >C=碰撞时隙,E=空闲时隙,S=成功时隙
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/Slotted_ALOHA.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/Slotted_ALOHA.png)
 
 时隙多路访问协议的**效率**定义为:
 
 ?>当有大量的活跃节点且每个节点总有大量的帧要发送时,长期运行中成功时隙的份额
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/Slotted_ALOHA_efficiency.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/Slotted_ALOHA_efficiency.png)
 
 2. 载波侦听多路访问CSMA
 
@@ -1040,7 +1040,7 @@ MAC地址长度为`6字节`共`48位`,共有`2^48`个MAC地址
 
 后24位是由厂家自己分配的,称为`扩展标识符`,同一个厂家生产的网卡中MAC地址后24位是不同的
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/MAC_address.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/MAC_address.png)
 
 !>显然以上是理想情况,例如在华强北制作的网卡,显然不存在OUI,那么必然是伪造MAC地址甚至多个网卡同时使用一个MAC地址
 
@@ -1060,7 +1060,7 @@ MAC地址共分为3种,分别为**单播MAC地址**,**组播MAC地址**,**广播
 
 - 广播MAC地址是指每个比特都是1的MAC地址(FF-FF-FF-FF-FF-FF),广播MAC地址是组播MAC地址的一个特例
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/mac_broadcast.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/mac_broadcast.png)
 
 !>以**混杂方式**(promiscuous mode)工作的以太网适配器能够接收所有经过它的数据流,而不论其目的地址是否是它
 
@@ -1180,21 +1180,21 @@ MAC地址共分为3种,分别为**单播MAC地址**,**组播MAC地址**,**广播
 
 3. 如果在一段时间后,没有接收到以某个地址作为**源地址**的帧,则从表中删除该地址
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/self_learn%20(2).PNG)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/self_learn%20(2).PNG)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/self_learn%20(3).PNG)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/self_learn%20(3).PNG)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/self_learn%20(4).PNG)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/self_learn%20(4).PNG)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/self_learn%20(5).PNG)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/self_learn%20(5).PNG)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/self_learn%20(6).PNG)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/self_learn%20(6).PNG)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/self_learn%20(7).PNG)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/self_learn%20(7).PNG)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/self_learn%20(8).PNG)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/self_learn%20(8).PNG)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/self_learn%20(1).PNG)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/self_learn%20(1).PNG)
 
 ### 虚拟局域网(VLAN/Virtual LAN)
 
@@ -1225,7 +1225,7 @@ MAC地址共分为3种,分别为**单播MAC地址**,**组播MAC地址**,**广播
 
 关键在于:在计算机通信中,可靠交付应当由谁来负责?是网络还是端系统?
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/VCorData.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/VCorData.jpg)
 
 |对比的方面|虚电路服务|数据报服务|
 |:---:|:---:|:---:|   
@@ -1255,7 +1255,7 @@ MAC地址共分为3种,分别为**单播MAC地址**,**组播MAC地址**,**广播
 
 #### 路由器架构
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/router.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/router.png)
 
 - 输入端口
 
@@ -1265,11 +1265,11 @@ MAC地址共分为3种,分别为**单播MAC地址**,**组播MAC地址**,**广播
 
     3. 执行查询功能,通过查询转发表决定路由器的输出端口,到达的分组通过路由器的交换结构转发到输出端口
 
-    ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/input_port.png)
+    ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/input_port.png)
 
     ***输入端口队列***
 
-    ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/input_port_queue.png)
+    ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/input_port_queue.png)
 
     左图:输出端口拥塞,只能发送一个红色的分组,所以下面的那个红色分组被阻塞了
     右图:过了一个分组时间后,绿色的分组就遇到了HOL阻塞
@@ -1278,7 +1278,7 @@ MAC地址共分为3种,分别为**单播MAC地址**,**组播MAC地址**,**广播
 
     交换结构将路由器的输入端口连接到输出端口
 
-    ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/switch_fabric.png)
+    ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/switch_fabric.png)
 
 - 输出端口
 
@@ -1298,7 +1298,7 @@ MAC地址共分为3种,分别为**单播MAC地址**,**组播MAC地址**,**广播
 
 在优先权排队规则下,到达输出链路的分组被分类放入输出队列中的优先权类,基于优先级的调度,高优先级的排队分组最先发送
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/priority_queuing.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/priority_queuing.png)
 
 >如图所示,分组1,3,4的优先级较高,当1到达时,链路空闲,直接传输,当2,3到达时,虽然2先到达,但3的优先级较高,所以3先传输
 
@@ -1306,7 +1306,7 @@ MAC地址共分为3种,分别为**单播MAC地址**,**组播MAC地址**,**广播
 
 在循环排队规则下,分组向使用优先权排队那样被分类,但在类之间并不存在严格的服务优先权,循环调度器在这些类之间轮流提供服务
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/round_robin.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/round_robin.png)
 
 >如图所示,分组1,2,4属于第一类,分组3,5属于第二类,当1到达时,链路空闲,直接传输,当2,3到达时,虽然2先到达,但2属于第一类,链路调度器对第二类的分组进行查找,3属于第二类,对3进行传输,链路调度器对第一类的分组进行查找,2属于第一类,对2进行传输
 
@@ -1314,7 +1314,7 @@ MAC地址共分为3种,分别为**单播MAC地址**,**组播MAC地址**,**广播
 
 #### IPv4数据报格式
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/ipv4_packet.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/ipv4_packet.png)
 
 - 版本号(version)
 
@@ -1342,11 +1342,11 @@ MAC地址共分为3种,分别为**单播MAC地址**,**组播MAC地址**,**广播
 
     **片偏移**:占13位,标识较长的分组在分片后某片在原分组中的相对位置,片偏移以**8个字节**为偏移单位
 
-    ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/IP_data_divide1.png)
+    ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/IP_data_divide1.png)
 
-    ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/IP_data_divide2.png)
+    ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/IP_data_divide2.png)
 
-    ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/IP_data_divide3.png)
+    ![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/IP_data_divide3.png)
 
 - 存活时间(TTL)
 
@@ -1398,7 +1398,7 @@ IPv4地址就是给互联网上的每一台主机(或路由器)的每一个**接
 
 IPv4地址的书写常采用**点分十进制记法**
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/dotted_decimal_notation.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/dotted_decimal_notation.jpg)
 
 IP地址的编址方法共经过了三个历史阶段
 
@@ -1414,7 +1414,7 @@ IP地址的编址方法共经过了三个历史阶段
 >
 >第二个字段是主机号(host-id),它标志该主机(或路由器),一台主机号在它前面的网络号所指明的网络范围内必须是唯一的,因此,一个IP地址在整个互联网范围内是唯一的
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/net&host_ip.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/net&host_ip.jpg)
 
 >A类地址的网络号字段占1个字节,只有7位可供使用(该字段的第一位已固定为0),可指派的网络号是126个,减2的原因是:第一,IP地址中的全0代表当前设备的IP,可以代表本机的所有IP地址;第二,网络号为127(即01111111)保留作为本地软件环回测试,用于本机中各个应用之间的网络交互
 >
@@ -1424,11 +1424,11 @@ IP地址的编址方法共经过了三个历史阶段
 >
 >C类地址有3个字节的网络号字段,最前面的3位是(110),还有21位可以进行分配,但C类网络地址192.0.0.0不进行指派,可以指派的C类最小网络地址是192.0.1.0,因此C类地址可指派的网络总数是2^21−1,即2097151,每一个C类地址的最大主机数是2^8–2,即254
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/range_ip.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/range_ip.jpg)
 
 !>一般不使用的特殊的IP地址
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/special_ip.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/special_ip.png)
 
 !>IP地址与MAC地址
 
@@ -1454,11 +1454,11 @@ IP地址的编址方法共经过了三个历史阶段
 
 子网掩码长度为32位,左边部分为**一连串1**,对应于网络号和子网号,右边部分的**一连串0**,对应于主机号
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/subnetmask.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/subnetmask.jpg)
 
 把IP地址的子网掩码和收到的数据报的目的IP地址进行逐位与(and),得到子网的网络地址
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/ABC_subnetmask.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/ABC_subnetmask.jpg)
 
 !>B类地址的子网划分选择(使用固定长度子网)
 
@@ -1560,7 +1560,7 @@ CIDR把网络前缀都相同的连续的IP地址组成一个**CIDR地址块**,�
 
 !>仅支持地址转换,不支持端口映射
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/nat.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/nat.jpg)
 
 NAT路由器收到从专用网内部的主机A发往互联网上主机B的IP数据报:源IP地址是`192.168.0.3`,而目的IP地址是`213.18.2.4`
 
@@ -1621,7 +1621,7 @@ IPv6所引进的主要变化如下:
 
 IPv6数据报由两大部分组成,即基本首部(base header)和后面的有效载荷(payload)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/ipv6.jpg)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/ipv6.jpg)
 
 - 版本(version):占4位,它指明了协议的版本,对IPv6该字段是6
 
@@ -1732,7 +1732,7 @@ IPv6地址可分为三种:
 
 - `N'`:节点子集,记录已经确定最短路径的节点
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/route_graph.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/route_graph.png)
 
 使用上图中的网络,从`u`开始计算到各个目的节点的最短路径开销
 
@@ -1753,7 +1753,7 @@ Bellman-Ford等式(动态规划的思想)
 
 用`d_𝑥 (𝑦)`表示"从x到y的最佳路径的成本",则有`d_𝑥 (𝑦)=min┬𝑣⁡{𝑐(𝑥,𝑣)+d_𝑣 (𝑦)}`("x到v的成本"+"从v到y的最佳路径的成本")
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/Bellman_Ford_Sample.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/Bellman_Ford_Sample.png)
 
 `d_v(z)=5`,`d_x(z)=3`,`d_w(z)=3`
 
@@ -1775,11 +1775,11 @@ Bellman-Ford等式(动态规划的思想)
 
 只要所有节点继续交换距离向量,每个开销估计`Dx(y)`收敛到`dx(y)`(`x`到`y`的实际最低开销路径的开销)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/Bellman_Ford_Table.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/Bellman_Ford_Table.png)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/good_news_travels_fast.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/good_news_travels_fast.png)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/bad_news_travels_slow.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/bad_news_travels_slow.png)
 
 利用`毒性逆转`来避免路由环路:如果`z→y→x`,则z向y通告`𝐷_𝑧 (𝑥)=∞`(即使z知道𝐷_𝑧 (𝑥)是某个数值),这样可以防止y重新经过z到达x,但是有一些路由环路的产生是无法通过毒性逆转来避免的
 
@@ -1835,9 +1835,9 @@ RIP协议使用的距离向量算法
 
 - 返回
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/RIP1.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/RIP1.png)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/RIP2.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/RIP2.png)
 
 RIP2报文由首部和路由部分组成
 
@@ -1877,13 +1877,13 @@ OSPF协议的特点是:
 
 每一个区域都有一个`32`位的区域标识符
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/OSPF_Sample.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/OSPF_Sample.png)
 
 OSPF使用层次结构的区域划分,在上层的区域叫做主干区域,主干区域的标识符规定为`0.0.0.0`,主干区域的作用是用来连通其他在下层的区域
 
 OSPF**不用UDP**而是直接用**IP数据报**传送
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/OSPF_Head.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/OSPF_Head.png)
 
 OSPF分组使用`24`字节的**固定长度首部**
 
@@ -1893,7 +1893,7 @@ OSPF分组使用`24`字节的**固定长度首部**
 - 类型4,链路状态更新(Link State Update)分组,用洪泛法对全网更新链路状态
 - 类型5,链路状态确认(Link State Acknowledgment)分组
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/RIPvsOSPF.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/RIPvsOSPF.png)
 
 #### 外部网关协议
 
@@ -1907,11 +1907,11 @@ BGP只能是力求寻找一条能够到达目的网络且比较好的路由(不�
 
 一个BGP发言人除了必须运行BGP协议外,还必须运行该自治系统所使用的内部网关协议
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/BGP_speaker.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/BGP_speaker.png)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/BGPswap1.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/BGPswap1.png)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/BGPswap2.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/BGPswap2.png)
 
 ### ICMP协议
 
@@ -1919,7 +1919,7 @@ BGP只能是力求寻找一条能够到达目的网络且比较好的路由(不�
 
 ICMP不是高层协议(ICMP报文是装在IP数据报中,作为其中的数据部分),而是IP层的协议,ICMP报文作为IP层数据报的数据,加上数据报的首部,组成IP数据报发送出去
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/ICMPform.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/ICMPform.png)
 
 ICMP报文的种类有两种,即ICMP**差错报告**报文和ICMP**询问**报文
 
@@ -1937,7 +1937,7 @@ ICMP报文的种类有两种,即ICMP**差错报告**报文和ICMP**询问**报�
 - 参数问题:当路由器或目的主机收到的数据报的首部中有的字段的值不正确时,就丢弃该数据报,并向源点发送参数问题报文
 - 改变路由(重定向):路由器把改变路由报文发送给主机,让主机知道下次应将数据报发送给另外的路由器(可通过更好的路由)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/books/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/ICMPerror.png)
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/ICMPerror.png)
 
 - 对ICMP差错报告报文不再发送ICMP差错报告报文
 - 对第一个分片的数据报片的所有后续数据报片都不发送ICMP差错报告报文
@@ -1962,4 +1962,182 @@ ICMP报文的种类有两种,即ICMP**差错报告**报文和ICMP**询问**报�
 
 分用是指接收方的传输层在剥去报文的首部后能够把这些数据正确交付目的应用进程
 
-分用和复用的前提是
+分用和复用的前提是给应用层的每个应用进程赋予一个非常明确的标志,因此在运输层使用**协议端口号**,简称为**端口**
+
+虽然通信的终点是应用进程,但只要把所传送的报文交到目的主机的某个合适的目的端口,剩下的工作(即最后交付目的进程)就由TCP或UDP来完成
+
+在协议栈层间的抽象的协议端口是**软件端口**,在路由器或交换机上的端口为**硬件端口**,硬件端口是不同硬件设备进行交互的接口,而软件端口是应用层的各种协议进程与运输实体进行层间交互的一种地址
+
+### 端口
+
+运输层用一个`16`位端口号来标志一个端口,端口号只具有本地意义,只是为了标志本计算机应用层中的各个进程在和运输层交互时的层间接口,16位的端口号可允许有`65535`个不同的端口号
+
+运输层的端口号分为两大类
+
+- 服务器端使用的端口号
+
+    - 熟知端口号 (0~1023)
+    |应用程序|端口|
+    |:---:|:---:|
+    |FTP|21|
+    |TELNET|23|
+    |SMTP|25|
+    |DNS|53|
+    |TFTP|69|
+    |HTTP|80|
+    |SNMP|161|
+    |HTTPS|443|
+
+    - 登记端口号 (1024~49151)
+
+- 客户端使用的端口号
+
+    - 短暂端口号 (49152~65535)
+
+    这类端口号仅在客户进程运行时才动态选择
+
+### 用户数据报协议UDP
+
+#### 特点
+
+- UDP是**无连接**的,即发送数据之前不需要建立连接,因此减少了开销和发送数据之前的时延
+- UDP使用**尽最大努力**交付,即不保证可靠交付,因此主机不需要维持复杂的连接状态表
+- UDP是**面向报文**的,发送方的UDP对应用程序交下来的报文,在添加首部后就向下交付IP层,UDP对应用层交下来的报文,既不合并,也不拆分,而是保留这些报文的边界,也就是说,应用层交给UDP多长的报文,UDP就照样发送,即一次发送一个报文
+- UDP**没有拥塞控制**,因此网络出现的拥塞不会使源主机的发送速率降低(适合对实时性有要求的应用)
+- UDP支持**一对一,一对多,多对一和多对多**的交互通信
+- UDP的**首部开销小**,只有8个字节
+
+#### UDP报文段结构
+
+<table style="margin: 0 auto; text-align: center;">
+<caption>UDP首部</caption>
+<tbody>
+<tr>
+<th style="border-bottom:none; border-right:none;"><span style="font-family:sans-serif;font-size:100%;color:grey;background-color:transparent;;">偏移</span></th>
+<th style="border-left:none;">字节</th>
+<th colspan="8">0</th>
+<th colspan="8">1</th>
+<th colspan="8">2</th>
+<th colspan="8">3</th>
+</tr>
+<tr>
+<th style="border-top: none">字节</th>
+<th>位</th>
+<th>&#160;0</th>
+<th>&#160;1</th>
+<th>&#160;2</th>
+<th>&#160;3</th>
+<th>&#160;4</th>
+<th>&#160;5</th>
+<th>&#160;6</th>
+<th>&#160;7</th>
+<th>&#160;8</th>
+<th>&#160;9</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+<th>13</th>
+<th>14</th>
+<th>15</th>
+<th>16</th>
+<th>17</th>
+<th>18</th>
+<th>19</th>
+<th>20</th>
+<th>21</th>
+<th>22</th>
+<th>23</th>
+<th>24</th>
+<th>25</th>
+<th>26</th>
+<th>27</th>
+<th>28</th>
+<th>29</th>
+<th>30</th>
+<th>31</th></tr>
+<tr>
+<th>0</th>
+<th>0</th>
+<td colspan="16">源端口号</td>
+<td colspan="16">目的端口号</td>
+</tr>
+<tr>
+<th>4</th>
+<th>32</th>
+<td colspan="16">报文长度</td>
+<td colspan="16">校验和</td>
+</tr>
+</tbody>
+</table>
+
+UDP首部共有4个字段,每个字段由两个字节组成
+
+- 报文长度
+    
+    该字段指定UDP报头和数据总共占用的长度
+
+    可能的最小长度是8字节,因为UDP报头已经占用了8字节,由于这个字段的存在,UDP报文总长不可能超过65535字节(包括8字节的报头,和65527字节的数据),实际上通过IPv4协议传输时,由于IPv4的头部信息要占用20字节,因此数据长度不可能超过`65507`字节(65535−8字节UDP首部−20字节IP头部)
+
+- 校验和
+    
+    校验和字段可以用于发现头部信息和数据中的传输错误
+
+#### UDP校验和计算
+
+当UDP运行在IPv4之上时,为了能够计算校验和,需要在UDP数据包前添加一个"伪首部",伪首部包括了IPv4头部中的一些信息,但它并不是发送IP数据包时使用的IP数据包的头部,而只是一个用来计算校验和而已
+
+<table style="margin: 0 auto; text-align: center;">
+<tbody><tr style="text-align:center;">
+<th><span style="font-family:sans-serif;font-size:100%;color:grey;background-color:transparent;;">位</span>
+</th>
+<th colspan="8" style="width:75px;">0 – 7
+</th>
+<th colspan="8" style="width:75px;">8 – 15
+</th>
+<th colspan="8" style="width:75px;">16 – 23
+</th>
+<th colspan="8" style="width:75px;">24 – 31
+</th></tr>
+<tr style="text-align:center;">
+<th>0
+</th>
+<td colspan="32" style="background:#fdd;">源地址
+</td></tr>
+<tr style="text-align:center;">
+<th>32
+</th>
+<td colspan="32" style="background:#fdd;">目的地址
+</td></tr>
+<tr style="text-align:center;">
+<th>64
+</th>
+<td colspan="8" style="background:#fdd;">全零
+</td>
+<td colspan="8" style="background:#fdd;">协议类型(UDP(17)->0x11)
+</td>
+<td colspan="16" style="background:#fdd;">UDP报文长度
+</td></tr>
+<tr style="text-align:center;">
+<th>96
+</th>
+<td colspan="16">来源连接端口
+</td>
+<td colspan="16">目的连接端口
+</td></tr>
+<tr style="text-align:center;">
+<th>128
+</th>
+<td colspan="16">报文长度
+</td>
+<td colspan="16">检验和
+</td></tr>
+<tr style="text-align:center;">
+<th>160+
+</th>
+<td colspan="32">&#160;<br />数据<br />&#160;
+</td></tr></tbody></table>
+
+UDP的检验和是把首部和数据部分一起都检验
+
+![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/subject/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/UDP_checksum.png)
+
