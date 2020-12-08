@@ -4,7 +4,7 @@
   - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/datastruct.svg) 数据结构](/cs/data_struct)
   - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/algorithm.svg) 算法](/cs/algorithm)
 - **课程笔记**
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/key.svg) 现代密码学](/subject/现代密码学)
+  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/key.svg) 密码学导论](/subject/密码学导论)
   - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/assembly.svg) 汇编语言](/subject/assembly)
   - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/internet.svg) 计算机网络](/subject/internet)
 - **编程开发**
