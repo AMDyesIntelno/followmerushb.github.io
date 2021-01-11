@@ -585,9 +585,9 @@ False
 
 ### 可变数据类型与不可变数据类型
 
-- 可变数据类型:列表list和字典dict
+- 可变数据类型:列表`list`,字典`dict`和集合`set`
 
-- 不可变数据类型:整型int,浮点型float,字符串型string和元组tuple
+- 不可变数据类型:整型`int`,浮点型`float`,字符串型`string`和元组`tuple`
 
 >可变与不可变,是指内存中的值(value)是否可以被改变
 >
