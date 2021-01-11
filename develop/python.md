@@ -1279,7 +1279,7 @@ print(list[0:4:2])#list[0] list[2]
 print(list[::3])#list[0] list[3]
 print(list[-5:-3:1])#list[-5] list[-3]
 print(list[-3:-5:-1])#list[-3] list[-5]
-print(list[5:3:-1])#list[5] list[3]
+print(list[5:3:-1])#list[5] list[4]
 print(list[::-1])
 ```
 
