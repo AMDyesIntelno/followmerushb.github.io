@@ -1,15 +1,15 @@
 - **README**
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/important.svg) README](/README)
+  - [![](https://img.misaka.gq/Notes/svg/important.svg) README](/README)
 - **CS基础**
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/datastruct.svg) 数据结构](/cs/data_struct)
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/algorithm.svg) 算法](/cs/algorithm)
+  - [![](https://img.misaka.gq/Notes/svg/datastruct.svg) 数据结构](/cs/data_struct)
+  - [![](https://img.misaka.gq/Notes/svg/algorithm.svg) 算法](/cs/algorithm)
 - **课程笔记**
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/key.svg) 密码学导论](/subject/密码学导论)
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/assembly.svg) 汇编语言](/subject/assembly)
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/internet.svg) 计算机网络](/subject/internet)
+  - [![](https://img.misaka.gq/Notes/svg/key.svg) 密码学导论](/subject/密码学导论)
+  - [![](https://img.misaka.gq/Notes/svg/assembly.svg) 汇编语言](/subject/assembly)
+  - [![](https://img.misaka.gq/Notes/svg/internet.svg) 计算机网络](/subject/internet)
 - **编程开发**
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/cpp-blue.svg) C/C++](/develop/c_cpp)
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/python.svg) Python](/develop/python)
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/golang.svg) Golang](/develop/golang)
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/git.svg) Git](/develop/git)
-  - [![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/svg/docker.svg) Docker](/develop/docker)
+  - [![](https://img.misaka.gq/Notes/svg/cpp-blue.svg) C/C++](/develop/c_cpp)
+  - [![](https://img.misaka.gq/Notes/svg/python.svg) Python](/develop/python)
+  - [![](https://img.misaka.gq/Notes/svg/golang.svg) Golang](/develop/golang)
+  - [![](https://img.misaka.gq/Notes/svg/git.svg) Git](/develop/git)
+  - [![](https://img.misaka.gq/Notes/svg/docker.svg) Docker](/develop/docker)
