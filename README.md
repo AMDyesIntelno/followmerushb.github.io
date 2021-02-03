@@ -24,6 +24,8 @@
 </style>
 ```
 
+在`<head></head>`中添加`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"/>`
+
 ### 添加script
 
 ``` html
