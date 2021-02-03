@@ -38,7 +38,7 @@ __pycache__/
 
 >我的某个仓库
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/develop/git/git_status.png)
+![](https://img.misaka.gq/Notes/develop/git/git_status.png)
 
 >`On branch master`说明当前位于master分支上
 >
@@ -50,7 +50,7 @@ __pycache__/
 
 ## 将文件加入到仓库中
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/develop/git/git_add.png)
+![](https://img.misaka.gq/Notes/develop/git/git_add.png)
 
 >只要在`Changes to be committed`这行下面的，就说明是已暂存状态
 >
@@ -58,7 +58,7 @@ __pycache__/
 
 ## 执行提交
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/develop/git/git_commit&push.png)
+![](https://img.misaka.gq/Notes/develop/git/git_commit&push.png)
 
 >`git commit -m "update"`以拍摄项目的快照,标志`-m`让`Git`将接下来的消息`update`记录到项目的历史记录中,输出表明我们在master分支上,且有一个文件被修改了
 >

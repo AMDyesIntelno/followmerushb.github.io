@@ -977,7 +977,7 @@ const int 与 int const等价
 
 ***Sample***
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/develop/c_cpp/String/1.png)
+![](https://img.misaka.gq/Notes/develop/c_cpp/String/1.png)
 
 1. `str.erase(num)`
 
@@ -1001,7 +1001,7 @@ const int 与 int const等价
 
 ***Sample***
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/develop/c_cpp/String/2.png)
+![](https://img.misaka.gq/Notes/develop/c_cpp/String/2.png)
 
 1. `str.insert(num,str2)`
 

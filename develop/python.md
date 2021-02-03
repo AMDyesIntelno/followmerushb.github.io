@@ -714,7 +714,7 @@ print(x)
 
 `[-1]=1000 0001`
 
-n位二进制数的取值范围是![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/develop/python/True_form.svg)
+n位二进制数的取值范围是![](https://img.misaka.gq/Notes/develop/python/True_form.svg)
 
 当n=8时,`[1111 1111,0111 1111]`即`[-127,127]`
 
@@ -3163,7 +3163,7 @@ zhangsan 90
 zhangsan 90
 ```
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/develop/python/python_private.png)
+![](https://img.misaka.gq/Notes/develop/python/python_private.png)
 
 ```python
 class student:
@@ -3183,7 +3183,7 @@ zhangsan 90
 zhangsan 100
 ```
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/develop/python/python_change_private.png)
+![](https://img.misaka.gq/Notes/develop/python/python_change_private.png)
 
 >如果需要从外部获取类中的私有变量的值,可以在类中添加读取方法
 
@@ -3728,9 +3728,9 @@ ZeroDivisionError: division by zero
 
 ## 日期与时间
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/develop/python/python_format.jpeg)
+![](https://img.misaka.gq/Notes/develop/python/python_format.jpeg)
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/develop/python/python_struct_time.jpeg)
+![](https://img.misaka.gq/Notes/develop/python/python_struct_time.jpeg)
 
 ```python
 import time
@@ -3825,7 +3825,7 @@ print(datetime.datetime.now().strftime("%Y %B %d %H:%M:%S"))#将格式字符串�
 
 !>文件打开模式
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/develop/python/access_mode.jpeg)
+![](https://img.misaka.gq/Notes/develop/python/access_mode.jpeg)
 
 ### 文件读取
 
@@ -3950,11 +3950,11 @@ kxjchvasdfghjkl
 
 - 正则表达式模式
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/develop/python/re.jpeg)
+![](https://img.misaka.gq/Notes/develop/python/re.jpeg)
 
 - 正则表达式例子
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img@master/Notes/develop/python/re_sample.jpeg)
+![](https://img.misaka.gq/Notes/develop/python/re_sample.jpeg)
 
 ```
 '00\d'可以匹配'007',但无法匹配'00q'

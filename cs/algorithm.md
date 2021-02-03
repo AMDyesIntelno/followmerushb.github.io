@@ -1240,7 +1240,7 @@ int main() {
 
 #### 参考图
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/algorithm/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/Prim.png)
+![](https://img.misaka.gq/Notes/algorithm/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/Prim.png)
 
 #### Sample
 
@@ -1419,7 +1419,7 @@ int main(){
 
 #### 参考图
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/algorithm/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/Kruskal.png)
+![](https://img.misaka.gq/Notes/algorithm/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/Kruskal.png)
 
 #### Sample
 
@@ -2452,7 +2452,7 @@ P.S. 若要通过洛谷P3375,需要修改数据输出格式,即将输出string�
 
 ## 排序
 
-![](https://cdn.jsdelivr.net/gh/AMDyesIntelno/blog_img/Notes/algorithm/sort.png)
+![](https://img.misaka.gq/Notes/algorithm/sort.png)
 
 ### 冒泡排序
 
