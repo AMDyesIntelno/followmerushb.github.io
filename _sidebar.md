@@ -3,6 +3,7 @@
 - **CS基础**
   - [![](https://img.misaka.gq/Notes/svg/datastruct.svg) 数据结构](/cs/data_struct)
   - [![](https://img.misaka.gq/Notes/svg/algorithm.svg) 算法](/cs/algorithm)
+  - [![](https://img.misaka.gq/Notes/svg/computer.svg) CSAPP](/cs/CSAPP)
 - **课程笔记**
   - [![](https://img.misaka.gq/Notes/svg/key.svg) 密码学导论](/subject/密码学导论)
   - [![](https://img.misaka.gq/Notes/svg/assembly.svg) 汇编语言](/subject/assembly)
