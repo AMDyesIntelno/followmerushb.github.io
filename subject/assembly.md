@@ -617,3 +617,5 @@ int 21H
 ![](https://img.misaka.gq/Notes/subject/汇编语言/简化编译和连接.png)
 
 `masm test;`,`link test;`注意分号
+
+test
