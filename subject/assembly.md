@@ -242,7 +242,7 @@ jmp ax
 
 一共修改了4次,IP最后为0
 
-### 实验一 Debug的使用
+### 实验1 Debug的使用
 
 - 用Debug的`R`命令查看,改变CPU寄存器的内容
 - 用Debug的`D`命令查看内存中的内容
@@ -449,7 +449,7 @@ pop [2]
 pop [0]
 ```
 
-### 实验二 用机器指令和汇编指令编程
+### 实验2 用机器指令和汇编指令编程
 
 ![](https://img.misaka.gq/Notes/subject/汇编语言/debug_t_ss1.png)
 
@@ -617,3 +617,70 @@ int 21H
 ![](https://img.misaka.gq/Notes/subject/汇编语言/简化编译和连接.png)
 
 `masm test;`,`link test;`注意分号
+
+---
+
+此时,有一个正在运行的程序将1.exe中的程序加载入内存,这个正在运行的程序是什么?它将程序载入内存后,如何是程序得以运行?程序运行结束后,返回到哪里?
+
+1. 在DOS中直接执行1.exe时,使正在运行的`command`,将1.exe中的程序载入内存
+
+2. `command`设置CPU的`CS:IP`指向程序的第一条指令(即程序的入口),从而使程序得以运行
+
+3. 程序运行结束后,返回到`command`中,CPU继续运行`command`
+
+### 程序执行过程
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/PSP.png)
+
+1. 程序加载后,`ds`中存放着程序所在内存区的段地址,这个内存区的偏移地址为0,则程序所在的内存区的地址为`ds:0`
+
+2. 这个内存区的前256个字节中存放的是`PSP`,DOS用来和程序进行通信,从256字节处向后的空间存放的是程序
+
+|区划|地址|
+|:---:|:---:|
+|空闲内存区|`SA:0`|
+|PSP区|`SA:0`|
+|程序区|`SA+10H:0`|
+
+用`P`命令执行`INT 21`,返回`Program terminated normally`
+
+### 实验3 编程,编译,连接,跟踪
+
+```nasm
+assume cs:codesg
+codesg segment
+
+    mov ax,2000H
+    mov ss,ax
+    mov sp,0
+    add sp,10
+    pop ax
+    pop bx
+    push ax
+    push bx
+    pop ax
+    pop bx
+
+    mov ax,4c00H
+    int 21H
+
+codesg ends
+end
+```
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/实验3_1.png)
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/实验3_2.png)
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/实验3_3.png)
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/实验3_4.png)
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/实验3_5.png)
+
+## [BX]和loop指令
+
+`[0]`表示内存单元,偏移地址为0,`[BX]`同样表示内存单元,偏移地址为`BX`寄存器中的内容
+
+!>约定使用`idata`表示常量,`mov bx,idata`代表如`mov bx,1`
+
