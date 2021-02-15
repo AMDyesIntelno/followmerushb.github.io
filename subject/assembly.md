@@ -855,3 +855,150 @@ end
 
 ![](https://img.misaka.gq/Notes/subject/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E5%AE%9E%E9%AA%8C4.png)
 
+## 包含多个段的程序
+
+### 在代码段中使用数据
+
+编程计算8个数据的和,结果保存在ax中
+
+```nasm
+assume cs:code
+code segment
+
+    dw 0123h,0456h,0789h,0abch,0defh,0fedh,0cbah,0987h
+    mov ax,0
+    mov bx,0
+
+    mov cx,8
+    s:
+    add ax,cs:[bx]
+    add bx,2
+    loop s
+
+    mov ax,4c00h
+    int 21h
+
+code ends
+end
+```
+
+`dw`即`define word`,定义**字型**数据,程序在运行时`CS`中存放代码,所以这8个数据存放在`CS`中,位于代码段的开始,所以偏移地址为0
+
+!>由于是字型数据,所以`add bx,2`
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/dw_1.png)
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/dw_2.png)
+
+debug加载后的的`IP`为`0000`,要将其修改为`0010`才能正常运行程序,因此存在缺陷
+
+```nasm
+assume cs:code
+code segment
+
+    dw 0123h,0456h,0789h,0abch,0defh,0fedh,0cbah,0987h
+    start:
+    mov ax,0
+    mov bx,0
+
+    mov cx,8
+    s:
+    add ax,cs:[bx]
+    add bx,2
+    loop s
+
+    mov ax,4c00h
+    int 21h
+
+code ends
+end start
+```
+
+在丑奴儿供需的第一条指令的前面加上一个标号`start`,并在伪指令`end`后面出现
+
+!>`end`除了通知编译器程序结束外,还可以通知编译器程序的入口在什么地方
+
+因此`mov bx,0`是程序的第一条指令
+
+### 在代码段中使用栈
+
+利用栈,将程序中定义的数据逆序存放
+
+```nasm
+assume cs:code
+code segment
+
+    dw 0123h,0456h,0789h,0abch,0defh,0fedh,0cbah,0987h
+    dw 0,0,0,0,0,0,0,0;用dw定义了16个字型数据,在程序加载后,将这16个字的内存空间作为栈来使用
+    start:
+    mov ax,cs
+    mov ss,ax
+    mov sp,20h;将栈顶指向cs:20
+
+    mov bx,0
+    mov cx,8
+    s0:
+    push cs:[bx]
+    add bx,2
+    loop s0
+    
+    mov bx,0
+    mov cx,8
+    s1:
+    pop cs:[bx]
+    add bx,2
+    loop s1
+
+    mov ax,4c00h
+    int 21h
+
+code ends
+end start
+```
+
+### 将数据,代码,栈放入不同的段
+
+将程序中定义的数据逆序存放
+
+```nasm
+assume cs:code,ds:data,ss:stack
+
+data segment
+    dw 0123h,0456h,0789h,0abch,0defh,0fedh,0cbah,0987h
+data ends
+
+stack segment
+    dw 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+stack ends
+
+code segment
+    start:
+    mov ax,stack
+    mov ss,ax
+    mov sp,20h
+
+    mov ax,data
+    mov ds,ax
+    mov bx,0
+
+    mov cx,8
+    s0:
+    push [bx]
+    add bx,2
+    loop s0
+
+    mov bx,0
+
+    mov cx,8
+    s1:
+    pop [bx]
+    add bx,2
+    loop s1
+    
+    mov ax,4c00h
+    int 21h
+code ends
+
+end start
+```
+
