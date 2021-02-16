@@ -914,9 +914,9 @@ code ends
 end start
 ```
 
-在丑奴儿供需的第一条指令的前面加上一个标号`start`,并在伪指令`end`后面出现
+在程序的第一条指令的前面加上一个标号`start`,并在伪指令`end`后面出现
 
-!>`end`除了通知编译器程序结束外,还可以通知编译器程序的入口在什么地方
+!>`end`除了通知编译器程序结束外,还可以通知编译器程序的入口在什么地方,在不指明程序入口的情况下,程序默认按照顺序从头开始执行
 
 因此`mov bx,0`是程序的第一条指令
 
@@ -975,11 +975,11 @@ code segment
     start:
     mov ax,stack
     mov ss,ax
-    mov sp,20h
+    mov sp,20h;设置栈顶ss:sp指向stack:20
 
     mov ax,data
     mov ds,ax
-    mov bx,0
+    mov bx,0;ds:bx指向data段中的第一个单元
 
     mov cx,8
     s0:
@@ -1001,4 +1001,75 @@ code ends
 
 end start
 ```
+
+设置了三个段`assume cs:code,ds:data,ss:stack`,其后将段寄存器指向这些段
+
+### 实验5 编写,调试具有多个段的程序
+
+```nasm
+assume cs:code,ds:data,ss:stack
+
+data segment
+   ...
+data ends
+
+stack segment
+   ...
+stack ends
+
+code segment
+
+start:  
+   ...
+
+code ends
+
+end start
+```
+
+!>数据段空间大小为定义数据所需的16字节的最小整数倍
+
+比如定义了1个字节,系统就给数据段分配16个字节;定义了17个字节,系统就分配32个字节
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/实验5_1.png)
+
+---
+
+```nasm
+assume cs:code,ds:data,ss:stack
+
+code segment
+    start:
+    mov ax,stack
+    mov ss,ax
+    mov sp,16
+
+    mov ax,data
+    mov ds,ax
+
+    push ds:[0]
+    push ds:[2]
+    pop ds:[2]
+    pop ds:[0]
+    
+    mov ax,4c00h
+    int 21h
+code ends
+
+data segment
+    dw 0123h,0456h
+data ends
+
+stack segment
+    dw 0,0
+stack ends
+
+end start
+```
+
+设程序加载后,code段的段地址为`X`,则data段的段地址为`X+3`,stack段的段地址为`X+4`
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/实验5_2.png)
+
+## 定位内存地址
 
