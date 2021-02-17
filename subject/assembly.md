@@ -1236,7 +1236,7 @@ end start
 !>使用栈进行数据的暂存
 
 ```nasm
-assume cs:code,ds:datasg
+assume cs:code,ds:datasg,ss:stacksg
 datasg segment
     db 'ibm             '
     db 'dec             '
@@ -1244,10 +1244,17 @@ datasg segment
     db 'vax             '
 datasg ends
 
+stacksg segment
+    dw 0,0,0,0,0,0,0,0;定义一个16字节的栈段
+stacksg ends
+
 code segment
     start:
     mov ax,datasg
     mov ds,ax
+    mov ax,stacksg
+    mov ss,ax
+    mov sp,16
 
     mov bx,0;bx作为行
     mov cx,4
@@ -1268,4 +1275,168 @@ code segment
 code ends
 end start
 ```
+
+---
+
+将datasg段中每个单词的前4个字母改为大写字母
+
+```nasm
+assume cs:code,ds:datasg,ss:stacksg
+datasg segment
+    db '1. display      '
+    db '2. brows        '
+    db '3. replace      '
+    db '4. modify       '
+datasg ends
+
+stacksg segment
+    dw 0,0,0,0,0,0,0,0;定义一个16字节的栈段
+stacksg ends
+
+code segment
+    start:
+    mov ax,datasg
+    mov ds,ax
+    mov ax,stacksg
+    mov ss,ax
+    mov sp,16
+
+    mov bx,0;bx作为行
+    mov cx,4
+    s0:
+    push cx
+    mov si,0;si作为列
+    mov cx,4
+    s1:
+    and byte ptr ds:[bx+si+3],11011111b
+    inc si
+    loop s1
+    pop cx
+    add bx,16
+    loop s0
+
+    mov ax,4c00h
+    int 21h
+code ends
+end start
+```
+
+## 数据处理
+
+两个基本问题
+
+- 处理的数据在什么地方
+- 要处理的数据有多长
+
+### BP
+
+BP:基址指针寄存器
+
+BP寄存器主要适用于给出堆栈中数据区的偏移,从而可以方便的实现直接存取堆栈中的数据
+
+可以使用`[bp]`进行内存寻址,当指令中没有显性地给出段地址时,段地址默认为`SS`
+
+!>错误指令
+
+`mov ax,[bx+bp]`
+
+`mov ax,[si+di]`
+
+在没有寄存器名存在的情况下,用操作符`X ptr`指明内存单元的长度,X可以表示为`word`或者`byte`
+
+### DIV指令
+
+DIV是除法指令,`div reg`或`div 内存单元`
+
+- 除数
+
+有8位和16位两种,在一个reg或内存单元中
+
+- 被除数
+
+默认放在AX或DX和AX中,**如果除数为8位,被除数则为16位,默认在AX中存放,如果除数为16位,被除数则为32位,在DX存放高16位,在AX存放低16位**
+
+- 结果
+
+如果除数为8位,则AL存储除法操作的商,AH存储除法操作的余数,如果除数为16位,则AX存储除法操作的商,DX存储除法操作的余数
+
+!>高位放余数,低位放商
+
+```nasm
+div byte ptr ds:[0]
+;al=ax/(ds*16+0)的商
+;ah=ax/(ds*16+0)的余数
+div word ptr es:[0]
+;ax=(dx*10000H+ax)/(es*16+0)的商
+;dx=(dx*10000H+ax)/(es*16+0)的余数
+```
+
+利用DIV计算1001/100
+
+```nasm
+mov ax,1001
+mov bl,100;除数为8位,被除数则为16位
+div bl
+```
+
+利用DIV计算100001/100
+
+```nasm
+mov dx,1
+mov ax,86a1h
+mov bx,100;除数为16位,被除数则为32位
+div bx
+```
+
+### 伪指令DD
+
+- db:字节型数据
+- dw:字型数据
+- dd:double word双字型数据
+
+---
+
+用DIV计算data段中第一个数据处以第二个数据后的结果,商存在第三个数据的存储单元中
+
+```nasm
+assume cs:code,ds:data
+data segment
+    dd 100001;双字
+    dw 100
+    dw 0
+code segment
+    start:
+    mov ax,data
+    mov ds,ax
+
+    mov ax,ds:[0];低16位
+    mov dx,ds:[2];高16位
+    div word ptr ds:[4];除数为16位,商存放在ax中
+    mov ds:[6],ax
+
+    mov ax,4c00h
+    int 21h
+code ends
+end start
+```
+
+### dup
+
+dup是一个操作负,配合db,dw等伪指令使用,用来进行数据的重复
+
+使用格式如下
+
+```nasm
+db 重复的次数 dup (重复的字节型数据)
+dw 重复的次数 dup (重复的字型数据)
+dd 重复的次数 dup (重复的双字型数据)
+```
+
+`db 3 dup (0)`->`db 0,0,0`
+
+`db 3 dup (0,1,2)`->`db 0,1,2,0,1,2,0,1,2`
+
+`db 3 dup('abc','ABC')`->`db 'abcABCabcABCabcABC'`
+
+### 实验7 结构化数据的访问
 
