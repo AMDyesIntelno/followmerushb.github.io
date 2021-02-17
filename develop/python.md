@@ -1,4 +1,4 @@
-?> Python 笔记
+# Python笔记
 
 !>[遇事不决看文档 https://docs.python.org/zh-cn/3.7/](https://docs.python.org/zh-cn/3.7/)
 
