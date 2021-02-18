@@ -1633,6 +1633,10 @@ end start
 
 ![](https://img.misaka.gq/Notes/subject/汇编语言/jmp_4.png)
 
+!>在前移时,计算偏移时需要计算`jmp`指令的长度
+
+`inc ax`1个字节,`mov ax,0`3个字节,`jmp short`2个字节,一共9个字节,`00-9=F7`,所以得出`jmp short s`的内存为`EBF7`
+
 !>CPU在执行jmp指令时并不需要转移的目的地址
 
 - CS=07E4,IP=0006,CS:IP指向`EB ??`(jmp short s的机器码)
@@ -1685,3 +1689,137 @@ end start
 
 `jmp 16位reg`->IP=16位reg中的值
 
+#### 转移地址在内存中
+
+- `jmp word ptr 内存单元`(段内转移)
+
+内存单元存储的字作为转移目的的偏移地址
+
+```nasm
+mov ax,0123h
+mov ds:[0],ax
+jmp word ptr ds:[0];IP=0123h
+```
+
+- `jmp dword ptr 内存单元`(段间转移)
+
+高地址处的字是转移的目的段地址,低地址处的字是偏移地址
+
+```nasm
+mov ax,0123h
+mov ds:[0],ax
+mov word ptr ds:[2],0
+jmp dword ptr ds:[0];CS=0,IP=0123h
+```
+
+### jcxz/loop
+
+!>jcxz指令为有条件转移指令,所有的有条件转移指令都是短转移
+
+`jcxz 标号`(如果cx=0,则转移到标号处执行)
+
+!>loop指令为循环指令,所有的循环指令都是短转移
+
+`loop 标号`(cx=cx-1,如果cx!=0,转移到标号处执行)
+
+### 实验8 分析程序
+
+```nasm
+assume cs:codesg
+codesg segment
+    mov ax, 4c00h
+    int 21h
+    start:
+    mov ax, 0
+    s:
+    nop
+    nop
+    mov di, offset s
+    mov si, offset s2
+    mov ax, cs:[si]
+    mov cs:[di], ax
+    s0:
+    jmp short s
+    s1:
+    mov ax, 0
+    int 21h
+    mov ax, 0
+    s2:
+    jmp short s1
+    nop
+codesg ends
+end start
+```
+
+1. 程序开始,定位到`start`,执行`mov ax,0`
+2. `mov di,offset s`,向di中存储`s`相对于`codesg`的偏移地址
+3. `mov si,offset s2`,向si中存储`s2`相对于`codesg`的偏移地址
+4. `mov ax,cs:[si]`,向ax中存储cs:[si]所保存的字型数据,即标号s2处的数据
+5. `jmp short s1`的内存数据为`EBF6`(`mov ax,0`3个字节,`int 21h`2个字节,`jmp short s1`2个字节,一共10个字节,`00-0A=F6`,所以`jmp short s1`的内存为`EBF6`)
+6. `mov cs:[di], ax`,s的两个nop被替换为`EBF6`
+7. 执行s0,重新跳转到s
+8. 执行`EBF6`,相当于向前跳转10个字节(`mov ax,4c00h`3个字节,`int 21h`2个字节,`mov ax,0`3个字节,`EBF6`2个字节),所以跳转到`mov ax, 4c00h`
+9. 继续执行程序,正常结束
+
+### 实验9 根据材料编程
+
+```nasm
+assume cs:codesg
+data segment
+    db 'welcome to masm!'
+data ends
+codesg segment
+    start:
+    mov ax,0b800h
+    mov ds,ax
+    mov ax,data
+    mov es,ax
+    mov si,0
+    mov bx,07c0h
+    
+    mov ah,00000010b;welcome
+    mov cx,7
+    s0:
+    mov al,byte ptr es:[si]
+    mov word ptr ds:[bx],ax
+    inc si
+    add bx,2
+    loop s0
+
+    mov ah,00000000b;空格
+    mov al,byte ptr es:[si]
+    mov word ptr ds:[bx],ax
+    inc si
+    add bx,2
+
+    mov ah,00100100b;to
+    mov cx,2
+    s1:
+    mov al,byte ptr es:[si]
+    mov word ptr ds:[bx],ax
+    inc si
+    add bx,2
+    loop s1
+
+    mov ah,00000000b;空格
+    mov al,byte ptr es:[si]
+    mov word ptr ds:[bx],ax
+    inc si
+    add bx,2
+
+    mov ah,01110001b;masm!
+    mov cx,5
+    s2:
+    mov al,byte ptr es:[si]
+    mov word ptr ds:[bx],ax
+    inc si
+    add bx,2
+    loop s2
+
+    mov ax, 4c00h
+    int 21h
+codesg ends
+end start
+```
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/实验9.png)
