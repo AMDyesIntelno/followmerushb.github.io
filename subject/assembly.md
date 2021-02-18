@@ -1512,3 +1512,176 @@ end start
 ![](https://img.misaka.gq/Notes/subject/汇编语言/实验7_1.png)
 
 ![](https://img.misaka.gq/Notes/subject/汇编语言/实验7_2.png)
+
+## 转移指令的原理
+
+!>可以修改`IP`或同时修改`CS`和`IP`的指令统称位转移指令
+
+- 只修改`IP`时,称为段内转移
+- 同时修改`CS`和`IP`时,称为段间转移
+
+### offset
+
+!>操作符`offset`是由编译器处理的符号,其功能时取得标号的偏移地址
+
+```nasm
+assume cs:codesg
+codesg segment
+    start:
+    mov ax,offset start;相当于mov ax,0
+    s:
+    mov ax,offset s;相当于mov ax,3,前一条指令的长度为3
+codesg ends
+end start
+```
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/offset_1.png)
+
+```nasm
+assume cs:codesg
+codesg segment
+    s:
+    mov ax,bx;占两个字节
+    mov si,offset s
+    mov di,offset s0
+    mov ax,cs:[si]
+    mov cs:[di],ax
+    s0:
+    nop;nop的机器码占一个字节
+    nop
+codesg ends
+end s
+```
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/offset_2.png)
+
+### jmp
+
+!>jmp为无条件转移指令,可以只修改`IP`也可以同时修改`CS`和`IP`
+
+jmp指令要给出以下信息
+
+- 转移的目的地址
+- 转移的距离(段间转移,段内短转移,段内近转移)
+
+#### 依据位移进行转移
+
+`jmp short 标号`->IP=IP+8位位移(段内短转移),对IP的修改范围是`-128~127`
+
+```nasm
+assume cs:codesg
+codesg segment
+    start:
+    mov ax,0
+    jmp short s
+    add ax,1
+    s:
+    inc ax
+codesg ends
+end start
+```
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/jmp_1.png)
+
+```nasm
+assume cs:codesg
+codesg segment
+    start:
+    mov ax,0
+    mov bx,0
+    jmp short s
+    add ax,1
+    s:
+    inc ax
+codesg ends
+end start
+```
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/jmp_2.png)
+
+```nasm
+assume cs:codesg
+codesg segment
+    start:
+    mov ax,0
+    mov bx,0
+    jmp short s
+    add ax,1
+    add ax,1
+    s:
+    inc ax
+codesg ends
+end start
+```
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/jmp_3.png)
+
+```nasm
+assume cs:codesg
+codesg segment
+    s:
+    inc ax
+    start:
+    mov ax,0
+    mov bx,0
+    jmp short s
+    add ax,1
+    add ax,1
+codesg ends
+end start
+```
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/jmp_4.png)
+
+!>CPU在执行jmp指令时并不需要转移的目的地址
+
+- CS=07E4,IP=0006,CS:IP指向`EB ??`(jmp short s的机器码)
+- 读取指令(`EB ??`)进入指令缓冲器
+- IP=IP+所读取的指令的长度,CS:IP指向`add ax,1`
+- CPU执行指令缓冲器中的指令
+- 指令执行后,IP指向`inc ax`
+
+指令`EB ??`中没有指出要转移的目的地址,而是指出了要转移的位移
+
+`jmp near ptr 标号`->IP=IP+16位位移(段内近转移),对IP的修改范围是`-32768~32767`
+
+```nasm
+assume cs:codesg
+codesg segment
+    start:
+    mov ax,0
+    mov bx,0
+    jmp near ptr s
+    db 128 dup (0)
+    add ax,1
+    s:
+    inc ax
+codesg ends
+end start
+```
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/jmp_5.png)
+
+`jmp far ptr 标号`->CS=标号所在段的段地址,IP=标号所在段中的偏移地址
+
+```nasm
+assume cs:codesg
+codesg segment
+    start:
+    mov ax,0
+    mov bx,0
+    jmp far ptr s
+    db 128 dup (0)
+    add ax,1
+    s:
+    inc ax
+codesg ends
+end start
+```
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/jmp_6.png)
+
+`8E 00 E4 07`是目的地址在指令中的存储顺序,高地址的`E4 07`是转移的段地址`07E4`,低地址的`8E 00`是偏移地址`008E`
+
+`jmp 16位reg`->IP=16位reg中的值
+
