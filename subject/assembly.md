@@ -1999,3 +1999,180 @@ codesg ends
 end start
 ```
 
+### 批量数据传递
+
+将一个全是字母的字符串转化为大写
+
+```nasm
+assume cs:codesg
+data segment
+    db 'conversation'
+data ends
+codesg segment
+start:
+    mov ax,data
+    mov ds,ax
+    mov bx,0
+    mov cx,12
+    call upper
+
+    mov ax, 4c00h
+    int 21h
+
+upper:
+    and byte ptr ds:[bx],11011111b
+    inc bx
+    loop upper
+    ret
+
+codesg ends
+end start
+```
+
+---
+
+计算1+3+5+7+9,用栈传递参数
+
+```nasm
+assume cs:codesg
+stack segment
+    db 16 dup (0)
+stack ends
+data segment
+    dw 1,3,5,7,9
+data ends
+codesg segment
+start:
+    mov ax,stack
+    mov ss,ax
+    mov sp,16
+    mov ax,data
+    mov ds,ax
+    mov bx,0
+    mov cx,5
+s0:
+    push word ptr ds:[bx]
+    add bx,2
+    loop s0
+
+    call calculate
+    mov ax, 4c00h
+    int 21h
+
+calculate:
+    push bp;bp入栈,先保存bp原数据
+    mov bp,sp;把sp值给bp,使用基于bp的固定偏移量对栈中的内容进行读取
+    mov ax,ss:[bp+4];9
+    add ax,ss:[bp+6];7
+    add ax,ss:[bp+8];5
+    add ax,ss:[bp+10];3
+    add ax,ss:[bp+12];1
+    mov sp,bp;恢复sp
+    pop bp;恢复bp
+    ret 10;堆栈平衡,返回到call的下一条指令
+
+codesg ends
+end start
+```
+
+### 实验10 编写子程序
+
+1. 显示字符串
+
+```nasm
+assume cs:code
+data segment
+    db 'Welcome to masm!',0
+data ends
+stack segment
+    dw 8 dup (0)
+stack ends
+code segment
+start:
+    mov dh,8;行号
+    mov dl,3;列号
+    mov cl,2;颜色
+    mov ax,data
+    mov ds,ax
+    mov si,0;ds:si指向字符串的首地址
+    call show_str
+
+    mov ax, 4c00h
+    int 21h
+show_str:
+
+    push dx
+    push cx;保存相关寄存器
+
+    mov ax,0b800h
+    mov es,ax;显存
+    mov ax,00a0h
+    sub dh,1
+    mul dh
+    mov bx,ax;es:[bx]
+    mov ax,0
+    sub dl,1
+    mov al,dl
+    add bx,ax
+    add bx,ax;es:[bx]记录起始位置
+
+    mov di,0
+    mov si,0
+    mov ah,cl
+    mov cx,0
+print:
+    mov cl,byte ptr ds:[di]
+    jcxz finish
+    mov al,cl
+    mov word ptr es:[bx+si],ax
+    inc di
+    add si,2
+    jmp print
+finish:
+    pop cx
+    pop dx
+    ret
+code ends
+end start
+```
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/实验10_1.png)
+
+2. 解决除法溢出问题
+
+```nasm
+assume cs:code
+stack segment
+    dw 16 dup (0)
+stack ends
+code segment
+start:
+    mov ax,stack
+    mov ss,ax
+    mov sp,32
+    mov ax,4240h
+    mov dx,0fh
+    mov cx,0ah
+    push ax
+    push dx
+    push cx
+    call divdw
+    mov ax, 4c00h
+    int 21h
+divdw:
+    push bp
+    mov bp,sp
+    mov ax,word ptr ss:[bp+6];高16位
+    mov dx,0;dx清零
+    div word ptr ss:[bp+4];dx:余数,ax:商
+    push ax;结果的高16位
+    mov ax,word ptr ss:[bp+8];低16位
+    div word ptr ss:[bp+4];dx:余数,ax:商(低16位)
+    mov cx,dx;cx存放余数
+    mov dx,word ptr ss:[bp-2];结果的高16位
+    mov sp,bp
+    pop bp
+    ret 6
+code ends
+end start
+```
