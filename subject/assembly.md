@@ -1823,3 +1823,179 @@ end start
 ```
 
 ![](https://img.misaka.gq/Notes/subject/汇编语言/实验9.png)
+
+## CALL和RET指令
+
+### ret/retf
+
+- ret指令用栈中的数据,修改IP的内容,从而实现近转移(`pop IP`)
+    - IP=SS:[SP]
+    - SP=SP+2
+- retf指令用栈中的数据,修改CS和IP的内容,从而实现远转移(`pop IP`,`pop CS`)
+    - IP=SS:[SP]
+    - SP=SP+2
+    - CS=SS:[SP]
+    - SP=SP+2
+
+```nasm
+assume cs:codesg
+stack segment
+    db 16 dup (0)
+stack ends
+codesg segment
+    mov ax, 4c00h
+    int 21h
+    start:
+    mov ax,stack
+    mov ss,ax
+    mov sp,16
+    mov ax,0
+    push ax
+    ret;IP=0
+codesg ends
+end start
+```
+
+```nasm
+assume cs:codesg
+stack segment
+    db 16 dup (0)
+stack ends
+codesg segment
+    mov ax, 4c00h
+    int 21h
+    start:
+    mov ax,stack
+    mov ss,ax
+    mov sp,16
+    mov ax,0
+    push cs
+    push ax
+    retf;CS=codesg,IP=0
+codesg ends
+end start
+```
+
+### call
+
+- 将当前的IP或CS和IP压入栈中
+- 转移
+
+!>call指令不能实现短转移
+
+#### 依据位移进行转移
+
+`call 标号`(将当前的IP(call的下一条指令)压栈后,转到标号处执行指令)
+
+- SP=SP-2
+- SS:[SP]=IP(call的下一条指令)
+- IP=IP(call的下一条指令)+16位位移(标号处的地址-call指令后的第一个字节的地址)
+
+相当于
+
+```nasm
+push IP(call的下一条指令)
+jmp near ptr 标号
+```
+
+#### 转移的目的地址在指令中
+
+`call far ptr 标号`实现段间转移
+
+- SP=SP-2
+- SS:[SP]=CS
+- SP=SP-2
+- SS:[SP]=IP(call的下一条指令)
+
+#### 转移地址在寄存器中
+
+`call 16位reg`
+
+- SP=SP-2
+- SS:[SP]=IP(call的下一条指令)
+- IP=reg中的数值
+
+#### 转移地址在内存中
+
+`call word ptr 内存单元地址`
+
+- SP=SP-2
+- SS:[SP]=IP(call的下一条指令)
+- IP=内存单元中的值
+
+`call dword ptr 内存单元地址`
+
+- SP=SP-2
+- SS:[SP]=CS
+- CS=高地址处的值
+- SP=SP-2
+- SS:[SP]=IP(call的下一条指令)
+- IP=低地址处的值
+
+### call和ret配合
+
+```nasm
+assume cs:code
+code segment
+main:
+    ...
+    call sub1
+    ...
+    mov ax,4c00h
+    int 21h
+
+sub1:
+    ...
+    call sub2
+    ...
+    ret
+
+sub2:
+    ...
+    ret
+code ends
+end main
+```
+
+### mul指令
+
+1. 两个相乘的数,要么都是8位,要么都是16位,如果是8位,一个默认放在AL中,另一个放在8位reg或内存单元中,如果是16位,一个默认放在AX中,一个放在16位reg或内存单元中
+
+2. 如果是8位乘法,结果默认在AX中,如果是16位乘法,高位在DX中,低位在AX中
+
+计算data段中第一组数据的3次方,结果保存在后面一组dword单元中
+
+```nasm
+assume cs:codesg
+data segment
+    dw 1,2,3,4,5,6,7,8
+    dd 8 dup (0)
+data ends
+codesg segment
+start:
+    mov ax,data
+    mov ds,ax
+    mov si,0
+    mov di,16
+    mov cx,8
+s:
+    mov bx,word ptr ds:[si]
+    call cubed
+    mov word ptr ds:[di],ax
+    mov word ptr ds:[di+2],dx
+    add si,2
+    add di,4
+    loop s
+
+    mov ax, 4c00h
+    int 21h
+
+cubed:
+    mov ax,bx
+    mul bx
+    mul bx
+    ret
+codesg ends
+end start
+```
+
