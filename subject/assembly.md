@@ -2176,3 +2176,261 @@ divdw:
 code ends
 end start
 ```
+
+3. 数值显示
+
+```nasm
+assume cs:code
+data segment
+    db 10 dup (0)
+data ends
+stack segment
+    dw 16 dup (0)
+stack ends
+
+code segment
+start:
+    mov ax,12666
+    mov bx,data
+    mov ds,bx
+    mov bx,stack
+    mov ss,bx
+    mov sp,32
+    mov si,0
+    call dtoc
+
+    mov dh,8
+    mov dl,3
+    mov cl,2
+    call show_str
+    
+    mov ax, 4c00h
+    int 21h
+
+dtoc:
+    push bp
+    mov bp,sp
+    mov dx,0
+    push dx
+dtoc_start:
+    mov bx,10
+    mov dx,0
+    div bx;ax:商,dx:余数
+    add dx,030h;0->'0'
+    push dx;ascii入栈
+    mov cx,ax
+    jcxz re
+    mov dx,0
+    jmp dtoc_start
+re:;用栈将ascii倒序
+    pop cx
+    jcxz return
+    mov byte ptr ds:[si],cl;移动到内存区
+    inc si
+    jmp re
+return:
+    mov sp,bp
+    pop bp
+    ret
+
+show_str:
+    push dx
+    push cx;保存相关寄存器
+
+    mov ax,0b800h
+    mov es,ax;显存
+    mov ax,00a0h
+    sub dh,1
+    mul dh
+    mov bx,ax;es:[bx]
+    mov ax,0
+    sub dl,1
+    mov al,dl
+    add bx,ax
+    add bx,ax;es:[bx]记录起始位置
+
+    mov di,0
+    mov si,0
+    mov ah,cl
+    mov cx,0
+print:
+    mov cl,byte ptr ds:[di]
+    jcxz finish
+    mov al,cl
+    mov word ptr es:[bx+si],ax
+    inc di
+    add si,2
+    jmp print
+finish:
+    pop cx
+    pop dx
+    ret
+
+code ends
+end start
+```
+
+## 课程设计1
+
+将实验7中的数据按格式显示出来
+
+```nasm
+assume cs:code
+data segment
+    db '1975','1976','1977','1978','1979','1980','1981','1982','1983'
+    db '1984','1985','1986','1987','1988','1989','1990','1991','1992'
+    db '1993','1994','1995'
+
+    dd 16,22,382,1356,2390,8000,16000,24486,50065,97479,140417,197514
+    dd 345980,590827,803530,1183000,1843000,2759000,3753000,4649000,5937000
+    
+    dw 3,7,9,13,28,38,130,220,476,778,1001,1442,2258,2793,4037,5635,8226
+    dw 11542,14430,15257,17800
+data ends
+
+mem segment
+    dw 40 dup (0220h);空格
+mem ends
+
+stack segment
+    db 32 dup(0)
+stack ends
+
+code segment
+start:
+    mov ax,data
+    mov ds,ax
+
+    mov ax,mem
+    mov es,ax
+    mov si,0;si作为mem的下标
+
+    mov ax,stack
+    mov ss,ax
+    mov sp,32
+
+    mov ax,4c00h
+    int 21h
+
+year:;堆栈传参,word ptr ss:[bp+6]'xx',word ptr ss:[bp+4]'19'
+    push bp
+    mov bp,sp
+    push cx
+    mov di,4
+    mov cx,4
+year_loop:
+    mov al,byte ptr ss:[bp+di]
+    mov byte ptr es:[si],al
+    add si,2
+    inc di
+    loop year_loop
+    pop cx
+    mov sp,bp
+    pop bp
+    ret 4;堆栈平衡
+
+income:
+    nop
+
+
+
+people:;堆栈传参,word ptr ss:[bp+6]低16位,word ptr ss:[bp+4]高16位
+    push bp
+    mov bp,sp
+    push cx
+    mov bx,10
+    mov dx,0
+    push dx
+    mov ax,word ptr ss:[bp+6]
+    mov dx,word ptr ss:[bp+4]
+people_loop:
+    div bx;ax:商,dx:余数
+    add dx,030h;0->'0'
+    push dx
+    mov cx,ax
+    jcxz people_re
+    mov dx,0
+    jmp people_loop
+people_re:
+    pop cx
+    jcxz people_ret
+    mov byte ptr es:[si],cl
+    add si,2
+    jmp people_re
+people_ret:
+    pop cx
+    mov sp,bp
+    pop bp
+    ret 4;堆栈平衡
+
+pre_income:;堆栈传参,word ptr ss:[bp+6]员工数量,word ptr ss:[bp+6]低16位,word ptr ss:[bp+4]高16位
+    push bp
+    mov bp,sp
+    mov ax,word ptr ss:[bp+6]
+    mov dx,word ptr ss:[bp+4]
+    div word ptr ss:[bp+6];ax存放人均收入
+    mov bx,10
+    mov dx,0
+    push dx
+pre_income_loop:
+    div bx;ax:商,dx:余数
+    add dx,030h;0->'0'
+    push dx
+    mov cx,ax
+    jcxz pre_income_re
+    mov dx,0
+    jmp pre_income_loop
+pre_income_re:
+    pop cx
+    jcxz pre_income_ret
+    mov byte ptr es:[si],cl
+    add si,2
+    jmp pre_income_re
+pre_income_ret:
+    mov sp,bp
+    pop bp
+    ret 6;堆栈平衡
+
+show_str:
+    push bp
+    mov bp,sp
+    push ds
+    mov ax,word ptr ss:[bp+4];每一行显存的起始位置
+    mov ds,ax
+    push cx
+    mov cx,40
+    push si
+    mov si,0
+show_str_loop:
+    mov ax,word ptr es:[si]
+    mov word ptr ds:[si],ax
+    add si,2
+    loop show_str_loop
+    pop cx
+    pop si
+    pop ax;恢复原本的ds
+    mov ds,ax
+    mov sp,bp
+    pop bp
+    ret
+
+clear_mem:
+    push bp
+    mov bp,sp
+    push si
+    push cx
+    mov si,0
+    mov cx,40
+    mov ax,0200h;颜色
+clear_loop:
+    mov word ptr es:[si],ax
+    add si,2
+    loop clear_loop
+    pop cx
+    pop si
+    mov sp,bp
+    pop bp
+    ret
+code ends
+end start
+```
