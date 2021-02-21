@@ -2561,3 +2561,52 @@ sub ax,0001h;00001011 00000000,PF=1
 ```
 
 ![](https://img.misaka.gq/Notes/subject/汇编语言/PF.png)
+
+### SF
+
+符号标志位,设置成结果的最高位,也就是带符号数中的最高位(0**非负**1负)
+
+`00000001B`可以看作无符号数1,或者有符号数+1
+
+`10000001B`可以看作无符号数129,或者有符号数-127
+
+```nasm
+mov al,10000001B
+add al,1;SF=1
+mov al,10000001B
+add al,01111111B;SF=0
+```
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/SF.png)
+
+### CF
+
+进位标志位,当算术运算在最高位产生了**进位**或**借位**时设置,否则清除,该标志也表示**无符号整数运算**发生了溢出
+
+```nasm
+mov al,98H
+add al,al;al=30H,CF=1
+add al,al;al=60H,CF=0
+mov al,97H
+sub al,98H;al=FFH,CF=1,向更高位借位
+sub al,al;al=0,CF=0
+```
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/CF_1.png)
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/CF_2.png)
+
+### OF
+
+溢出标志位,当结果大于可表示的最大正数或小于可表示的最小负数(不包含符号位)时设置,否则清除
+
+该标志位表示了**有符号数算术**(补码算术)发生了溢出情况
+
+```nasm
+mov al,98H;152
+add al,al;al=30H,CF=1,OF=1
+add al,al;al=60H,CF=0,OF=0
+mov al,98
+add al,al;al=C4H,CF=0,OF=1
+add al,al;al=88H,CF=1,OF=1
+
