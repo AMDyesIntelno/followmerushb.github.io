@@ -2009,14 +2009,14 @@ data segment
     db 'conversation'
 data ends
 codesg segment
-start:
+main:
     mov ax,data
     mov ds,ax
     mov bx,0
     mov cx,12
     call upper
 
-    mov ax, 4c00h
+    mov ax,4c00h
     int 21h
 
 upper:
@@ -2026,7 +2026,7 @@ upper:
     ret
 
 codesg ends
-end start
+end main
 ```
 
 ---
@@ -2042,7 +2042,7 @@ data segment
     dw 1,3,5,7,9
 data ends
 codesg segment
-start:
+main:
     mov ax,stack
     mov ss,ax
     mov sp,16
@@ -2056,7 +2056,7 @@ s0:
     loop s0
 
     call calculate
-    mov ax, 4c00h
+    mov ax,4c00h
     int 21h
 
 calculate:
@@ -2072,7 +2072,7 @@ calculate:
     ret 10;堆栈平衡,返回到call的下一条指令
 
 codesg ends
-end start
+end main
 ```
 
 ### 实验10 编写子程序
@@ -2088,7 +2088,7 @@ stack segment
     dw 8 dup (0)
 stack ends
 code segment
-start:
+main:
     mov dh,8;行号
     mov dl,3;列号
     mov cl,2;颜色
@@ -2120,20 +2120,20 @@ show_str:
     mov si,0
     mov ah,cl
     mov cx,0
-print:
+show_str_loop:
     mov cl,byte ptr ds:[di]
-    jcxz finish
+    jcxz show_str_ret
     mov al,cl
     mov word ptr es:[bx+si],ax
     inc di
     add si,2
-    jmp print
-finish:
+    jmp show_str_loop
+show_str_ret:
     pop cx
     pop dx
     ret
 code ends
-end start
+end main
 ```
 
 ![](https://img.misaka.gq/Notes/subject/汇编语言/实验10_1.png)
@@ -2146,7 +2146,7 @@ stack segment
     dw 16 dup (0)
 stack ends
 code segment
-start:
+main:
     mov ax,stack
     mov ss,ax
     mov sp,32
@@ -2174,7 +2174,7 @@ divdw:
     pop bp
     ret 6
 code ends
-end start
+end main
 ```
 
 3. 数值显示
@@ -2189,7 +2189,7 @@ stack segment
 stack ends
 
 code segment
-start:
+main:
     mov ax,12666
     mov bx,data
     mov ds,bx
@@ -2204,7 +2204,7 @@ start:
     mov cl,2
     call show_str
     
-    mov ax, 4c00h
+    mov ax,4c00h
     int 21h
 
 dtoc:
@@ -2212,23 +2212,22 @@ dtoc:
     mov bp,sp
     mov dx,0
     push dx
-dtoc_start:
     mov bx,10
-    mov dx,0
+dtoc_loop:
     div bx;ax:商,dx:余数
     add dx,030h;0->'0'
     push dx;ascii入栈
     mov cx,ax
-    jcxz re
+    jcxz dtoc_re
     mov dx,0
-    jmp dtoc_start
-re:;用栈将ascii倒序
+    jmp dtoc_loop
+dtoc_re:;用栈将ascii倒序
     pop cx
-    jcxz return
+    jcxz dtoc_ret
     mov byte ptr ds:[si],cl;移动到内存区
     inc si
-    jmp re
-return:
+    jmp dtoc_re
+dtoc_ret:
     mov sp,bp
     pop bp
     ret
@@ -2253,21 +2252,20 @@ show_str:
     mov si,0
     mov ah,cl
     mov cx,0
-print:
+show_str_loop:
     mov cl,byte ptr ds:[di]
-    jcxz finish
+    jcxz show_str_ret
     mov al,cl
     mov word ptr es:[bx+si],ax
     inc di
     add si,2
-    jmp print
-finish:
+    jmp show_str_loop
+show_str_ret:
     pop cx
     pop dx
     ret
-
 code ends
-end start
+end main
 ```
 
 ## 课程设计1
@@ -2289,7 +2287,7 @@ data segment
 data ends
 
 mem segment
-    dw 40 dup (0220h);空格
+    dw 32 dup (0220h);空格
 mem ends
 
 stack segment
@@ -2297,9 +2295,11 @@ stack segment
 stack ends
 
 code segment
-start:
+main:
     mov ax,data
     mov ds,ax
+    mov bx,0;年份和收入起始位置
+    mov bp,168;人数起始位置
 
     mov ax,mem
     mov es,ax
@@ -2308,6 +2308,37 @@ start:
     mov ax,stack
     mov ss,ax
     mov sp,32
+
+    mov ax,0b80ah;显存位置
+    push ax
+
+    mov cx,21
+
+main_loop:
+    push word ptr ds:[bx+2];'xx'
+    push word ptr ds:[bx];'19'
+    call year
+    mov si,10h
+    push word ptr ds:[bx+84];低16位
+    push word ptr ds:[bx+86];高16位
+    call income
+    mov si,20h
+    push word ptr ds:[bp]
+    call people
+    mov si,30h
+    push word ptr ds:[bp]
+    push word ptr ds:[bx+84];低16位
+    push word ptr ds:[bx+86];高16位
+    call per_income
+    pop ax
+    add ax,0ah;显存下一行
+    push ax
+    call show_str
+    call clear_mem
+    mov si,0
+    add bx,4
+    add bp,2
+    loop main_loop
 
     mov ax,4c00h
     int 21h
@@ -2329,20 +2360,63 @@ year_loop:
     pop bp
     ret 4;堆栈平衡
 
-income:
-    nop
-
-
-
-people:;堆栈传参,word ptr ss:[bp+6]低16位,word ptr ss:[bp+4]高16位
+income:;堆栈传参,word ptr ss:[bp+6]低16位,word ptr ss:[bp+4]高16位
     push bp
     mov bp,sp
     push cx
+    push bx
     mov bx,10
     mov dx,0
     push dx
     mov ax,word ptr ss:[bp+6]
     mov dx,word ptr ss:[bp+4]
+income_loop:
+    push ax
+    push dx
+    call divdw;cs存放余数
+    add cx,030h;0->'0'
+    push cx;ascii入栈
+    mov cx,ax
+    or cx,dx
+    jcxz income_re
+    jmp income_loop
+income_re:
+    pop cx
+    jcxz income_ret
+    mov byte ptr es:[si],cl
+    add si,2
+    jmp income_re
+income_ret:
+    pop bx
+    pop cx
+    mov sp,bp
+    pop bp
+    ret 4
+
+divdw:;堆栈传参
+    push bp
+    mov bp,sp
+    mov ax,word ptr ss:[bp+4];高16位
+    mov dx,0;dx清零
+    div bx;dx:余数,ax:商
+    push ax;结果的高16位
+    mov ax,word ptr ss:[bp+6];低16位
+    div bx;dx:余数,ax:商(低16位)
+    mov cx,dx;cx存放余数
+    mov dx,word ptr ss:[bp-2];结果的高16位
+    mov sp,bp
+    pop bp
+    ret 4
+
+people:;堆栈传参
+    push bp
+    mov bp,sp
+    push cx
+    push bx
+    mov bx,10
+    mov dx,0
+    push dx
+    mov ax,word ptr ss:[bp+4]
 people_loop:
     div bx;ax:商,dx:余数
     add dx,030h;0->'0'
@@ -2358,47 +2432,52 @@ people_re:
     add si,2
     jmp people_re
 people_ret:
+    pop bx
     pop cx
     mov sp,bp
     pop bp
-    ret 4;堆栈平衡
+    ret 2;堆栈平衡
 
-pre_income:;堆栈传参,word ptr ss:[bp+6]员工数量,word ptr ss:[bp+6]低16位,word ptr ss:[bp+4]高16位
+per_income:;堆栈传参,word ptr ss:[bp+8]员工数量,word ptr ss:[bp+6]低16位,word ptr ss:[bp+4]高16位
     push bp
     mov bp,sp
+    push cx
+    push bx
     mov ax,word ptr ss:[bp+6]
     mov dx,word ptr ss:[bp+4]
-    div word ptr ss:[bp+6];ax存放人均收入
+    div word ptr ss:[bp+8];ax存放人均收入
     mov bx,10
     mov dx,0
     push dx
-pre_income_loop:
+per_income_loop:
     div bx;ax:商,dx:余数
     add dx,030h;0->'0'
     push dx
     mov cx,ax
-    jcxz pre_income_re
+    jcxz per_income_re
     mov dx,0
-    jmp pre_income_loop
-pre_income_re:
+    jmp per_income_loop
+per_income_re:
     pop cx
-    jcxz pre_income_ret
+    jcxz per_income_ret
     mov byte ptr es:[si],cl
     add si,2
-    jmp pre_income_re
-pre_income_ret:
+    jmp per_income_re
+per_income_ret:
+    pop bx
+    pop cx
     mov sp,bp
     pop bp
     ret 6;堆栈平衡
 
-show_str:
+show_str:;堆栈传参
     push bp
     mov bp,sp
     push ds
     mov ax,word ptr ss:[bp+4];每一行显存的起始位置
     mov ds,ax
     push cx
-    mov cx,40
+    mov cx,32
     push si
     mov si,0
 show_str_loop:
@@ -2406,8 +2485,8 @@ show_str_loop:
     mov word ptr ds:[si],ax
     add si,2
     loop show_str_loop
-    pop cx
     pop si
+    pop cx
     pop ax;恢复原本的ds
     mov ds,ax
     mov sp,bp
@@ -2420,8 +2499,8 @@ clear_mem:
     push si
     push cx
     mov si,0
-    mov cx,40
-    mov ax,0200h;颜色
+    mov cx,32
+    mov ax,0220h;颜色
 clear_loop:
     mov word ptr es:[si],ax
     add si,2
@@ -2432,5 +2511,14 @@ clear_loop:
     pop bp
     ret
 code ends
-end start
+end main
 ```
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/课程设计1.png)
+
+## 标志寄存器
+
+- 用来存储相关指令的某些执行结果
+- 用来为CPU执行相关指令提供行为依据
+- 用来控制CPU的相关工作方式
+
