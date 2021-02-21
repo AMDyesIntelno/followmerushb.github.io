@@ -2522,3 +2522,42 @@ end main
 - 用来为CPU执行相关指令提供行为依据
 - 用来控制CPU的相关工作方式
 
+DEBUG中使用`RF`修改标志寄存器
+
+|标志名|置位(值为1)|复位(值为0)|
+|:---:|:---:|:---:|
+|溢出OF|OV|NV|
+|方向DF|DN|UP|
+|中断IF|EI|DI|
+|符号SF|NG|PL|
+|零ZF|ZR|NZ|
+|辅助进位AF|AC|NA|
+|奇偶PF|PE|PO|
+|进位CF|CY|NC|
+
+### ZF
+
+零标志位,当结果是零时设置,否则清除
+
+```nasm
+mov ax,2
+suv ax,2;ZF=1
+mov ax,1
+and ax,0;ZF=1
+```
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/ZF_1.png)
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/ZF_2.png)
+
+### PF
+
+奇偶标志位,当结果的**最低字节**中1的个数为偶数(包括零)时设置,否则清除
+
+```nasm
+mov ax,0a01h;00001010 00000001
+add ax,0100h;00001011 00000001,PF=0
+sub ax,0001h;00001011 00000000,PF=1
+```
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/PF.png)
