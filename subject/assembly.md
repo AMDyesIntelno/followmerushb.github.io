@@ -2609,4 +2609,45 @@ add al,al;al=60H,CF=0,OF=0
 mov al,98
 add al,al;al=C4H,CF=0,OF=1
 add al,al;al=88H,CF=1,OF=1
+mov al,0F0H;-16
+add al,088H;-120,CF=1,OF=1
+mov al,0F0H;-19
+add al,78H;120,CF=1,OF=0
+```
+
+### adc指令
+
+adc是带进位加法指令,利用了CF位上记录的值
+
+`adc 操作对象1,操作对象2`
+
+操作对象1=操作对象1+操作对象2+CF
+
+```nasm
+mov al,98H
+add al,al
+adc al,3;al=34H
+```
+
+`add ax,bx`等价于`add al,bl  adc ah,bh`
+
+计算`1EF000H+201000H`结果放在AX(高16位)和BX(低16位)中
+
+```nasm
+mov ax,001EH
+mov bx,0F000H
+add bx,1000H
+adc ax,0020H
+```
+
+计算`1EF0001000H+2010001EF0H`结果放在AX(高16位)和BX(中16位)和CX(低16位)中
+
+```nasm
+mov ax,001EH
+mov bx,0F000H
+mov cx,1000H
+add cx,1EF0H
+adc bx,1000H
+adc ax,0020H
+```
 
