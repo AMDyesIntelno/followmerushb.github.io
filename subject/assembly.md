@@ -2755,37 +2755,112 @@ end main
 
 移动数据(内存-->内存)
 
-在8086中MOVS指令将`ds:si`指向
+在8086中MOVS指令将`ds:si`指向的内存单元移动到`es:di`,`movsb`字节单元,`movsw`字单元
+
+DF标志位(方向标志位)：DF标志位为0时执行一次加1/2/4,为1时执行一次则减1/2/4,根据Byte/Word/Dword决定
 
 在Move操作结束后,SI与DI寄存器会自动的增加或者减少,而依据则是根据标志寄存器中的`DF`标志位来判断增加还是减少
 
 - 如果`DF`标志位为0,则SI与DI寄存器则自增
 - 如果`DF`标志位为1,则SI与DI寄存器则自减
 
-可移动三种空间：Byte、Word、Dword
+- `CLD(clear direction flag)`该指令使DF=0,使地址自动增量
+- `STD(set direction flag)`该指令使DF=1,使地址自动减量
 
-`MOVS Byte [EDI],Byte [ESI]`     MOVSB
+`movsb`,`movsw`常与`rep`指令配合使用,`rep`会根据`cx`的值重复执行后面的指令
 
-`MOVS Word [EDI],Word [ESI]`     MOVSW
+`rep movsb`
 
-`MOVS Dword [EDI],Word [ESI]`     MOVSD
+将data段中的第一个字符串复制到其后面的空间中
 
-默认使用EDI和ESI
+```nasm
+assume cs:codesg
+data segment
+    db 'Welcome to masm!'
+    db 16 dup (0)
+data ends
+codesg segment
+main:
+    mov ax,data
+    mov ds,ax
+    mov es,ax
+    mov si,0
+    mov di,10H
+    mov cx,16
+    cld
+    rep movsb
 
-ESI：内存地址,要复制的数据存储地址
+    mov ax,4c00h
+    int 21h
 
-EDI：内存地址,要把数据复制到的存储地址
+codesg ends
+end main
+```
 
-在OllyDbg中输入MOVSB、MOVSW、MOVSD,自动填充指令,**注意,移动的是地址指向的内存数据,而非地址**
+逆向传送字符串,将F000H段中的最后16个字符复制到data段中
 
-DF标志位(方向标志位)：DF标志位为0时执行一次加1/2/4,为1时执行一次则减1/2/4,根据Byte/Word/Dword决定
+```nasm
+assume cs:codesg
+data segment
+    db 16 dup (0)
+data ends
+codesg segment
+main:
+    mov ax,0F000H
+    mov ds,ax
+    mov ax,data
+    mov es,ax
+    mov si,0FFFFH
+    mov di,0FH
+    mov cx,16
+    std
+    rep movsb
 
+    mov ax,4c00h
+    int 21h
 
+codesg ends
+end main
+```
 
-`CLD(clear direction flag)`该指令使DF=0,使地址自动增量`STD(set direction flag)`该指令使DF=1,使地址自动减量
+### pushf和popf
 
-而每次自增/自减的长度根据指令而定：
+`pushf`的功能是将标志寄存器的值压栈,`popf`从栈中弹出数据,送入标志寄存器中
 
-- MOVSB则增加/减少一个字节
-- MOVSW则增加/减少一个字
-- MOVSD则增加/减少两个字
+### 实验11 编写子程序
+
+编写一个子程序,将包含任意字符,以0结尾的字符串中的小写字母转变成大写字母
+
+```nasm
+assume cs:codesg
+datasg segment
+    db "Beginner's All-purpose Symbolic Instruction Code.",0
+datasg ends
+codesg segment
+main:
+    mov ax,datasg
+    mov ds,ax
+    mov si,0
+    call letterc
+
+    mov ax,4c00h
+    int 21h
+
+letterc:
+    mov ch,0
+    mov cl,byte ptr ds:[si]
+    jcxz letterc_return
+    cmp cx,61h;'a'
+    jb letterc_loop
+    cmp cx,7ah;'z'
+    ja letterc_loop
+    and byte ptr ds:[si],11011111b
+letterc_loop:
+    inc si
+    jmp letterc
+letterc_return:
+    ret
+
+codesg ends
+end main
+```
