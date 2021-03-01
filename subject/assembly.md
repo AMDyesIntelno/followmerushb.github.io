@@ -2651,3 +2651,141 @@ adc bx,1000H
 adc ax,0020H
 ```
 
+### sbb指令
+
+sbb是带借位减法指令,利用CF位上记录的借位值
+
+`sbb 操作对象1,操作对象2`
+
+操作对象1=操作对象1-操作对象2-CF
+
+计算`003E1000H-00202000H`
+
+```nasm
+mov bx,1000H
+mov ax,003EH
+sub bx,2000H
+sbb ax,0020H
+```
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/sbb.png)
+
+### cmp指令
+
+cmp是比较指令
+
+`cmp 操作对象1,操作对象2`
+
+计算操作对象1-操作对象2,但不保存结果,仅根据计算结果对寄存器进行设置
+
+`cmp ax,ax`,进行`ax-ax`,执行后`ZF=1,PF=1,SF=0,CF=0,OF=0`
+
+```nasm
+mov ax,8
+mov bx,3
+cmp ax,bx
+```
+
+`ax=8,ZF=0,PF=1,SF=0,CF=0,OF=0`
+
+`cmp ax,bx`
+
+- 如果`ax=bx`,则`ax-bx=0`,则`ZF=1`
+- 如果`ax!=bx`,则`ax-bx!=0`,则`ZF=0`
+- 如果`ax<bx`,则`ax-bx`会产生借位,则`CF=1`
+- 如果`ax>=bx`,则`ax-bx`不必借位,则`CF=0`
+- 如果`ax>bx`,则`ax-bx`既不必借位,结果也不为0,则`CF=0且ZF=0`
+- 如果`ax<=bx`,则`ax-bx`可能产生借位,结果可能位0则`CF=1或ZF=1`
+
+cmp指令可以进行有符号数运算和无符号数运算
+
+`cmp ah,bh`
+
+对于有符号数运算,如果`ah<bh`,则`ah-bh`会导致`SF=1`,但`SF=1`并不能说明操作对象1小于操作对象2
+
+假设`ah=22H,bh=A0H`,则`ah-bh=34-(-96)=82H(-126)`,`SF=1`
+
+但显然34大于-96,**如果产生了溢出(OF=1),那么逻辑上的真正结果与溢出导致的实际结果相反**
+
+![](https://img.misaka.gq/Notes/subject/汇编语言/cmp.png)
+
+### 条件转移指令
+
+|指令|含义|相关标志位|
+|:---:|:---:|:---:|
+|je|等于则转移|ZF=1|
+|jne|不等于则转移|ZF=0|
+|jb|低于则转移|CF=1|
+|jnb|**不低于**则转移|CF=0|
+|ja|高于则转移|CF=0且ZF=0|
+|jna|**不高于**则转移|CF=1或ZF=1|
+
+统计data段中数值为8的字节的字数,用ax保存统计结果
+
+```nasm
+assume cs:codesg
+data segment
+    db 8,11,8,1,8,5,63,38
+data ends
+codesg segment
+main:
+    mov ax,data
+    mov ds,ax
+    mov ax,0
+    mov bx,0
+    mov cx,8
+main_loop:
+    cmp byte ptr ds:[bx],8
+    je add1
+    jmp next
+add1:
+    inc ax
+next:
+    inc bx
+    loop main_loop
+
+    mov ax,4c00h
+    int 21h
+
+codesg ends
+end main
+```
+
+### 串传送指令
+
+移动数据(内存-->内存)
+
+在8086中MOVS指令将`ds:si`指向
+
+在Move操作结束后,SI与DI寄存器会自动的增加或者减少,而依据则是根据标志寄存器中的`DF`标志位来判断增加还是减少
+
+- 如果`DF`标志位为0,则SI与DI寄存器则自增
+- 如果`DF`标志位为1,则SI与DI寄存器则自减
+
+可移动三种空间：Byte、Word、Dword
+
+`MOVS Byte [EDI],Byte [ESI]`     MOVSB
+
+`MOVS Word [EDI],Word [ESI]`     MOVSW
+
+`MOVS Dword [EDI],Word [ESI]`     MOVSD
+
+默认使用EDI和ESI
+
+ESI：内存地址,要复制的数据存储地址
+
+EDI：内存地址,要把数据复制到的存储地址
+
+在OllyDbg中输入MOVSB、MOVSW、MOVSD,自动填充指令,**注意,移动的是地址指向的内存数据,而非地址**
+
+DF标志位(方向标志位)：DF标志位为0时执行一次加1/2/4,为1时执行一次则减1/2/4,根据Byte/Word/Dword决定
+
+
+
+`CLD(clear direction flag)`该指令使DF=0,使地址自动增量`STD(set direction flag)`该指令使DF=1,使地址自动减量
+
+而每次自增/自减的长度根据指令而定：
+
+- MOVSB则增加/减少一个字节
+- MOVSW则增加/减少一个字
+- MOVSD则增加/减少两个字
