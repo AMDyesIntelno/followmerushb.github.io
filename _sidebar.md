@@ -7,6 +7,7 @@
   - [![](https://img.misaka.gq/Notes/svg/key.svg) 密码学导论](/subject/密码学导论)
   - [![](https://img.misaka.gq/Notes/svg/assembly.svg) 汇编语言](/subject/assembly)
   - [![](https://img.misaka.gq/Notes/svg/internet.svg) 计算机网络](/subject/internet)
+  - [![](https://img.misaka.gq/Notes/svg/computer.svg) 计算机组成原理](/subject/计算机组成原理)
 - **编程开发**
   - [![](https://img.misaka.gq/Notes/svg/cpp-blue.svg) C/C++](/develop/c_cpp)
   - [![](https://img.misaka.gq/Notes/svg/python.svg) Python](/develop/python)
