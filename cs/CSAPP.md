@@ -277,7 +277,133 @@ ffffffff
 
 ### 整数表示
 
+补码的最高有效位的权为$-2^{w-1}$,反码的最高有效位的权为$-(2^{w-1}-1)$,原码的最高有效位是符号位,用于确定剩下的位应该取正权还是负权
+
+在原码和反码中对于0用两种编码方式,既`+0`与`-0`
+
+原码`0000 0000`与`1000 0000`均表示`0`
+
+反码`0000 0000`与`1111 1111`均表示`0`
+
 `0101`转补码为`-0*2^3+1*2^2+0*2^1+1*2^0=0+4+0+1=5`
 
 `1111`转补码为`-1*2^3+1*2^2+1*2^1+1*2^0=-8+4+2+1=-1`
 
+---
+
+有符号数与无符号数之间的转换
+
+```cpp
+#include "stdio.h"
+int main(){
+    short int v=-12345;
+    unsigned short uv=(unsigned short) v;
+    printf("v=%d uv=%u",v,uv);
+    return 0;
+}
+```
+
+`v=-12345 uv=53191`
+
+```cpp
+#include "stdio.h"
+int main(){
+    unsigned u=0xFFFFFFFF;
+    int tu=(int) u;
+    printf("u=%u tu=%d",u,tu);
+    return 0;
+}
+```
+
+`u=4294967295 tu=-1`
+
+```cpp
+#include "stdio.h"
+int main(){
+    int x=-1;
+    unsigned u=2147483648;
+    printf("x=%u=%d\n",x,x);
+    printf("u=%u=%d",u,u);
+    return 0;
+}
+```
+
+`x=4294967295=-1`
+
+`u=2147483648=-2147483648`
+
+强制类型转换的结果保持位值不变,只是改变了解释这些位的方式
+
+---
+
+当执行一个运算时,如果它的一个运算数是有符号的而另一个是无符号的,那么C语言会隐式地将有符号参数强制类型转换为无符号数,并假设这两个数都是非负的,来执行这个运算
+
+|表达式|类型|求值|原因|
+|:---:|:---:|:---:|:---:|
+|0==0U|无符号|1||
+|-1<0|有符号|1||
+|-1<0U|无符号|0|hex(-1)=0xFFFFFFFF|
+|2147483647>-2147483647-1|有符号|1||
+|2147483647U>-2147483647-1|无符号|0|hex(2147483647)=0x7fffffff,hex(-2147483648)=0x8000000|
+|2147483647>(int)2147483648U|有符号|1|(int)2147483648U=-2147483648|
+|-1>-2|有符号|1||
+|(unsigned)-1>-2|无符号|1|(unsigned)-1=0xffffffff|
+|-2147483647-1==2147483648U|无符号|1|(unsigned)-2147483648=2147483648|
+|-2147483647-1<2147483647|有符号|1||
+|-2147483647-1U<2147483647|无符号|0|-2147483647-1U=2147483648|
+|-2147483647-1<-2147483647|有符号|1||
+|-2147483647-1U<-2147483647|无符号|1|(unsigned)-2147483647=2147483649|
+
+---
+
+转换顺序的影响
+
+```cpp
+#include<stdio.h>
+typedef unsigned char * byte_pointer;
+void show_bytes(byte_pointer start,size_t len){
+    size_t i;
+    for(i=0;i<len;++i){
+        printf("%.2x",start[i]);
+    }
+    printf("\n");
+}
+int main(){
+    short sx=-12345;
+    unsigned uy=sx;
+    printf("uy=%u\t",uy);
+    show_bytes((byte_pointer)&uy,sizeof(unsigned));
+    return 0;
+}
+```
+
+`uy=4294954951   c7cfffff`
+
+当把`short`转换成`unsigned`时,**先改变大小,然后再完成从有符号到无符号的转变**,既`(unsigned)sx`等价于`(unsigned)(int)sx`,而不是`(unsigned)(unsigned short)sx`
+
+```cpp
+#include<stdio.h>
+typedef unsigned char * byte_pointer;
+void show_bytes(byte_pointer start,size_t len){
+    size_t i;
+    for(i=0;i<len;++i){
+        printf("%.2x",start[i]);
+    }
+    printf("\n");
+}
+int main(){
+    short sx=-12345;
+    unsigned a=(unsigned)(int)sx;
+    unsigned b=(unsigned)(unsigned short)sx;
+    printf("%u %u\n",a,b);
+    show_bytes((byte_pointer)&a,sizeof(unsigned));
+    show_bytes((byte_pointer)&b,sizeof(unsigned));
+    return 0;
+}
+```
+
+```
+4294954951 53191
+c7cfffff
+c7cf0000
+```
