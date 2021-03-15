@@ -336,7 +336,7 @@ int main(){
 
 ---
 
-当执行一个运算时,如果它的一个运算数是有符号的而另一个是无符号的,那么C语言会隐式地将有符号参数强制类型转换为无符号数,并假设这两个数都是非负的,来执行这个运算
+当执行一个运算时,如果它的一个运算数是有符号的而另一个是无符号的,那么C语言会隐式地将**有符号参数强制类型转换为无符号数**,并假设这两个数都是非负的,来执行这个运算
 
 |表达式|类型|求值|原因|
 |:---:|:---:|:---:|:---:|
@@ -407,3 +407,45 @@ int main(){
 c7cfffff
 c7cf0000
 ```
+
+```cpp
+#include "stdio.h"
+int func(unsigned x,unsigned y){
+    return x-y>0;
+}
+int main(){
+    unsigned a=123;
+    unsigned b=124;
+    printf("%d %d",func(a,b),func(b,a));
+    return 0;
+}
+```
+
+```
+1 1
+```
+
+!>`(unsigned)-1>0`
+
+### 整数运算
+
+确定补码加法是否溢出
+
+```cpp
+int func(int x,int y){
+    int sum=x+y;
+    int neg_over=x<0&&y<0&&sum>=0;//负数相加得到非负数
+    int pos_over=x>=0&&y>=0&&sum<0;//非负数相加得到负数
+    return !neg_over&&!pos_over;
+}
+```
+
+简化版
+
+```cpp
+int func(int x,int y){
+    int sum=x+y;
+    return (sum-x==y)&&(sum-y==x);
+}
+```
+

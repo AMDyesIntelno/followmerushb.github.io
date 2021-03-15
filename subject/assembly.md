@@ -3015,3 +3015,193 @@ end
 
 1. 求一word型数据的平方
 
+```nasm
+assume cs:code
+code segment
+main:
+    mov ax,cs
+    mov ds,ax
+    mov si,offset power
+    
+    mov ax,0000h
+    mov es,ax
+    mov di,0200h
+
+    cld
+    mov cx,offset powerend-offset power
+    rep movsb
+
+    mov ax,0000h
+    mov es,ax
+    mov word ptr es:[7ch*4],0200h
+    mov word ptr es:[7ch*4+2],0000h
+
+    mov ax,4c00h
+    int 21h
+power:
+    mul ax
+    iret;恢复ip,cs,flag
+powerend:
+    nop
+code ends
+end main
+```
+
+```nasm
+assume cs:code
+code segment
+main:
+    mov ax,3456
+    int 7ch
+    add ax,ax
+    adc dx,dx
+    
+    mov ax,4c00h
+    int 21h
+code ends
+end main
+```
+
+2. 将一个全是字母,以0结尾的字符串,转化为大写
+
+```nasm
+assume cs:code
+code segment
+main:
+    mov ax,cs
+    mov ds,ax
+    mov si,offset int7c
+    
+    mov ax,0000h
+    mov es,ax
+    mov di,0200h
+
+    cld
+    mov cx,offset int7c_end-offset int7c
+    rep movsb
+
+    mov ax,0000h
+    mov es,ax
+    mov word ptr es:[7ch*4],0200h
+    mov word ptr es:[7ch*4+2],0000h
+
+    mov ax,4c00h
+    int 21h
+int7c:
+    push si
+    push cx
+    mov cx,0
+upper:
+    mov cl,byte ptr ds:[si]
+    jcxz int7c_finish
+    and byte ptr ds:[si],11011111b
+    inc si
+    jmp upper
+int7c_finish:
+    pop cx
+    pop si
+    iret;恢复ip,cs,flag
+int7c_end:
+    nop
+code ends
+end main
+```
+
+```nasm
+assume cs:code
+data segment
+    db 'wdnmd',0
+data ends
+code segment
+main:
+    mov ax,data
+    mov ds,ax
+    mov si,0
+    int 7ch
+
+    mov ax,4c00h
+    int 21h
+code ends
+end main
+```
+
+3. 用7ch中断例程完成`loop`指令的功能
+
+```nasm
+assume cs:code
+code segment
+main:
+    mov ax,cs
+    mov ds,ax
+    mov si,offset int7c
+    
+    mov ax,0000h
+    mov es,ax
+    mov di,0200h
+
+    cld
+    mov cx,offset int7c_end-offset int7c
+    rep movsb
+
+    mov ax,0000h
+    mov es,ax
+    mov word ptr es:[7ch*4],0200h
+    mov word ptr es:[7ch*4+2],0000h
+
+    mov ax,4c00h
+    int 21h
+int7c:
+    push bp
+    mov bp,sp
+    dec cx
+    jcxz finish
+    sub ss:[bp+2],bx;将ip重新指向s
+finish:
+    mov sp,bp
+    pop bp
+    iret;恢复ip,cs,flag
+int7c_end:
+    nop
+code ends
+end main
+```
+
+```nasm
+assume cs:code
+code segment
+main:
+    mov ax,0b800h
+    mov es,ax
+    mov di,160*12
+
+    mov bx,offset se-offset s
+    mov cx,80
+s:
+    mov byte ptr es:[di],'!'
+    add di,2
+    int 7ch;中断时,ip指向se,flag,cs,ip入栈,在中断例程中如果cx!=0将栈中的ip通过bx修改为指向s,cx=0则不进行修改
+se:
+    nop
+
+    mov ax,4c00h
+    int 21h
+code ends
+end main
+```
+
+### BIOS中断例程
+
+BIOS(基本输入输出系统),主要包含以下几部分内容
+
+- 硬件系统的检测和初始化程序
+- 外部中断和内部中断的中断例程
+- 用于对硬件设备进行I/O操作的中断例程
+- 其他和硬件系统相关的中断例程
+
+BIOS中的中断例程在内存的安装方法
+
+- CPU加电,初始化`CS=0FFFFH`,`IP=0`,自动从`FFFF:0`开始执行程序,`FFFF:0`有一条跳转指令,CPU执行后,转去指向BIOS中的硬件系统的检测和初始化程序
+- 将BIOS提供的中断例程的入口地址登记在中断向量表中,因为BIOS的中断例程固化在ROM中,因此仅需要登记入口地址
+- 硬件系统的检测和初始化完成后,调用`int 19h`进行操作系统的引导
+- DOS启动后,将其提供的中断例程写入内存,并将其地址写入中断向量表
+
