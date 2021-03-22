@@ -3420,3 +3420,150 @@ mov al,0
 out al,71h
 ```
 
+### 位移指令
+
+`shl`逻辑左移,`shr`逻辑右移,`shl`算术左移,`sar`算术右移
+
+!>如果移动位数大于1时,必须将移动位数放在`cl`中
+
+```nasm
+mov al,80h
+shr al,1;AX=0040
+```
+
+```nasm
+mov al,80h
+sar al,1;AX=00C0
+```
+
+```nasm
+mov al,40h
+shl al,1;AX=0080
+```
+
+```nasm
+mov al,40h
+sal al,1;AX=0080
+```
+
+用加法和移位指令计算`ax=ax*10`
+
+```nasm
+assume cs:code
+code segment
+main:
+    mov ax,8888h;高16位放dx,低16位放ax
+    xor dx,dx
+
+    shl ax,1
+    adc dx,0;ax*2
+
+    mov bx,ax
+    mov cx,dx
+
+    shl ax,1
+    adc dx,0
+    shl dx,1;ax*4
+
+    shl ax,1
+    adc dx,0
+    shl dx,1;ax*8
+
+    add ax,bx
+    adc dx,cx;ax=5550,dx=0005
+    
+    mov ax,4c00h
+    int 21h
+code ends
+end main
+```
+
+### 实验14 访问CMOS RAM
+
+以`年/月/日 时:分:秒`的格式显示当前的日期时间
+
+```nasm
+assume cs:code
+data segment
+    db 9,8,7,4,2,0;年月日时分秒
+data ends
+code segment
+main:
+    mov ax,data
+    mov ds,ax
+    mov di,160*12+40*2;di显存输出起始位置
+    mov si,0
+    mov bx,0b800h
+    mov es,bx
+    xor ax,ax
+    
+    call date;年
+    mov ax,'/'
+    push ax
+    call sep
+
+    call date;月
+    mov ax,'/'
+    push ax
+    call sep
+    
+    call date;日
+    mov ax,' '
+    push ax
+    call sep
+
+    call date;时
+    mov ax,':'
+    push ax
+    call sep
+
+    call date;分
+    mov ax,':'
+    push ax
+    call sep
+
+    call date;秒
+
+    mov ax,4c00h
+    int 21h
+
+date:
+    mov al,byte ptr ds:[si]
+    inc si
+    out 70h,al
+    in al,71h
+
+    mov ah,al
+    mov cl,4
+    shr ah,cl;保留前4位
+    and al,00001111b;保留后4位
+
+    add al,30h
+    add ah,30h;BCD码转ascii码
+    
+    mov byte ptr es:[di],ah
+    add di,2
+    mov byte ptr es:[di],al
+    add di,2
+    ret
+
+sep:
+    push bp
+    mov bp,sp
+    mov ax,ss:[bp+4]
+    mov byte ptr es:[di],al
+    add di,2
+    mov sp,bp
+    pop bp
+    ret 2
+
+code ends
+end main
+```
+
+## 外中断
+
+### 外中断信息
+
+在PC中,外中断源一共有两类
+
