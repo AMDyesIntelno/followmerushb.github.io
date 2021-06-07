@@ -1,4 +1,4 @@
-![logo](https://img.misaka.gq/avatar.png ':size=100')
+![logo](https://cdn.jsdelivr.net/gh/followmerushb/followmerushb.github.io@master/static/favicon.png ':size=100')
 
 # Misaka's Notes
 
