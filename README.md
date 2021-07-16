@@ -44,6 +44,6 @@
 <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-json.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-powershell.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-nasm.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-nasm.min.js"></script>
 ```
